@@ -11,7 +11,7 @@ extends CharacterBody2D
 ## be adjusted to fit your specific needs
 
 ## The four possible character states and the character's current state
-enum {IDLE, WALK, JUMP, FALL, WALL_SLIDE}
+enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 
@@ -111,9 +111,14 @@ func physics_tick(delta: float) -> void:
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
+	print(state)
 	if velocity.y == 0:
 		if velocity.x == 0:
 			state = IDLE
+		elif velocity.x == 150:
+			state = SPRINT
+		elif velocity.x == -150:
+			state = SPRINT
 		else:
 			state = WALK
 	elif velocity.y < 0:
@@ -143,7 +148,8 @@ func manage_animations() -> void:
 			ANIMATION_PLAYER.play("Fall")
 		WALL_SLIDE:
 			ANIMATION_PLAYER.play("Fall") # 
-
+		SPRINT:
+			ANIMATION_PLAYER.play("Jump")
 
 ## Gets the strength and status of the mapped actions
 func get_inputs() -> Dictionary:
