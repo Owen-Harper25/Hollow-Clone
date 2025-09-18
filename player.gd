@@ -29,7 +29,7 @@ enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 @export var JOYSTICK_MOVEMENT := false
 
 ## Enable/Disable sprinting
-@export var ENABLE_SPRINT := false
+@export var ENABLE_SPRINT := true
 ## Enable/Disable Wall Jumping
 @export var ENABLE_WALL_JUMPING := false
 

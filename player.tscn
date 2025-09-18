@@ -104,7 +104,6 @@ texture = ExtResource("2_onrkg")
 hframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-modulate = Color(0, 0, 1, 1)
 position = Vector2(0, 0.33333334)
 shape = SubResource("CapsuleShape2D_hqtel")
 
