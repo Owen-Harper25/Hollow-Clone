@@ -3,4 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bal0ovoru8dqd" path="res://x particle.png" id="1_k60xo"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
+emitting = false
+amount = 3
 texture = ExtResource("1_k60xo")
+one_shot = true
+gravity = Vector2(0, 10)

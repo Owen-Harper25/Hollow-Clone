@@ -240,7 +240,9 @@ func run_particles():
 	if is_on_floor() and velocity.x > 0 and canSpawnParticle:
 		canSpawnParticle = false
 		$ParticleTimer.start()
-		var particle = DUST_PARTICLE
+		var particle = DUST_PARTICLE.instantiate()
+		particle.global_position = global_position
+		get_parent().add_child(particle)
 
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
 ## but can be passed a new force and direction
