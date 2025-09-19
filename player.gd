@@ -116,6 +116,7 @@ func manage_state() -> void:
 	if velocity.y == 0:
 		if velocity.x == 0:
 			state = IDLE
+			run_particles()
 		elif velocity.x == 150 or velocity.x == -150:
 			state = SPRINT
 			
@@ -238,7 +239,7 @@ func run_particles():
 	if is_on_floor() and velocity.x != 0 and canSpawnParticle:
 		print("SpawnParticle")
 		canSpawnParticle = false
-		$ParticleTimer.start()
+		#$ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()
 		particle.global_position = global_position
 		get_parent().add_child(particle)
@@ -281,3 +282,5 @@ func coyote_time() -> void:
 
 func _on_particle_timer_timeout() -> void:
 	canSpawnParticle = true
+	print("Timer Done")
+	$ParticleTimer.start()
