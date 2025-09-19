@@ -237,8 +237,10 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 		jumping = false
 
 func run_particles():
-	if is_on_floor() and velocity.x > 0:
+	if is_on_floor() and velocity.x > 0 and canSpawnParticle:
 		canSpawnParticle = false
+		$ParticleTimer.start()
+		var particle = DUST_PARTICLE
 
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
 ## but can be passed a new force and direction
