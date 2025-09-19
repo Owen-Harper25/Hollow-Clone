@@ -3,12 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bal0ovoru8dqd" path="res://Assets/Sprites/x particle.png" id="1_qjm3n"]
 
 [sub_resource type="Gradient" id="Gradient_qjm3n"]
-offsets = PackedFloat32Array(0.5479452, 1)
+offsets = PackedFloat32Array(0.80136985, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 show_behind_parent = true
 z_index = 1
+scale = Vector2(5.066025, -0.42183766)
 emitting = false
 amount = 2
 texture = ExtResource("1_qjm3n")
@@ -16,6 +17,8 @@ lifetime = 0.3
 one_shot = true
 randomness = 0.31
 lifetime_randomness = 0.18
+emission_shape = 1
+emission_sphere_radius = 1.0
 spread = 108.09
 gravity = Vector2(0, 5)
 angular_velocity_max = 59.38
