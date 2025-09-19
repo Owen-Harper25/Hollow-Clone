@@ -61,3 +61,5 @@ up={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/canvas_textures/default_texture_filter=1
+renderer/main_scene="uid://bycbvvxvjb035"

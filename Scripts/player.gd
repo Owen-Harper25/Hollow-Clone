@@ -34,7 +34,7 @@ var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 ## Enable/Disable sprinting
 @export var ENABLE_SPRINT := true
 ## Enable/Disable Wall Jumping
-@export var ENABLE_WALL_JUMPING := false
+@export var ENABLE_WALL_JUMPING := true
 
 @export_group("Input Map Actions")
 # Input Map actions related to each movement direction, jumping, and sprinting.  Set each to their related

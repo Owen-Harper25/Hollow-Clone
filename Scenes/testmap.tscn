@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=4 uid="uid://cs5nehq6fugxq"]
+[gd_scene load_steps=7 format=4 uid="uid://cs5nehq6fugxq"]
 
 [ext_resource type="Texture2D" uid="uid://bpkjn456r15wi" path="res://Assets/Sprites/Dungeon Set2.png" id="1_julm7"]
-[ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/player.tscn" id="2_axgwx"]
 [ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Background.png" id="3_owteh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_axgwx"]
@@ -61,11 +60,8 @@ tile_set = SubResource("TileSet_ys0t5")
 z_index = -1
 tile_set = SubResource("TileSet_8vdae")
 
-[node name="Player" parent="." instance=ExtResource("2_axgwx")]
-position = Vector2(576, 461)
-
 [node name="ParallexFolder" type="Node2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(318, 360)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallexFolder"]
 scroll_scale = Vector2(0.9, 0)
