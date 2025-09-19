@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bal0ovoru8dqd"
-path="res://.godot/imported/x particle.png-d93980c4a40ef0226d23dc63975d6898.ctex"
+uid="uid://cbjukl5mee370"
+path="res://.godot/imported/icon.svg-937281dbc6e7ba0435124e30fe85aebc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://x particle.png"
-dest_files=["res://.godot/imported/x particle.png-d93980c4a40ef0226d23dc63975d6898.ctex"]
+source_file="res://Assets/Sprites/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-937281dbc6e7ba0435124e30fe85aebc.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkw45fpuc1ea3"
-path="res://.godot/imported/ManSheet.png-2df1a4a8e433cc608eb84e56f19a4860.ctex"
+uid="uid://bci23jw42fqq8"
+path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ManSheet.png"
-dest_files=["res://.godot/imported/ManSheet.png-2df1a4a8e433cc608eb84e56f19a4860.ctex"]
+source_file="res://Assets/Sprites/Archer.png"
+dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
 
 [params]
 

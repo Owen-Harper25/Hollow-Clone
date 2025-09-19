@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d37dmp26mfjr6"
-path="res://.godot/imported/Man.png-fa9c1f3a72cc8411a02d5b4ec2fdde94.ctex"
+uid="uid://bpkjn456r15wi"
+path="res://.godot/imported/Dungeon Set2.png-d353d5e092cce8b1847159d487f40cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Man.png"
-dest_files=["res://.godot/imported/Man.png-fa9c1f3a72cc8411a02d5b4ec2fdde94.ctex"]
+source_file="res://Assets/Sprites/Dungeon Set2.png"
+dest_files=["res://.godot/imported/Dungeon Set2.png-d353d5e092cce8b1847159d487f40cc1.ctex"]
 
 [params]
 

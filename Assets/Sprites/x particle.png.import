@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy06uljwxu2tj"
-path="res://.godot/imported/Streak.png-c86140255ce6be7b632876ac2c15963b.ctex"
+uid="uid://bal0ovoru8dqd"
+path="res://.godot/imported/x particle.png-cd3be93a6f2799fabcf996f37fce62f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Streak.png"
-dest_files=["res://.godot/imported/Streak.png-c86140255ce6be7b632876ac2c15963b.ctex"]
+source_file="res://Assets/Sprites/x particle.png"
+dest_files=["res://.godot/imported/x particle.png-cd3be93a6f2799fabcf996f37fce62f1.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://p1fnq0v0esmp"]
 
-[ext_resource type="Texture2D" uid="uid://bal0ovoru8dqd" path="res://x particle.png" id="1_k60xo"]
+[ext_resource type="Texture2D" uid="uid://bal0ovoru8dqd" path="res://Assets/Sprites/x particle.png" id="1_k60xo"]
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
 texture = ExtResource("1_k60xo")
