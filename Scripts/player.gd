@@ -244,7 +244,7 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 func run_particles():
 	if is_on_floor() and state == 1 and canSpawnParticle:
 		canSpawnParticle = false
-		$ParticleTimer.start()
+		$Timers/ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()
 		particle.emitting = true
 		particle.global_position = $Feet.global_position
