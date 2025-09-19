@@ -136,7 +136,7 @@ libraries = {
 wait_time = 0.1
 
 [node name="Attack Timer" type="Timer" parent="Timers"]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
@@ -145,6 +145,7 @@ position = Vector2(0, 2.6666667)
 scale = Vector2(0.33333334, 0.33333334)
 
 [node name="AttackArc" parent="." instance=ExtResource("3_6t5aa")]
+visible = false
 position = Vector2(0, 0.19999997)
 scale = Vector2(0.9999998, 0.9999998)
 

@@ -135,10 +135,16 @@ func _process(_delta: float) -> void:
 		SoundLibrary.play_random_dash()
 
 func get_cardinal_direction(dir: Vector2) -> Vector2:
-	if abs(dir.x) > abs(dir.y):
-		return Vector2(sign(dir.x), 0)  # left or right
+	var deadzone := 0.2
+	var compliance := 1.1 if is_on_floor() else 1.0
+	if dir.length() < deadzone:
+		return facing_direction
+	
+	
+	if abs(dir.x) * compliance > abs(dir.y):
+		return Vector2(sign(dir.x), 0)  # prefer left/right
 	else:
-		return Vector2(0, sign(dir.y))  # up or down
+		return Vector2(0, sign(dir.y))  # only switch if clearly vertical
 
 func start_attack():
 	print(facing_direction)
@@ -153,7 +159,14 @@ func start_attack():
 	elif facing_direction == Vector2.UP:
 		attack_arc.rotation = -PI/2
 	elif facing_direction == Vector2.DOWN:
-		attack_arc.rotation = PI/2
+		if not is_on_floor():  # only allow down slash in air
+			attack_arc.rotation = PI/2
+		else:
+			# force into horizontal slash instead
+			if PLAYER_SPRITE.flip_h:
+				attack_arc.rotation = PI   # face left
+			else:
+				attack_arc.rotation = 0    # face right2
 	# Store the initial attack angle
 	#var attack_direction = (get_global_mouse_position() - global_position).normalized()
 	#attack_arc.rotation = attack_direction.angle()  # Set rotation once
