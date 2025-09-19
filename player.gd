@@ -114,9 +114,9 @@ func physics_tick(delta: float) -> void:
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
 	if velocity.y == 0:
+		run_particles()
 		if velocity.x == 0:
 			state = IDLE
-			run_particles()
 		elif velocity.x == 150 or velocity.x == -150:
 			state = SPRINT
 			
