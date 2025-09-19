@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bci23jw42fqq8"
-path="res://.godot/imported/Archer.png-8c6dd9ddbfb08b750b8306fdc69a9971.ctex"
+uid="uid://cy06uljwxu2tj"
+path="res://.godot/imported/Streak.png-f89623fc5a4393d96599a10be4779471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Archer.png"
-dest_files=["res://.godot/imported/Archer.png-8c6dd9ddbfb08b750b8306fdc69a9971.ctex"]
+source_file="res://Assets/Sprites/Streak.png"
+dest_files=["res://.godot/imported/Streak.png-f89623fc5a4393d96599a10be4779471.ctex"]
 
 [params]
 

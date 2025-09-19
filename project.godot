@@ -13,7 +13,7 @@ config_version=5
 config/name="Hollow Knight"
 run/main_scene="uid://cs5nehq6fugxq"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/Sprites/icon.svg"
 
 [input]
 
