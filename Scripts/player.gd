@@ -15,7 +15,7 @@ enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 var canSpawnParticle = true
-var DUST_PARTICLE = preload("res://DustParticle.tscn")
+var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
