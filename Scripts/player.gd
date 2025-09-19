@@ -19,6 +19,8 @@ enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 #Movement Variables
 var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
+var DASH_PARTICLE = preload("res://Scenes/DashParticle.tscn")
+
 @onready var feet: Marker2D = $Feet
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
 
@@ -126,7 +128,7 @@ var jumping := false
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var input_dir: Vector2 = Vector2.ZERO
 
 	if Input.is_action_pressed(ACTION_RIGHT):
@@ -151,44 +153,32 @@ func _process(delta: float) -> void:
 		SoundLibrary.play_random_dash()
 	
 	#Dashing Code
-	if is_dashing:
-		#$".".play("dash")
-		dash_timer -= delta
-		if dash_timer <= 0.0:
-			is_dashing = false
-			dash_immunity = false
-			velocity.x = dash_direction.x * MAX_SPEED
-		else:
-			velocity = dash_direction * dash_speed
-			
 	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
-		print("Dash")
 		var dash_input := get_input_direction()
-		if dash_input == Vector2.ZERO:
-			dash_input = facing_direction if facing_direction != Vector2.ZERO else Vector2.RIGHT
-		start_dash(dash_input)
-		SoundLibrary.play_random_dash()
-		dash_input.y = 0
 		if dash_input == Vector2.ZERO:
 			dash_input = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
 		start_dash(dash_input)
 		SoundLibrary.play_random_dash()
 		can_dash = false
 		dash_cooldown_timer.start()
+
 		
 func start_dash(direction: Vector2) -> void:
-	var dir = direction
-	if dir == Vector2.ZERO:
-		dir = facing_direction if facing_direction != Vector2.ZERO else Vector2.RIGHT
+	direction.y = 0
+	$AnimationPlayer.play("dash")
+	var particle = DASH_PARTICLE.instantiate()
+	particle.emitting = true
+	particle.global_position = $Feet.global_position
+	get_parent().add_child(particle)
+	if direction == Vector2.ZERO:
+		direction = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
 		
+	dash_direction = direction.normalized()
+	
 	is_dashing = true
 	dash_immunity = true
 	dash_timer = dash_duration
-	dash_direction = dir.normalized()
-	velocity = dash_direction * dash_speed
-	#$Particles/DashPush.emitting = false
-	#$Particles/DashPush.restart()
-	#$Particles/DashPush.emitting = true
+	velocity.x = dash_direction.x * dash_speed
 
 func get_cardinal_direction(dir: Vector2) -> Vector2:
 	var deadzone := 0.2
@@ -240,6 +230,7 @@ func physics_tick(delta: float) -> void:
 		if dash_timer <= 0.0:
 			is_dashing = false
 			dash_immunity = false
+			velocity.x = dash_direction.x * MAX_SPEED
 		move_and_slide()
 		return  # skip normal physics while dashing
 		
@@ -388,6 +379,8 @@ func run_particles():
 		particle.emitting = true
 		particle.global_position = $Feet.global_position
 		get_parent().add_child(particle)
+
+
 
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
 ## but can be passed a new force and direction

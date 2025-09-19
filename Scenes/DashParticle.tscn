@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://k20y8e7fyqqp"]
+
+[ext_resource type="Texture2D" uid="uid://bal0ovoru8dqd" path="res://Assets/Sprites/x particle.png" id="1_3mgyi"]
+
+[sub_resource type="Gradient" id="Gradient_qjm3n"]
+offsets = PackedFloat32Array(0.80136985, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+show_behind_parent = true
+z_index = 1
+scale = Vector2(10.29278, -1.624493)
+emitting = false
+amount = 7
+texture = ExtResource("1_3mgyi")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 0.31
+lifetime_randomness = 0.18
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, 2)
+spread = 7.88
+gravity = Vector2(0, 80)
+initial_velocity_max = 20.62
+angle_min = -360.0
+angle_max = 360.0
+scale_amount_min = 0.7
+color = Color(0.737193, 0.7371929, 0.7371929, 1)
+color_ramp = SubResource("Gradient_qjm3n")
+anim_speed_max = 9.24
+anim_offset_max = 0.2887

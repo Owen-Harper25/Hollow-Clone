@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=13 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_onrkg"]
@@ -99,6 +99,21 @@ tracks/0/keys = {
 "values": [2, 3, 4, 3]
 }
 
+[sub_resource type="Animation" id="Animation_6t5aa"]
+resource_name = "dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
 &"Fall": SubResource("Animation_onrkg"),
@@ -106,7 +121,8 @@ _data = {
 &"Jump": SubResource("Animation_2hs0m"),
 &"RESET": SubResource("Animation_i3pqv"),
 &"Sprint": SubResource("Animation_1jxqw"),
-&"Walk": SubResource("Animation_sweqy")
+&"Walk": SubResource("Animation_sweqy"),
+&"dash": SubResource("Animation_6t5aa")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
