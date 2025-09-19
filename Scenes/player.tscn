@@ -134,5 +134,10 @@ libraries = {
 zoom = Vector2(5, 5)
 
 [node name="ParticleTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Feet" type="Marker2D" parent="."]
+position = Vector2(0, 2.6666667)
+scale = Vector2(0.33333334, 0.33333334)
 
 [connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]
