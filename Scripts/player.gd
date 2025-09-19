@@ -34,7 +34,7 @@ var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 ## Enable/Disable sprinting
 @export var ENABLE_SPRINT := true
 ## Enable/Disable Wall Jumping
-@export var ENABLE_WALL_JUMPING := false
+@export var ENABLE_WALL_JUMPING := true
 
 @export_group("Input Map Actions")
 # Input Map actions related to each movement direction, jumping, and sprinting.  Set each to their related
@@ -236,7 +236,7 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 		jumping = false
 
 func run_particles():
-	if is_on_floor() and velocity.x != 0 and canSpawnParticle:
+	if is_on_floor() and state == 1 and canSpawnParticle:
 		canSpawnParticle = false
 		$ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()

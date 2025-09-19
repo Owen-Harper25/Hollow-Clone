@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dckgnnhbevn5d"]
+
+[ext_resource type="Shader" uid="uid://d38jqog0lli61" path="res://Scenes/Subpixel.gdshader" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://bhpa4osybcxmh" path="res://Scenes/game_manager.tscn" id="1_jjgbg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
+shader = ExtResource("1_bo1nx")
+shader_parameter/cam_offset = Vector2(0, 0)
+
+[node name="Main" type="Node2D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_8gbba")
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 478.0
+offset_bottom = 268.0
+scale = Vector2(4, 4)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(482, 272)
+render_target_update_mode = 4
+
+[node name="Game Manager" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_jjgbg")]
+texture_filter = 1
