@@ -140,14 +140,12 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 	if dir.length() < deadzone:
 		return facing_direction
 	
-	
 	if abs(dir.x) * compliance > abs(dir.y):
 		return Vector2(sign(dir.x), 0)  # prefer left/right
 	else:
 		return Vector2(0, sign(dir.y))  # only switch if clearly vertical
 
 func start_attack():
-	print(facing_direction)
 	attack_arc = attack_arc_scene.instantiate()  # Create attack arc
 	get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
 	attack_arc.global_position = global_position  # Set position to player
@@ -167,9 +165,6 @@ func start_attack():
 				attack_arc.rotation = PI   # face left
 			else:
 				attack_arc.rotation = 0    # face right2
-	# Store the initial attack angle
-	#var attack_direction = (get_global_mouse_position() - global_position).normalized()
-	#attack_arc.rotation = attack_direction.angle()  # Set rotation once
 
 	attack_timer.start()  # Start attack duration
 
