@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://8d4pvawstgha"]
+
+[ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Background.png" id="1_dcmhf"]
+
+[node name="Map_1" type="TileMapLayer"]
+
+[node name="Foreground" type="TileMapLayer" parent="."]
+
+[node name="MainGround" type="TileMapLayer" parent="."]
+
+[node name="ParallexFolder" type="Node2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallexFolder"]
+scroll_scale = Vector2(0.9, 0)
+repeat_size = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallexFolder/Parallax2D"]
+z_index = -5
+texture = ExtResource("1_dcmhf")
