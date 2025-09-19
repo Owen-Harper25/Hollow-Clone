@@ -113,13 +113,11 @@ func physics_tick(delta: float) -> void:
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
-	print(state)
 	if velocity.y == 0:
 		if velocity.x == 0:
 			state = IDLE
 		elif velocity.x == 150 or velocity.x == -150:
 			state = SPRINT
-			canSpawnParticle = false
 			
 		else:
 			state = WALK
@@ -237,7 +235,8 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 		jumping = false
 
 func run_particles():
-	if is_on_floor() and velocity.x > 0 and canSpawnParticle:
+	if is_on_floor() and velocity.x != 0 and canSpawnParticle:
+		print("SpawnParticle")
 		canSpawnParticle = false
 		$ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()
