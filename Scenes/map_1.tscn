@@ -9,8 +9,12 @@
 [node name="MainGround" type="TileMapLayer" parent="."]
 
 [node name="ParallexFolder" type="Node2D" parent="."]
+position = Vector2(576, 324)
 
 [node name="Parallax2D" type="Parallax2D" parent="ParallexFolder"]
+scroll_scale = Vector2(0.9, 0)
+repeat_size = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallexFolder/Parallax2D"]
+z_index = -5
 texture = ExtResource("1_dcmhf")
