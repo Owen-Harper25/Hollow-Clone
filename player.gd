@@ -14,6 +14,8 @@ extends CharacterBody2D
 enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
+var canSpawnParticle = true
+var DUST_PARTICLE = preload("res://DustParticle.tscn")
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
@@ -115,10 +117,10 @@ func manage_state() -> void:
 	if velocity.y == 0:
 		if velocity.x == 0:
 			state = IDLE
-		elif velocity.x == 150:
+		elif velocity.x == 150 or velocity.x == -150:
 			state = SPRINT
-		elif velocity.x == -150:
-			state = SPRINT
+			canSpawnParticle = false
+			
 		else:
 			state = WALK
 	elif velocity.y < 0:
@@ -128,7 +130,6 @@ func manage_state() -> void:
 			state = WALL_SLIDE
 		else:
 			state = FALL
-
 
 ## Manages the character's animations based on the current state and [param PLAYER_SPRITE] direction based on
 ## the current horizontal velocity. The expected default animations are [param Idle], [param Walk], [param Jump], and [param Fall]
@@ -190,7 +191,7 @@ func handle_velocity(delta: float, input_direction: Vector2 = Vector2.ZERO) -> v
 		apply_velocity(delta, input_direction)
 	else:
 		apply_friction(delta)
-
+	
 
 ## Applies velocity in the current input direction using the [param ACCELERATION], [param MAX_SPEED], and [param SPRINT_MULTIPLIER]
 func apply_velocity(delta: float, move_direction: Vector2) -> void:
@@ -235,6 +236,9 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 		wall_jump = false
 		jumping = false
 
+func run_particles():
+	if is_on_floor() and velocity.x > 0:
+		canSpawnParticle = false
 
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
 ## but can be passed a new force and direction
@@ -270,3 +274,7 @@ func buffer_jump() -> void:
 func coyote_time() -> void:
 	await get_tree().create_timer(COYOTE_TIMER).timeout
 	can_jump = false
+
+
+func _on_particle_timer_timeout() -> void:
+	canSpawnParticle = true

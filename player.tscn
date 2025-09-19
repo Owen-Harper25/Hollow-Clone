@@ -132,3 +132,7 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
+
+[node name="ParticleTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]
