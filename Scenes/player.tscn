@@ -109,10 +109,10 @@ _data = {
 &"Walk": SubResource("Animation_sweqy")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(5, 5)
 collision_layer = 3
-collision_mask = 3
+collision_mask = 15
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -137,6 +137,10 @@ wait_time = 0.1
 
 [node name="Attack Timer" type="Timer" parent="Timers"]
 wait_time = 0.3
+one_shot = true
+
+[node name="Dash Timer" type="Timer" parent="Timers"]
+wait_time = 0.7
 one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
@@ -165,3 +169,4 @@ position = Vector2(0, 2.75)
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]

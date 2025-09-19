@@ -16,24 +16,38 @@ enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 
-
+#Movement Variables
 var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 @onready var feet: Marker2D = $Feet
-@export var attack_damage: int = 1  # Damage dealt to enemies
-@export var attack_cooldown: float = 1.0  # Attack cooldown time
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
-@onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
-@onready var attack_arc: Node2D = $AttackArc
+
+#Attack Variables
+var can_attack: bool = true
 var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
+@export var attack_damage: int = 1  # Damage dealt to enemies
+@export var attack_cooldown: float = 1.0  # Attack cooldown time
+@onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
+@onready var attack_arc: Node2D = $AttackArc
 
-
-var can_attack: bool = true
+#Health Variables
 var health = 5
 var health_max = 5
 var health_min = 0
 var alive: bool = true
+
+#Dashing Variables
+var can_dash: bool = true
+var is_dashing: bool = false
+var dash_timer: float = 0.0
+var dash_immunity: bool = false  # If the player is immune to damage during the dash
+var dash_direction: Vector2 = Vector2.ZERO  # Direction of the dash
+@export var dash_speed: float = 400.0  # Dash speed
+@export var dash_duration: float = 0.2  # How long the dash lasts
+@export var dash_cooldown: float = 1.0  # Cooldown between dashes
+@onready var dash_cooldown_timer: Timer = $"Timers/Dash Timer"
+
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
 @export_node_path("Sprite2D") var PLAYER_SPRITE_PATH: NodePath
@@ -61,6 +75,7 @@ var alive: bool = true
 @export var ACTION_RIGHT := "right" ## The input mapping for right
 @export var ACTION_JUMP := "jump" ## The input mapping for jump
 @export var ACTION_SPRINT := "sprint" ## The input mapping for sprint
+
 
 @export_group("Movement Values")
 # The following float values are in px/sec when used in movement calculations with 'delta'
@@ -111,7 +126,7 @@ var jumping := false
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var input_dir: Vector2 = Vector2.ZERO
 
 	if Input.is_action_pressed(ACTION_RIGHT):
@@ -128,11 +143,52 @@ func _process(_delta: float) -> void:
 # only update if we actually pressed a direction
 	if input_dir != Vector2.ZERO:
 		facing_direction = get_cardinal_direction(input_dir)
+	
 	if Input.is_action_just_pressed("attack") and can_attack == true:
 		start_attack()
 		can_attack = false
 		$"Timers/Attack Timer".start()
 		SoundLibrary.play_random_dash()
+	
+	#Dashing Code
+	if is_dashing:
+		#$".".play("dash")
+		dash_timer -= delta
+		if dash_timer <= 0.0:
+			is_dashing = false
+			dash_immunity = false
+			velocity.x = dash_direction.x * MAX_SPEED
+		else:
+			velocity = dash_direction * dash_speed
+			
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
+		print("Dash")
+		var dash_input := get_input_direction()
+		if dash_input == Vector2.ZERO:
+			dash_input = facing_direction if facing_direction != Vector2.ZERO else Vector2.RIGHT
+		start_dash(dash_input)
+		SoundLibrary.play_random_dash()
+		dash_input.y = 0
+		if dash_input == Vector2.ZERO:
+			dash_input = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
+		start_dash(dash_input)
+		SoundLibrary.play_random_dash()
+		can_dash = false
+		dash_cooldown_timer.start()
+		
+func start_dash(direction: Vector2) -> void:
+	var dir = direction
+	if dir == Vector2.ZERO:
+		dir = facing_direction if facing_direction != Vector2.ZERO else Vector2.RIGHT
+		
+	is_dashing = true
+	dash_immunity = true
+	dash_timer = dash_duration
+	dash_direction = dir.normalized()
+	velocity = dash_direction * dash_speed
+	#$Particles/DashPush.emitting = false
+	#$Particles/DashPush.restart()
+	#$Particles/DashPush.emitting = true
 
 func get_cardinal_direction(dir: Vector2) -> Vector2:
 	var deadzone := 0.2
@@ -177,6 +233,16 @@ func _on_AttackTimer_timeout():
 ## Overrideable physics process used by the controller that calls whatever functions should be called
 ## and any logic that needs to be done on the [param _physics_process] tick
 func physics_tick(delta: float) -> void:
+	if is_dashing:
+		# Dash overrides normal movement
+		velocity = dash_direction * dash_speed
+		dash_timer -= delta
+		if dash_timer <= 0.0:
+			is_dashing = false
+			dash_immunity = false
+		move_and_slide()
+		return  # skip normal physics while dashing
+		
 	var inputs: Dictionary = get_inputs()
 	handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released)
 	handle_sprint(inputs.sprint_strength)
@@ -365,3 +431,7 @@ func _on_particle_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
+
+
+func _on_dash_timer_timeout() -> void:
+	can_dash = true

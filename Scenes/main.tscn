@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dckgnnhbevn5d"]
 
-[ext_resource type="Shader" uid="uid://d38jqog0lli61" path="res://Scenes/Subpixel.gdshader" id="1_bo1nx"]
+[ext_resource type="Shader" uid="uid://d38jqog0lli61" path="res://Scripts/Subpixel.gdshader" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bhpa4osybcxmh" path="res://Scenes/game_manager.tscn" id="1_jjgbg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8gbba"]
