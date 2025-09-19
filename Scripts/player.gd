@@ -15,15 +15,17 @@ enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
+
+
 var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
-
 @onready var feet: Marker2D = $Feet
 @export var attack_damage: int = 1  # Damage dealt to enemies
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var attack_arc: Node2D = $AttackArc
+
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
 @export_node_path("Sprite2D") var PLAYER_SPRITE_PATH: NodePath
