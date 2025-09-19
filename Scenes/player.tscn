@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=12 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/attack_arc.tscn" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
-radius = 1.0
-height = 4.666667
+radius = 0.79999995
+height = 4.7999997
 
 [sub_resource type="Animation" id="Animation_onrkg"]
 resource_name = "Fall"
@@ -109,20 +110,19 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-scale = Vector2(4, 4)
+scale = Vector2(5, 5)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.2737368e-13, 0)
+position = Vector2(-0.2, 0)
 scale = Vector2(0.3203125, 0.3203125)
 texture = ExtResource("2_onrkg")
 hframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 0.33333334)
+position = Vector2(0, 0.2)
 shape = SubResource("CapsuleShape2D_hqtel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -130,11 +130,37 @@ libraries = {
 &"": SubResource("AnimationLibrary_hqtel")
 }
 
-[node name="ParticleTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="ParticleTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
 
+[node name="Attack Timer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Feet" type="Marker2D" parent="."]
+visible = false
 position = Vector2(0, 2.6666667)
 scale = Vector2(0.33333334, 0.33333334)
 
-[connection signal="timeout" from="ParticleTimer" to="." method="_on_particle_timer_timeout"]
+[node name="AttackArc" parent="." instance=ExtResource("3_6t5aa")]
+position = Vector2(0, 0.19999997)
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="Directions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Directions"]
+position = Vector2(2, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="Directions"]
+position = Vector2(0, -2)
+
+[node name="Marker2D3" type="Marker2D" parent="Directions"]
+position = Vector2(-2, 0)
+
+[node name="Marker2D4" type="Marker2D" parent="Directions"]
+position = Vector2(0, 2.75)
+
+[connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
+[connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
