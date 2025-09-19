@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://bycbvvxvjb035"]
+
+[ext_resource type="Script" uid="uid://4v35scf22mit" path="res://Scenes/title_screen_gui.gd" id="1_cttc7"]
+
+[node name="TitleScreenGui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cttc7")
+
+[node name="Background Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 0.99607843, 1)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="Background Panel"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 208.0
+offset_right = 873.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 64
+text = "Hallow Night Three"
+
+[node name="PlayGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 432.0
+offset_right = 840.0
+offset_bottom = 488.0
+text = "PLAY"
+
+[node name="QuitGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 504.0
+offset_right = 840.0
+offset_bottom = 560.0
+text = "QUIT"
+
+[connection signal="button_down" from="PlayGame" to="." method="_on_play_game_button_down"]
+[connection signal="button_down" from="QuitGame" to="." method="_on_quit_game_button_down"]
