@@ -15,7 +15,7 @@ func _ready() -> void:
 	dash_sounds = [$Dash1, $Dash2, $Dash3]
 	item_short = [$"Secret Found Short"]
 	item_long = [$"Secret Found Long"]
-	potion = [$Potion1]
+	potion = [$Potion]
 
 func play_random_hit():
 	var random_sound = hit_sounds[randi() % hit_sounds.size()]

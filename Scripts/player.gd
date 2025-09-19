@@ -26,6 +26,8 @@ var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var attack_arc: Node2D = $AttackArc
 var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
+var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
+
 
 var can_attack: bool = true
 var health = 5
@@ -105,26 +107,56 @@ var jumping := false
 @onready var can_wall_jump: bool = ENABLE_WALL_JUMPING
 
 
+	
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
 
 func _process(_delta: float) -> void:
+	var input_dir: Vector2 = Vector2.ZERO
+
+	if Input.is_action_pressed(ACTION_RIGHT):
+		input_dir.x += 1
+	if Input.is_action_pressed(ACTION_LEFT):
+		input_dir.x -= 1
+	if Input.is_action_pressed(ACTION_DOWN):
+		input_dir.y += 1
+	if Input.is_action_pressed(ACTION_UP):
+		input_dir.y -= 1
+
+	if attack_arc and is_instance_valid(attack_arc):
+		attack_arc.global_position = global_position  # Keep it attached
+# only update if we actually pressed a direction
+	if input_dir != Vector2.ZERO:
+		facing_direction = get_cardinal_direction(input_dir)
 	if Input.is_action_just_pressed("attack") and can_attack == true:
 		start_attack()
 		can_attack = false
 		$"Timers/Attack Timer".start()
 		SoundLibrary.play_random_dash()
-	if attack_arc and is_instance_valid(attack_arc):
-			attack_arc.global_position = global_position  # Keep it attached
+
+func get_cardinal_direction(dir: Vector2) -> Vector2:
+	if abs(dir.x) > abs(dir.y):
+		return Vector2(sign(dir.x), 0)  # left or right
+	else:
+		return Vector2(0, sign(dir.y))  # up or down
 
 func start_attack():
+	print(facing_direction)
 	attack_arc = attack_arc_scene.instantiate()  # Create attack arc
 	get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
 	attack_arc.global_position = global_position  # Set position to player
 
+	if facing_direction == Vector2.RIGHT:
+		attack_arc.rotation = 0
+	elif facing_direction == Vector2.LEFT:
+		attack_arc.rotation = PI
+	elif facing_direction == Vector2.UP:
+		attack_arc.rotation = -PI/2
+	elif facing_direction == Vector2.DOWN:
+		attack_arc.rotation = PI/2
 	# Store the initial attack angle
-	var attack_direction = (get_global_mouse_position() - global_position).normalized()
-	attack_arc.rotation = attack_direction.angle()  # Set rotation once
+	#var attack_direction = (get_global_mouse_position() - global_position).normalized()
+	#attack_arc.rotation = attack_direction.angle()  # Set rotation once
 
 	attack_timer.start()  # Start attack duration
 
