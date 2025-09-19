@@ -147,9 +147,9 @@ func manage_animations() -> void:
 		FALL:
 			ANIMATION_PLAYER.play("Fall")
 		WALL_SLIDE:
-			ANIMATION_PLAYER.play("Fall") # 
+			ANIMATION_PLAYER.play("Fall")
 		SPRINT:
-			ANIMATION_PLAYER.play("Jump")
+			ANIMATION_PLAYER.play("Sprint")
 
 ## Gets the strength and status of the mapped actions
 func get_inputs() -> Dictionary:
