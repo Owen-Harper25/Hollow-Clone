@@ -16,6 +16,7 @@ enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
+@onready var feet: Marker2D = $Feet
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
@@ -119,7 +120,6 @@ func manage_state() -> void:
 			state = IDLE
 		elif velocity.x == 150 or velocity.x == -150:
 			state = SPRINT
-			
 		else:
 			state = WALK
 	elif velocity.y < 0:
@@ -237,13 +237,11 @@ func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0
 
 func run_particles():
 	if is_on_floor() and velocity.x != 0 and canSpawnParticle:
-		print("SpawnParticle")
-		
 		canSpawnParticle = false
 		$ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()
 		particle.emitting = true
-		particle.global_position = global_position
+		particle.global_position = $Feet.global_position
 		get_parent().add_child(particle)
 
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
@@ -284,4 +282,3 @@ func coyote_time() -> void:
 
 func _on_particle_timer_timeout() -> void:
 	canSpawnParticle = true
-	print("Timer Done")
