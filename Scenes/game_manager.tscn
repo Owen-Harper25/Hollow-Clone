@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhpa4osybcxmh"]
+[gd_scene load_steps=5 format=3 uid="uid://bhpa4osybcxmh"]
 
 [ext_resource type="PackedScene" uid="uid://cs5nehq6fugxq" path="res://Scenes/testmap.tscn" id="1_sq00h"]
 [ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/player.tscn" id="2_mmt5l"]
-[ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://SmoothCamera.gd" id="3_fgdfb"]
+[ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="3_fgdfb"]
+[ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Background.png" id="4_mmt5l"]
 
 [node name="Game Manager" type="Node2D"]
+
+[node name="ParallexFolder" type="Node2D" parent="."]
+position = Vector2(-1, 2)
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallexFolder"]
+scroll_scale = Vector2(0.9, 0)
+scroll_offset = Vector2(638, -3)
+repeat_size = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallexFolder/Parallax2D"]
+z_index = -5
+texture = ExtResource("4_mmt5l")
 
 [node name="MainGround" parent="." instance=ExtResource("1_sq00h")]
 position = Vector2(-1040, -693)
@@ -15,5 +28,5 @@ z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(3, 3)
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 script = ExtResource("3_fgdfb")
