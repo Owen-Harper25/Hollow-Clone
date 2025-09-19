@@ -239,7 +239,7 @@ func run_particles():
 	if is_on_floor() and velocity.x != 0 and canSpawnParticle:
 		print("SpawnParticle")
 		canSpawnParticle = false
-		#$ParticleTimer.start()
+		$ParticleTimer.start()
 		var particle = DUST_PARTICLE.instantiate()
 		particle.global_position = global_position
 		get_parent().add_child(particle)
@@ -283,4 +283,3 @@ func coyote_time() -> void:
 func _on_particle_timer_timeout() -> void:
 	canSpawnParticle = true
 	print("Timer Done")
-	$ParticleTimer.start()
