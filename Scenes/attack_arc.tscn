@@ -43,6 +43,7 @@ shape = SubResource("CapsuleShape2D_fa8ry")
 position = Vector2(19, 0)
 sprite_frames = SubResource("SpriteFrames_l558j")
 animation = &"attack"
+autoplay = "attack"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

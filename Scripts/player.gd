@@ -25,7 +25,13 @@ var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var attack_arc: Node2D = $AttackArc
+var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
 
+var can_attack: bool = true
+var health = 5
+var health_max = 5
+var health_min = 0
+var alive: bool = true
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
 @export_node_path("Sprite2D") var PLAYER_SPRITE_PATH: NodePath
@@ -101,6 +107,31 @@ var jumping := false
 
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("attack") and can_attack == true:
+		start_attack()
+		can_attack = false
+		$"Timers/Attack Timer".start()
+		SoundLibrary.play_random_dash()
+	if attack_arc and is_instance_valid(attack_arc):
+			attack_arc.global_position = global_position  # Keep it attached
+
+func start_attack():
+	attack_arc = attack_arc_scene.instantiate()  # Create attack arc
+	get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
+	attack_arc.global_position = global_position  # Set position to player
+
+	# Store the initial attack angle
+	var attack_direction = (get_global_mouse_position() - global_position).normalized()
+	attack_arc.rotation = attack_direction.angle()  # Set rotation once
+
+	attack_timer.start()  # Start attack duration
+
+func _on_AttackTimer_timeout():
+	if attack_arc and is_instance_valid(attack_arc):  # Ensure it's still valid
+		attack_arc.queue_free()  # Remove attack arc
+	attack_arc = null
 
 
 ## Overrideable physics process used by the controller that calls whatever functions should be called
@@ -293,4 +324,4 @@ func _on_particle_timer_timeout() -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	pass # Replace with function body.
+	can_attack = true
