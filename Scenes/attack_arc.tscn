@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://c73wr4xjul056"]
+
+[ext_resource type="Script" uid="uid://cvnssn27geqyi" path="res://Scripts/attack_arc.gd" id="1_6knpi"]
+[ext_resource type="Texture2D" uid="uid://cddui86gqsajk" path="res://Assets/Sprites/slash1.png" id="2_g3068"]
+[ext_resource type="Texture2D" uid="uid://dxibi0qelb7bv" path="res://Assets/Sprites/slash2.png" id="3_qxm27"]
+[ext_resource type="Texture2D" uid="uid://cndgdrhtmxyeu" path="res://Assets/Sprites/slash3.png" id="4_rq763"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fa8ry"]
+radius = 6.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l558j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g3068")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qxm27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rq763")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AttackArc" type="Node2D"]
+script = ExtResource("1_6knpi")
+
+[node name="AttackArcArea" type="Area2D" parent="."]
+position = Vector2(29, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArcArea"]
+shape = SubResource("CapsuleShape2D_fa8ry")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(19, 0)
+sprite_frames = SubResource("SpriteFrames_l558j")
+animation = &"attack"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="AttackArcArea" to="." method="_on_attack_arc_area_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
