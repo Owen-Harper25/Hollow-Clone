@@ -36,6 +36,7 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var attack_arc: Node2D = $AttackArc
+@onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 
 #Health Variables
 @onready var currentHealth: int = maxHealth
@@ -192,7 +193,8 @@ func start_dash(direction: Vector2) -> void:
 	dash_immunity = true
 	dash_timer = dash_duration
 	velocity.x = dash_direction.x * dash_speed
-
+	set_collision_mask_value(2, false)
+	
 func get_cardinal_direction(dir: Vector2) -> Vector2:
 	var deadzone := 0.2
 	var compliance := 1.1 if is_on_floor() else 1.0
@@ -244,6 +246,7 @@ func physics_tick(delta: float) -> void:
 			is_dashing = false
 			dash_immunity = false
 			velocity.x = dash_direction.x * MAX_SPEED
+			set_collision_mask_value(2, true)
 		move_and_slide()
 		return  # skip normal physics while dashing
 		
@@ -440,15 +443,16 @@ func _on_hurt_box_area_entered(area):
 	if area.name == "hitBox" and dash_immunity == false:
 		currentHealth -= 1
 		SoundLibrary.play_random_hit()
+		hit_flash_animation_player.play("hit_flash")
 		if currentHealth <= 0:
 			SoundLibrary.play_random_death()
 			currentHealth = maxHealth
 			print("Dead")
 		healthChanged.emit(currentHealth)
 		knockback()
-	#if area.name == "hitBox" and dash_immunity:
-		#SoundLibrary.play_random_pickup()
 
+func damageTime():
+	$AnimationPlayer.play("hurt")
 
 func knockback():
 	var knockbackDirection = -velocity.normalized() * MAX_SPEED

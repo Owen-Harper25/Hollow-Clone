@@ -1,12 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=20 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_onrkg"]
+[ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Scenes/hit_effect.gdshader" id="2_vgqql"]
 [ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/attack_arc.tscn" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
 radius = 0.8000001
 height = 4.7999997
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkybt"]
+shader = ExtResource("2_vgqql")
+shader_parameter/enabled = true
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_onrkg"]
 resource_name = "Fall"
@@ -21,18 +27,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_hqtel"]
@@ -79,18 +73,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_1jxqw"]
 resource_name = "Sprint"
@@ -122,18 +104,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [2, 3, 4, 3]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_6t5aa"]
 resource_name = "dash"
@@ -149,18 +119,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [5]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.82382995, 0.4832769, 9.62615e-07, 1), Color(0.82382995, 0.4832769, 9.62615e-07, 1)]
-}
+
+[sub_resource type="Animation" id="Animation_vgqql"]
+resource_name = "hurt"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
 _data = {
@@ -170,12 +131,50 @@ _data = {
 &"RESET": SubResource("Animation_i3pqv"),
 &"Sprint": SubResource("Animation_1jxqw"),
 &"Walk": SubResource("Animation_sweqy"),
-&"dash": SubResource("Animation_6t5aa")
+&"dash": SubResource("Animation_6t5aa"),
+&"hurt": SubResource("Animation_vgqql")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 0.99999994
 height = 4.7999997
+
+[sub_resource type="Animation" id="Animation_x3wgy"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_fkybt"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19491732),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3smsa"]
+_data = {
+&"RESET": SubResource("Animation_x3wgy"),
+&"hit_flash": SubResource("Animation_fkybt")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(5, 5)
@@ -190,6 +189,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("CapsuleShape2D_hqtel")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_fkybt")
 position = Vector2(-0.2, 0)
 scale = Vector2(0.3203125, 0.3203125)
 texture = ExtResource("2_onrkg")
@@ -243,6 +243,12 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 position = Vector2(0, 0.19999999)
 shape = SubResource("CapsuleShape2D_6t5aa")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3smsa")
+}
+autoplay = "RESET"
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
