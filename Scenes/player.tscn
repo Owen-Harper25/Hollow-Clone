@@ -135,10 +135,6 @@ _data = {
 &"hurt": SubResource("Animation_vgqql")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 0.99999994
-height = 4.7999997
-
 [sub_resource type="Animation" id="Animation_x3wgy"]
 length = 0.2
 tracks/0/type = "value"
@@ -176,6 +172,10 @@ _data = {
 &"hit_flash": SubResource("Animation_fkybt")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
+radius = 0.99999994
+height = 4.7999997
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(5, 5)
 collision_layer = 3
@@ -183,7 +183,6 @@ collision_mask = 15
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 0.19999996)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("CapsuleShape2D_hqtel")
@@ -200,6 +199,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_hqtel")
 }
 
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3smsa")
+}
+autoplay = "RESET"
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="ParticleTimer" type="Timer" parent="Timers"]
@@ -212,6 +217,8 @@ one_shot = true
 [node name="Dash Timer" type="Timer" parent="Timers"]
 wait_time = 0.7
 one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
 
 [node name="Feet" type="Marker2D" parent="."]
 visible = false
@@ -243,12 +250,6 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 position = Vector2(0, 0.19999999)
 shape = SubResource("CapsuleShape2D_6t5aa")
-
-[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_3smsa")
-}
-autoplay = "RESET"
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]

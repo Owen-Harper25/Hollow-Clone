@@ -246,7 +246,26 @@ func physics_tick(delta: float) -> void:
 			is_dashing = false
 			dash_immunity = false
 			velocity.x = dash_direction.x * MAX_SPEED
-			set_collision_mask_value(2, true)
+			var space_state = get_world_2d().direct_space_state
+			var query = PhysicsShapeQueryParameters2D.new()
+			query.shape = $hurtBox/CollisionShape2D.shape
+			query.transform = $hurtBox/CollisionShape2D.global_transform
+			query.collide_with_areas = true
+			query.collision_mask = 2  # enemy hitboxes layer
+			var results = space_state.intersect_shape(query)
+			for result in results:
+				var area = result.collider
+				print(result)
+				if area.is_in_group("Enemy"):
+					_on_hurt_box_area_entered(area)
+					#var push_dir = (global_position - area.global_position).normalized()
+					#global_position += push_dir * 20.0  # move out a few pixels
+					#velocity = push_dir * 200.0        # add knockback velocity
+					damage()
+			#for area in $hurtBox.get_overlapping_areas():
+				#if area.is_in_group("hitBox"): # or however you mark enemy hit areas
+					#damage()
+		
 		move_and_slide()
 		return  # skip normal physics while dashing
 		
@@ -441,20 +460,25 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_hurt_box_area_entered(area):
 	if area.name == "hitBox" and dash_immunity == false:
-		currentHealth -= 1
-		SoundLibrary.play_random_hit()
-		hit_flash_animation_player.play("hit_flash")
-		if currentHealth <= 0:
-			SoundLibrary.play_random_death()
-			currentHealth = maxHealth
-			print("Dead")
-		healthChanged.emit(currentHealth)
-		knockback()
+		damage()
 
-func damageTime():
-	$AnimationPlayer.play("hurt")
 
+func damage():
+	currentHealth -= 1
+	SoundLibrary.play_random_hit()
+	hit_flash_animation_player.play("hit_flash")
+	healthChanged.emit(currentHealth)
+	knockback()
+	if currentHealth <= 0:
+		SoundLibrary.play_random_death()
+		currentHealth = maxHealth
+		print("Dead")
+	
 func knockback():
-	var knockbackDirection = -velocity.normalized() * MAX_SPEED
+	var knockbackDirection = -velocity.normalized() * MAX_SPEED * 1.5
 	velocity = knockbackDirection
 	move_and_slide()
+	if velocity == Vector2.ZERO:
+		var push_dir = global_position.normalized()
+		global_position += push_dir * 8.0  # move out a few pixels
+		velocity = push_dir * 200.0        # add knockback velocity
