@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8d4pvawstgha" path="res://Scenes/map_1.tscn" id="2_fgdfb"]
 [ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/player.tscn" id="2_mmt5l"]
 [ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="3_fgdfb"]
-[ext_resource type="PackedScene" path="res://Scenes/hearts_container.tscn" id="5_fgdfb"]
+[ext_resource type="PackedScene" uid="uid://fkximm7bhk4v" path="res://Scenes/hearts_container.tscn" id="5_fgdfb"]
 
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_yqty0")

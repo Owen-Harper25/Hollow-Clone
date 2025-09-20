@@ -199,6 +199,7 @@ hframes = 7
 libraries = {
 &"": SubResource("AnimationLibrary_hqtel")
 }
+autoplay = "Idle"
 
 [node name="Timers" type="Node" parent="."]
 
