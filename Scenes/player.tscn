@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=14 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_onrkg"]
@@ -173,6 +173,10 @@ _data = {
 &"dash": SubResource("Animation_6t5aa")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
+radius = 0.99999994
+height = 4.7999997
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(5, 5)
 collision_layer = 3
@@ -238,8 +242,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 position = Vector2(0, 0.19999999)
-scale = Vector2(0.99999994, 0.99999994)
-shape = SubResource("CapsuleShape2D_hqtel")
+shape = SubResource("CapsuleShape2D_6t5aa")
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]

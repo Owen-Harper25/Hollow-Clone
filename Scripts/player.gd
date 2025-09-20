@@ -437,7 +437,7 @@ func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
 func _on_hurt_box_area_entered(area):
-	if area.name == "hitBox":
+	if area.name == "hitBox" and dash_immunity == false:
 		currentHealth -= 1
 		SoundLibrary.play_random_hit()
 		if currentHealth <= 0:
@@ -446,7 +446,10 @@ func _on_hurt_box_area_entered(area):
 			print("Dead")
 		healthChanged.emit(currentHealth)
 		knockback()
-		
+	#if area.name == "hitBox" and dash_immunity:
+		#SoundLibrary.play_random_pickup()
+
+
 func knockback():
 	var knockbackDirection = -velocity.normalized() * MAX_SPEED
 	velocity = knockbackDirection
