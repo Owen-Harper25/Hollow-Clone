@@ -198,6 +198,7 @@ hframes = 7
 libraries = {
 &"": SubResource("AnimationLibrary_hqtel")
 }
+autoplay = "Idle"
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
