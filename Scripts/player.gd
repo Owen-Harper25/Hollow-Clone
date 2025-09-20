@@ -29,6 +29,7 @@ var DASH_PARTICLE = preload("res://Scenes/DashParticle.tscn")
 
 
 #Attack Variables
+var invincibility: bool = false
 var can_attack: bool = true
 var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
@@ -37,6 +38,7 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var attack_arc: Node2D = $AttackArc
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
+@onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
 
 #Health Variables
 @onready var currentHealth: int = maxHealth
@@ -258,13 +260,7 @@ func physics_tick(delta: float) -> void:
 				print(result)
 				if area.is_in_group("Enemy"):
 					_on_hurt_box_area_entered(area)
-					#var push_dir = (global_position - area.global_position).normalized()
-					#global_position += push_dir * 20.0  # move out a few pixels
-					#velocity = push_dir * 200.0        # add knockback velocity
 					damage()
-			#for area in $hurtBox.get_overlapping_areas():
-				#if area.is_in_group("hitBox"): # or however you mark enemy hit areas
-					#damage()
 		
 		move_and_slide()
 		return  # skip normal physics while dashing
@@ -459,9 +455,12 @@ func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
 func _on_hurt_box_area_entered(area):
-	if area.name == "hitBox" and dash_immunity == false:
+	if area.name == "hitBox" and dash_immunity == false and invincibility == false:
 		damage()
 
+func _on_invincibility_timer_timeout() -> void:
+	invincibility = false
+	set_collision_mask_value(2, true)
 
 func damage():
 	currentHealth -= 1
@@ -469,6 +468,10 @@ func damage():
 	hit_flash_animation_player.play("hit_flash")
 	healthChanged.emit(currentHealth)
 	knockback()
+	if currentHealth > 0:
+		invincibility_timer.start()
+		invincibility = true
+		set_collision_mask_value(2, false)
 	if currentHealth <= 0:
 		SoundLibrary.play_random_death()
 		currentHealth = maxHealth

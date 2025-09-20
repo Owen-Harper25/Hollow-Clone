@@ -219,6 +219,8 @@ wait_time = 0.7
 one_shot = true
 
 [node name="InvincibilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
 visible = false
@@ -254,4 +256,5 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
