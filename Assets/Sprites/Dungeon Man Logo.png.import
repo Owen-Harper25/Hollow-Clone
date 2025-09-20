@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2no6hg7xlyxj"
-path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
+uid="uid://b1pjfvcv7eelg"
+path="res://.godot/imported/Dungeon Man Logo.png-5f750d11b02a1a93d30afd8f7280fd12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Archer.png"
-dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
+source_file="res://Assets/Sprites/Dungeon Man Logo.png"
+dest_files=["res://.godot/imported/Dungeon Man Logo.png-5f750d11b02a1a93d30afd8f7280fd12.ctex"]
 
 [params]
 

@@ -11,6 +11,9 @@ extends CharacterBody2D
 ## be adjusted to fit your specific needs
 
 ## The four possible character states and the character's current state
+
+signal healthChanged
+
 enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 
 ## The values for the jump direction, default is UP or -1
@@ -24,6 +27,7 @@ var DASH_PARTICLE = preload("res://Scenes/DashParticle.tscn")
 @onready var feet: Marker2D = $Feet
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
 
+
 #Attack Variables
 var can_attack: bool = true
 var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
@@ -34,10 +38,14 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var attack_arc: Node2D = $AttackArc
 
 #Health Variables
+@onready var currentHealth: int = maxHealth
+@export var maxHealth = 5
+
 var health = 5
-var health_max = 5
+#var hearts_list : Array[TextureRect]
 var health_min = 0
 var alive: bool = true
+
 
 #Dashing Variables
 var can_dash: bool = true
@@ -123,7 +131,12 @@ var jumping := false
 ## The player can wall jump when [param can_wall_jump] is true
 @onready var can_wall_jump: bool = ENABLE_WALL_JUMPING
 
-
+func _ready() -> void:
+	#var hearts_parent = $Healthbar/HBoxContainer
+	#for child in hearts_parent.get_childern():
+		#hearts_list.append(child)
+	#print(hearts_list)
+	pass
 	
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
@@ -428,3 +441,11 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
+
+func _on_hurt_box_area_entered(area):
+	if area.name == "hitBox":
+		currentHealth -= 1
+		if currentHealth < 0:
+			currentHealth = maxHealth
+			print("Dead")
+		healthChanged.emit(currentHealth)

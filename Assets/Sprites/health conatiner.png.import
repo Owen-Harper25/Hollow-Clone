@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2no6hg7xlyxj"
-path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
+uid="uid://cukm5ild63do0"
+path="res://.godot/imported/health conatiner.png-a378211de08334874aede6da0d69b5ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Archer.png"
-dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
+source_file="res://Assets/Sprites/health conatiner.png"
+dest_files=["res://.godot/imported/health conatiner.png-a378211de08334874aede6da0d69b5ab.ctex"]
 
 [params]
 

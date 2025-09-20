@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhpa4osybcxmh"]
+[gd_scene load_steps=7 format=3 uid="uid://bhpa4osybcxmh"]
 
 [ext_resource type="PackedScene" uid="uid://cs5nehq6fugxq" path="res://Scenes/testmap.tscn" id="1_sq00h"]
+[ext_resource type="Script" uid="uid://cflpa8rkglgey" path="res://Scripts/game_manager.gd" id="1_yqty0"]
 [ext_resource type="PackedScene" uid="uid://8d4pvawstgha" path="res://Scenes/map_1.tscn" id="2_fgdfb"]
 [ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/player.tscn" id="2_mmt5l"]
 [ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="3_fgdfb"]
+[ext_resource type="PackedScene" uid="uid://fkximm7bhk4v" path="res://Scenes/hearts_container.tscn" id="5_fgdfb"]
 
 [node name="Game Manager" type="Node2D"]
+script = ExtResource("1_yqty0")
 
 [node name="Map_1" parent="." instance=ExtResource("2_fgdfb")]
 position = Vector2(-1134.9999, -586)
@@ -20,6 +23,10 @@ scale = Vector2(1.8536633, 1.6507941)
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(2.9999998, 2.9999998)
 zoom = Vector2(3, 3)
 script = ExtResource("3_fgdfb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_fgdfb")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2no6hg7xlyxj"
-path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
+uid="uid://08r7lnsj5h3n"
+path="res://.godot/imported/Door.png-b9191d63c99d4a76f73a0c99e043368f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Archer.png"
-dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
+source_file="res://Assets/Sprites/Door.png"
+dest_files=["res://.godot/imported/Door.png-b9191d63c99d4a76f73a0c99e043368f.ctex"]
 
 [params]
 

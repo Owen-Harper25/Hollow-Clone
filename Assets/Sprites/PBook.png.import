@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2no6hg7xlyxj"
-path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
+uid="uid://b25s8xkawf6h0"
+path="res://.godot/imported/PBook.png-f9544587596b139c24e8af7b7bda0d8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Archer.png"
-dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
+source_file="res://Assets/Sprites/PBook.png"
+dest_files=["res://.godot/imported/PBook.png-f9544587596b139c24e8af7b7bda0d8f.ctex"]
 
 [params]
 

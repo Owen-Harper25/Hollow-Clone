@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2no6hg7xlyxj"
-path="res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"
+uid="uid://bgbc21qg5dhc2"
+path="res://.godot/imported/Dungeon Set.png-343ca8b4dd3a82ab5c989e3359c40dfb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Archer.png"
-dest_files=["res://.godot/imported/Archer.png-b1b1934ca074b996d2a78729fc7489e8.ctex"]
+source_file="res://Assets/Sprites/Dungeon Set.png"
+dest_files=["res://.godot/imported/Dungeon Set.png-343ca8b4dd3a82ab5c989e3359c40dfb.ctex"]
 
 [params]
 
