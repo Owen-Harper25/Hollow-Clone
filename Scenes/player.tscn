@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/attack_arc.tscn" id="3_6t5aa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
-radius = 0.79999995
+radius = 0.8000001
 height = 4.7999997
 
 [sub_resource type="Animation" id="Animation_onrkg"]
@@ -179,15 +179,17 @@ collision_layer = 3
 collision_mask = 15
 script = ExtResource("1_onrkg")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.19999996)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("CapsuleShape2D_hqtel")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.2, 0)
 scale = Vector2(0.3203125, 0.3203125)
 texture = ExtResource("2_onrkg")
 hframes = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.2)
-shape = SubResource("CapsuleShape2D_hqtel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -231,6 +233,15 @@ position = Vector2(-2, 0)
 [node name="Marker2D4" type="Marker2D" parent="Directions"]
 position = Vector2(0, 2.75)
 
+[node name="hurtBox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(0, 0.19999999)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_hqtel")
+
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

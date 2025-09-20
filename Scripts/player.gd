@@ -393,8 +393,6 @@ func run_particles():
 		particle.global_position = $Feet.global_position
 		get_parent().add_child(particle)
 
-
-
 ## Applies a jump force to the character in the specified direction, defaults to [param JUMP_FORCE] and [param JUMP_DIRECTIONS.UP]
 ## but can be passed a new force and direction
 func apply_jump(move_direction: Vector2, jump_force: float = JUMP_FORCE, jump_direction: int = JUMP_DIRECTIONS.UP) -> void:
@@ -410,12 +408,10 @@ func apply_jump(move_direction: Vector2, jump_force: float = JUMP_FORCE, jump_di
 
 	velocity.y += jump_force * jump_direction
 
-
 ## If jump is released before reaching the top of the jump, the jump is cancelled using the [param JUMP_CANCEL_FORCE] and delta
 func cancel_jump(delta: float) -> void:
 	jumping = false
 	velocity.y -= JUMP_CANCEL_FORCE * sign(velocity.y) * delta
-
 
 ## If jump is pressed before hitting the ground, it's buffered using the [param JUMP_BUFFER_TIMER] value and the jump is applied
 ## if the character lands before the timer ends
@@ -424,20 +420,18 @@ func buffer_jump() -> void:
 	await get_tree().create_timer(JUMP_BUFFER_TIMER).timeout
 	should_jump = false
 
-
 ## If the character steps off of a platform, they are given an amount of time in the air to still jump using the [param COYOTE_TIMER] value
 func coyote_time() -> void:
 	await get_tree().create_timer(COYOTE_TIMER).timeout
 	can_jump = false
 
+#connections
 
 func _on_particle_timer_timeout() -> void:
 	canSpawnParticle = true
 
-
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
-
 
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
@@ -445,7 +439,15 @@ func _on_dash_timer_timeout() -> void:
 func _on_hurt_box_area_entered(area):
 	if area.name == "hitBox":
 		currentHealth -= 1
-		if currentHealth < 0:
+		SoundLibrary.play_random_hit()
+		if currentHealth <= 0:
+			SoundLibrary.play_random_death()
 			currentHealth = maxHealth
 			print("Dead")
 		healthChanged.emit(currentHealth)
+		knockback()
+		
+func knockback():
+	var knockbackDirection = -velocity.normalized() * MAX_SPEED
+	velocity = knockbackDirection
+	move_and_slide()
