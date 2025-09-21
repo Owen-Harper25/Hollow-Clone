@@ -1,7 +1,5 @@
-[gd_scene load_steps=16 format=4 uid="uid://bqt0nyaqbxt36"]
+[gd_scene load_steps=14 format=4 uid="uid://bqt0nyaqbxt36"]
 
-[ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/player.tscn" id="1_5r5j8"]
-[ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="2_akpl7"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
 [ext_resource type="Texture2D" uid="uid://d0dkbuwsu8o5c" path="res://Assets/Sprites/Stringstar Fields/background_1.png" id="4_ptpgp"]
 [ext_resource type="Texture2D" uid="uid://ddhi6cq5oxlbb" path="res://Assets/Sprites/Stringstar Fields/background_2.png" id="5_2uqsa"]
@@ -678,15 +676,6 @@ texture = ExtResource("6_lp2uw")
 sources/0 = SubResource("TileSetAtlasSource_8lfqf")
 
 [node name="Level_1" type="Node2D"]
-
-[node name="Player" parent="." instance=ExtResource("1_5r5j8")]
-z_index = 1
-
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(14.999999, 14.999999)
-offset = Vector2(0, -30)
-zoom = Vector2(3, 3)
-script = ExtResource("2_akpl7")
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(576, 300)
