@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://e5wnoubiupe3"]
+[gd_scene load_steps=18 format=3 uid="uid://bayc67pdsup51"]
 
 [ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/ManSheet.png" id="1_isu26"]
-[ext_resource type="Script" path="res://Scripts/red_knight.gd" id="1_jr21u"]
+[ext_resource type="Script" uid="uid://c4okmogv0tvjt" path="res://Scripts/red_knight.gd" id="1_jr21u"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_isu26"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xghsx"]
@@ -116,9 +116,11 @@ animations = [{
 radius = 6.0
 height = 20.0
 
-[node name="RedKnight" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
+radius = 6.0
+height = 20.0
+
+[node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -134,5 +136,11 @@ shape = SubResource("CapsuleShape2D_m8i00")
 
 [node name="DirectionTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="hitBox" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_jr21u")
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]

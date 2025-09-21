@@ -196,7 +196,6 @@ func start_dash(direction: Vector2) -> void:
 	dash_timer = dash_duration
 	velocity.x = dash_direction.x * dash_speed
 	set_collision_mask_value(2, false)
-	set_collision_layer_value(2, false)
 	
 func get_cardinal_direction(dir: Vector2) -> Vector2:
 	var deadzone := 0.2
@@ -249,8 +248,6 @@ func physics_tick(delta: float) -> void:
 			is_dashing = false
 			dash_immunity = false
 			velocity.x = dash_direction.x * MAX_SPEED
-			set_collision_layer_value(2, true)
-			set_collision_mask_value(2, true)
 			var space_state = get_world_2d().direct_space_state
 			var query = PhysicsShapeQueryParameters2D.new()
 			query.shape = $hurtBox/CollisionShape2D.shape
@@ -464,7 +461,6 @@ func _on_hurt_box_area_entered(area):
 func _on_invincibility_timer_timeout() -> void:
 	invincibility = false
 	set_collision_mask_value(2, true)
-	set_collision_layer_value(2, true)
 
 func damage():
 	currentHealth -= 1
@@ -476,7 +472,6 @@ func damage():
 		invincibility_timer.start()
 		invincibility = true
 		set_collision_mask_value(2, false)
-		set_collision_layer_value(2, false)
 	if currentHealth <= 0:
 		SoundLibrary.play_random_death()
 		currentHealth = maxHealth

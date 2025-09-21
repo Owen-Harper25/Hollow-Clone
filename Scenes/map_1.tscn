@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://8d4pvawstgha"]
+[gd_scene load_steps=9 format=4 uid="uid://8d4pvawstgha"]
 
 [ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Background.png" id="1_dcmhf"]
 [ext_resource type="Texture2D" uid="uid://dasl4yw1txi83" path="res://Assets/Sprites/CastleInteriorTileSet.png" id="1_gt30j"]
 [ext_resource type="PackedScene" uid="uid://vlni72ufvfqd" path="res://Scenes/test_dummy.tscn" id="2_pj5k7"]
+[ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/red_knight.tscn" id="4_k5iew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pj5k7"]
 texture = ExtResource("1_gt30j")
@@ -103,8 +104,7 @@ texture = ExtResource("1_gt30j")
 3:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_k5iew"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_pj5k7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5iew"]
@@ -200,3 +200,6 @@ texture = ExtResource("1_dcmhf")
 
 [node name="Test Dummy" parent="." instance=ExtResource("2_pj5k7")]
 position = Vector2(1126.3008, 660.40375)
+
+[node name="RedKnight" parent="." instance=ExtResource("4_k5iew")]
+position = Vector2(672, 350)
