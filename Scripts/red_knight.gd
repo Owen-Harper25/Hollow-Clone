@@ -4,7 +4,7 @@ class_name Red_Knight
 
 const speed = 10
 var is_redknight_chase: bool
-	
+
 
 @export var health = 5
 @export var max_health = 5
@@ -27,6 +27,10 @@ func _process(delta: float) -> void:
 	move(delta)
 	handle_animation()
 	move_and_slide()
+	
+func take_damage(damage: int):
+	health -= damage
+	print(health)
 
 func move(delta):
 	if !dead:
