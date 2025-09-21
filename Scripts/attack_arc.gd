@@ -13,3 +13,4 @@ func _on_timer_timeout() -> void:
 func _on_attack_arc_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy") and body.has_method("take_damage"):
 		body.take_damage(damage)
+	pass # Replace with function body.
