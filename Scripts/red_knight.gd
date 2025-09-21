@@ -68,6 +68,8 @@ func handle_animation():
 		SoundLibrary.play_random_death()
 	elif dead and is_roaming:
 		is_roaming = false
+		set_collision_layer_value(2, false)
+		set_collision_mask_value(2, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
 		await get_tree().create_timer(2).timeout
