@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k13hwk0i7umv"
-path="res://.godot/imported/Background.png-11bc84fe4d7686a716d11ebb080e2204.ctex"
+uid="uid://chl762chi6f1o"
+path="res://.godot/imported/background_0.png-16dae5baeea7bfdd0b7b2353307e2354.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Background.png"
-dest_files=["res://.godot/imported/Background.png-11bc84fe4d7686a716d11ebb080e2204.ctex"]
+source_file="res://Assets/Sprites/Stringstar Fields/background_0.png"
+dest_files=["res://.godot/imported/background_0.png-16dae5baeea7bfdd0b7b2353307e2354.ctex"]
 
 [params]
 
