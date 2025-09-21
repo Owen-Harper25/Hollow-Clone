@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Red_Knight
 
 const speed = 10
-var is_redknight_chase: bool
+var is_redknight_chase : bool = false
 
 
 @export var health = 5
@@ -20,28 +20,59 @@ const gravity = 300
 var knockback_force = 200
 var is_roaming: bool = false
 
+var player: CharacterBody2D
+var player_in_area = false
+
 func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = 0
+	
+	if health <= 0:
+		dead = true
+		
+	player = Global.playerBody
+		
 	move(delta)
 	handle_animation()
 	move_and_slide()
 	
 func take_damage(damage: int):
 	health -= damage
-	print(health)
 
 func move(delta):
 	if !dead:
 		if !is_redknight_chase:
 			velocity += dir * speed * delta
+		elif is_redknight_chase and !taking_damage:
+			var dir_to_player = position.direction_to(player.position) * speed
+			velocity.x = dir_to_player.x
+			print(dir_to_player)
+			dir.x = abs(velocity.x) / velocity.x
 		is_roaming = true
 	elif dead:
 		velocity.x = 0
 
 func handle_animation():
-	pass
+	var anim_sprite = $AnimatedSprite2D
+	if !dead and !is_dealing_damage and !taking_damage:
+		anim_sprite.play("Walk")
+		if dir.x == -1:
+			anim_sprite.flip_h = true
+		elif dir.x == 1:
+			anim_sprite.flip_h = false
+	elif !dead and !is_dealing_damage and taking_damage:
+		anim_sprite.play("Hit")
+		await get_tree().create_timer(0.6).timeout
+		taking_damage = false
+	elif dead and is_roaming:
+		is_roaming = false
+		anim_sprite.play("Death")
+		await get_tree().create_timer(2).timeout
+		handleDeath()
+		
+func handleDeath():
+	self.queue_free()
 
 func _on_direction_timer_timeout() -> void:
 	$DirectionTimer.wait_time = choose([1.5, 2.0, 2.5])

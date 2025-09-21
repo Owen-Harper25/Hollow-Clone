@@ -18,6 +18,7 @@ config/icon="res://Assets/Sprites/icon.svg"
 [autoload]
 
 SoundLibrary="*res://Scenes/sound_library.tscn"
+Global="*res://global.gd"
 
 [display]
 

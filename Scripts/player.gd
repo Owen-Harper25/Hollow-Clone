@@ -135,6 +135,7 @@ var jumping := false
 @onready var can_wall_jump: bool = ENABLE_WALL_JUMPING
 
 func _ready() -> void:
+	Global.playerBody = self
 	#var hearts_parent = $Healthbar/HBoxContainer
 	#for child in hearts_parent.get_childern():
 		#hearts_list.append(child)
