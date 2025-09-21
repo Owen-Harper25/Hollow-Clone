@@ -1,13 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://bayc67pdsup51"]
+[gd_scene load_steps=20 format=3 uid="uid://bayc67pdsup51"]
 
 [ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/ManSheet.png" id="1_isu26"]
 [ext_resource type="Script" uid="uid://c4okmogv0tvjt" path="res://Scripts/red_knight.gd" id="1_jr21u"]
-[ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_isu26"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Scenes/hit_effect.gdshader" id="2_xghsx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ie4o"]
 shader = ExtResource("2_xghsx")
-shader_parameter/enabled = true
+shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xghsx"]
@@ -25,14 +24,6 @@ region = Rect2(80, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bibtd"]
 atlas = ExtResource("1_isu26")
 region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_actkj"]
-atlas = ExtResource("1_isu26")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jr21u"]
-atlas = ExtResource("2_isu26")
-region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8yjo1"]
 atlas = ExtResource("1_isu26")
@@ -72,20 +63,6 @@ animations = [{
 "loop": false,
 "name": &"Death",
 "speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_actkj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jr21u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_actkj")
-}],
-"loop": false,
-"name": &"Hit",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -136,10 +113,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 0.14419213, 0.2),
+"times": PackedFloat32Array(0, 0.033333335, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, false]
+"values": [false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_bibtd"]
@@ -154,7 +131,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_actkj"]

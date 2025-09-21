@@ -160,10 +160,10 @@ tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.19491732),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.19491732),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3smsa"]
@@ -223,11 +223,11 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
-visible = false
 position = Vector2(0, 2.6666667)
 scale = Vector2(0.33333334, 0.33333334)
 
 [node name="AttackArc" parent="." instance=ExtResource("3_6t5aa")]
+visible = false
 position = Vector2(0, 0.19999997)
 scale = Vector2(1e-05, 0.9999998)
 
