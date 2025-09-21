@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 		velocity.y += gravity * delta
 		velocity.x = 0
 	move(delta)
+	handle_animation()
 	move_and_slide()
 
 func move(delta):
@@ -34,6 +35,9 @@ func move(delta):
 		is_roaming = true
 	elif dead:
 		velocity.x = 0
+
+func handle_animation():
+	pass
 
 func _on_direction_timer_timeout() -> void:
 	$DirectionTimer.wait_time = choose([1.5, 2.0, 2.5])
