@@ -97,11 +97,11 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8i00"]
 radius = 6.0
-height = 20.0
+height = 25.125
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
 radius = 7.0
-height = 22.0
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_vp183"]
 resource_name = "Hurt"
@@ -147,7 +147,7 @@ script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1ie4o")
-scale = Vector2(1.3749999, 1.3749999)
+scale = Vector2(1.6950004, 1.6950004)
 sprite_frames = SubResource("SpriteFrames_0tpon")
 animation = &"Death"
 autoplay = "Idle"
