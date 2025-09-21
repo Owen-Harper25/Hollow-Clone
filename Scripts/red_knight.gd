@@ -3,9 +3,8 @@ extends CharacterBody2D
 class_name Red_Knight
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 
-const speed = 10
-var is_redknight_chase : bool = false
-
+const speed = 100
+var is_redknight_chase : bool = true
 
 @export var health = 5
 @export var max_health = 5
@@ -28,12 +27,11 @@ func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = 0
+		
+	player = Global.playerBody
 	
 	if health <= 0:
 		dead = true
-		
-		
-	player = Global.playerBody
 		
 	move(delta)
 	handle_animation()
@@ -49,10 +47,8 @@ func move(delta):
 		if !is_redknight_chase:
 			velocity += dir * speed * delta
 		elif is_redknight_chase and !taking_damage:
-			var dir_to_player = position.direction_to(player.position) * speed
+			var dir_to_player = global_position.direction_to(player.position) * speed
 			velocity.x = dir_to_player.x
-			print(dir_to_player)
-			dir.x = abs(velocity.x) / velocity.x
 		is_roaming = true
 	elif dead:
 		velocity.x = 0
