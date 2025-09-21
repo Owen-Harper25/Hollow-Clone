@@ -242,11 +242,13 @@ func _on_AttackTimer_timeout():
 func physics_tick(delta: float) -> void:
 	if is_dashing:
 		# Dash overrides normal movement
+		set_collision_layer_value(2, false)
 		velocity = dash_direction * dash_speed
 		dash_timer -= delta
 		if dash_timer <= 0.0:
 			is_dashing = false
 			dash_immunity = false
+			set_collision_layer_value(2, true)
 			velocity.x = dash_direction.x * MAX_SPEED
 			var space_state = get_world_2d().direct_space_state
 			var query = PhysicsShapeQueryParameters2D.new()
@@ -461,6 +463,7 @@ func _on_hurt_box_area_entered(area):
 func _on_invincibility_timer_timeout() -> void:
 	invincibility = false
 	set_collision_mask_value(2, true)
+	set_collision_layer_value(2, true)
 
 func damage():
 	currentHealth -= 1
@@ -472,6 +475,7 @@ func damage():
 		invincibility_timer.start()
 		invincibility = true
 		set_collision_mask_value(2, false)
+		set_collision_layer_value(2, false)
 	if currentHealth <= 0:
 		SoundLibrary.play_random_death()
 		currentHealth = maxHealth
