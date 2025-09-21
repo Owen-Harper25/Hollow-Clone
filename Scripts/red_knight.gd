@@ -30,9 +30,6 @@ func _process(delta: float) -> void:
 		
 	player = Global.playerBody
 	
-	if health <= 0:
-		dead = true
-	
 	move(delta)
 	handle_animation()
 	move_and_slide()
