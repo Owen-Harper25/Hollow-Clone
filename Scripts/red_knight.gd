@@ -4,7 +4,7 @@ class_name Red_Knight
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 
 const speed = 20
-var is_redknight_chase : bool = true
+var is_redknight_chase : bool = false
 
 @export var health = 5
 @export var max_health = 5
@@ -42,6 +42,9 @@ func take_damage(damage: int):
 	health -= damage
 	hit_flash_animation_player.play("Hurt")
 	SoundLibrary.play_random_hit()
+	if health <= health_min:
+		health = health_min
+		dead = true
 
 func move(delta):
 	if !dead:
