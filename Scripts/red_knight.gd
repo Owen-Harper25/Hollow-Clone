@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 class_name Red_Knight
+@onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 
 const speed = 10
 var is_redknight_chase : bool = false
@@ -31,6 +32,7 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		dead = true
 		
+		
 	player = Global.playerBody
 		
 	move(delta)
@@ -39,6 +41,8 @@ func _process(delta: float) -> void:
 	
 func take_damage(damage: int):
 	health -= damage
+	hit_flash_animation_player.play("Hurt")
+	SoundLibrary.play_random_hit()
 
 func move(delta):
 	if !dead:
@@ -65,9 +69,11 @@ func handle_animation():
 		anim_sprite.play("Hit")
 		await get_tree().create_timer(0.6).timeout
 		taking_damage = false
+		SoundLibrary.play_random_death()
 	elif dead and is_roaming:
 		is_roaming = false
 		anim_sprite.play("Death")
+		SoundLibrary.play_random_death()
 		await get_tree().create_timer(2).timeout
 		handleDeath()
 		

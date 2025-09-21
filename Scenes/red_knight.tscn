@@ -1,8 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://bayc67pdsup51"]
+[gd_scene load_steps=23 format=3 uid="uid://bayc67pdsup51"]
 
 [ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/ManSheet.png" id="1_isu26"]
 [ext_resource type="Script" uid="uid://c4okmogv0tvjt" path="res://Scripts/red_knight.gd" id="1_jr21u"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Man.png" id="2_isu26"]
+[ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Scenes/hit_effect.gdshader" id="2_xghsx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ie4o"]
+shader = ExtResource("2_xghsx")
+shader_parameter/enabled = true
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xghsx"]
 atlas = ExtResource("1_isu26")
@@ -120,12 +126,50 @@ height = 20.0
 radius = 7.0
 height = 22.0
 
+[sub_resource type="Animation" id="Animation_vp183"]
+resource_name = "Hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14419213),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bibtd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_actkj"]
+_data = {
+&"Hurt": SubResource("Animation_vp183"),
+&"RESET": SubResource("Animation_bibtd")
+}
+
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_1ie4o")
 scale = Vector2(1.3749999, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_0tpon")
 animation = &"Death"
@@ -145,5 +189,10 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_jr21u")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_actkj")
+}
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
