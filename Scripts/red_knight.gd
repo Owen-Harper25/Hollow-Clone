@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		dead = true
+		remove_child($hitBox)
 		
 	move(delta)
 	handle_animation()
