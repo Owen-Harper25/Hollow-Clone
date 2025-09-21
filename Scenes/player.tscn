@@ -204,7 +204,6 @@ autoplay = "Idle"
 libraries = {
 &"": SubResource("AnimationLibrary_3smsa")
 }
-autoplay = "RESET"
 
 [node name="Timers" type="Node" parent="."]
 
