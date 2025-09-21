@@ -94,3 +94,15 @@ func _on_direction_timer_timeout() -> void:
 func choose(array):
 	array.shuffle()
 	return array.front()
+
+
+func _on_detection_zone_body_entered(body: Node2D) -> void:
+	if body == player:
+		is_redknight_chase = true
+	pass # Replace with function body.
+
+
+func _on_detection_zone_body_exited(body: Node2D) -> void:
+	if body == player: 
+		is_redknight_chase = false
+	pass # Replace with function body.
