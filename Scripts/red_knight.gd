@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		dead = true
-		remove_child($hitBox)
+		
 		
 	move(delta)
 	handle_animation()
@@ -72,6 +72,7 @@ func handle_animation():
 		taking_damage = false
 	elif dead and is_roaming:
 		is_roaming = false
+		remove_child($hitBox)
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
 		set_collision_layer_value(1, false)
