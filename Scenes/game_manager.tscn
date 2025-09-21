@@ -16,6 +16,7 @@ z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2.9999998, 2.9999998)
+offset = Vector2(0, -30)
 zoom = Vector2(3, 3)
 script = ExtResource("3_fgdfb")
 
