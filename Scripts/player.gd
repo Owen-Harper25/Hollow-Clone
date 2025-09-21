@@ -251,19 +251,7 @@ func physics_tick(delta: float) -> void:
 			dash_immunity = false
 			set_collision_layer_value(2, true)
 			velocity.x = dash_direction.x * MAX_SPEED
-			var space_state = get_world_2d().direct_space_state
-			var query = PhysicsShapeQueryParameters2D.new()
-			query.shape = $hurtBox/CollisionShape2D.shape
-			query.transform = $hurtBox/CollisionShape2D.global_transform
-			query.collide_with_areas = true
-			query.collision_mask = 2  # enemy hitboxes layer
-			var results = space_state.intersect_shape(query)
-			for result in results:
-				var area = result.collider
-				print(result)
-				if area.is_in_group("Enemy"):
-					_on_hurt_box_area_entered(area)
-					damage()
+			damage_check()
 		
 		move_and_slide()
 		return  # skip normal physics while dashing
@@ -280,6 +268,21 @@ func physics_tick(delta: float) -> void:
 	handle_gravity(delta) 
 
 	move_and_slide()
+
+func damage_check():
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = $hurtBox/CollisionShape2D.shape
+	query.transform = $hurtBox/CollisionShape2D.global_transform
+	query.collide_with_areas = true
+	query.collision_mask = 2  # enemy hitboxes layer
+	var results = space_state.intersect_shape(query)
+	for result in results:
+		var area = result.collider
+		print(result)
+		if area.is_in_group("Enemy"):
+			_on_hurt_box_area_entered(area)
+			damage()
 
 
 ## Manages the character's current state based on the current velocity vector
@@ -453,6 +456,7 @@ func _on_particle_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	can_attack = true
+	damage_check()
 
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
@@ -465,6 +469,7 @@ func _on_invincibility_timer_timeout() -> void:
 	invincibility = false
 	set_collision_mask_value(2, true)
 	set_collision_layer_value(2, true)
+	damage_check()
 
 func damage():
 	currentHealth -= 1
@@ -477,6 +482,7 @@ func damage():
 		invincibility = true
 		set_collision_mask_value(2, false)
 		set_collision_layer_value(2, false)
+		
 	if currentHealth <= 0:
 		SoundLibrary.play_random_death()
 		currentHealth = maxHealth
