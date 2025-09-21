@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://8d4pvawstgha"]
+[gd_scene load_steps=8 format=4 uid="uid://8d4pvawstgha"]
 
 [ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Background.png" id="1_dcmhf"]
 [ext_resource type="Texture2D" uid="uid://dasl4yw1txi83" path="res://Assets/Sprites/CastleInteriorTileSet.png" id="1_gt30j"]
 [ext_resource type="PackedScene" uid="uid://vlni72ufvfqd" path="res://Scenes/test_dummy.tscn" id="2_pj5k7"]
-[ext_resource type="PackedScene" uid="uid://e5wnoubiupe3" path="res://Scenes/red_knight.tscn" id="4_k5iew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pj5k7"]
 texture = ExtResource("1_gt30j")
@@ -201,6 +200,3 @@ texture = ExtResource("1_dcmhf")
 
 [node name="Test Dummy" parent="." instance=ExtResource("2_pj5k7")]
 position = Vector2(1126.3008, 660.40375)
-
-[node name="RedKnight" parent="." instance=ExtResource("4_k5iew")]
-position = Vector2(620, 353)
