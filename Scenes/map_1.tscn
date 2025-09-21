@@ -176,6 +176,12 @@ sources/0 = SubResource("TileSetAtlasSource_k5iew")
 
 [node name="Map_1" type="TileMapLayer"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -9
+offset_right = 1150.0
+offset_bottom = 651.0
+color = Color(0.16915461, 0.10442213, 0.27801833, 1)
+
 [node name="Foreground" type="TileMapLayer" parent="."]
 
 [node name="MainGround" type="TileMapLayer" parent="."]
@@ -204,3 +210,5 @@ position = Vector2(1126.3008, 660.40375)
 
 [node name="RedKnight" parent="." instance=ExtResource("4_k5iew")]
 position = Vector2(672, 350)
+collision_layer = 2
+collision_mask = 6
