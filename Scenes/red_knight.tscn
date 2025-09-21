@@ -117,10 +117,12 @@ radius = 6.0
 height = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
-radius = 6.0
-height = 20.0
+radius = 7.0
+height = 22.0
 
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
