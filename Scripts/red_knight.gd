@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Red_Knight
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 
-const speed = 100
+const speed = 20
 var is_redknight_chase : bool = true
 
 @export var health = 5
@@ -17,7 +17,7 @@ var is_dealing_damage: bool = false
 
 var dir: Vector2
 const gravity = 300
-var knockback_force = 200
+var knockback_force = -20
 var is_roaming: bool = false
 
 var player: CharacterBody2D
@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 func take_damage(damage: int):
+	taking_damage = true
 	health -= damage
 	hit_flash_animation_player.play("Hurt")
 	SoundLibrary.play_random_hit()
@@ -49,6 +50,10 @@ func move(delta):
 		elif is_redknight_chase and !taking_damage:
 			var dir_to_player = global_position.direction_to(player.position) * speed
 			velocity.x = dir_to_player.x
+			dir.x = abs(velocity.x) / velocity.x
+		elif taking_damage:
+			var knockback_dir = global_position.direction_to(player.position) * knockback_force
+			velocity.x = knockback_dir.x
 		is_roaming = true
 	elif dead:
 		velocity.x = 0
@@ -62,14 +67,14 @@ func handle_animation():
 		elif dir.x == 1:
 			anim_sprite.flip_h = false
 	elif !dead and !is_dealing_damage and taking_damage:
-		anim_sprite.play("Hit")
 		await get_tree().create_timer(0.6).timeout
 		taking_damage = false
-		SoundLibrary.play_random_death()
 	elif dead and is_roaming:
 		is_roaming = false
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
+		set_collision_layer_value(1, false)
+		set_collision_mask_value(1, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
 		await get_tree().create_timer(2).timeout
