@@ -493,6 +493,11 @@ func knockback():
 	velocity = knockbackDirection
 	move_and_slide()
 	if velocity == Vector2.ZERO:
-		var push_dir = global_position.normalized()
-		global_position += push_dir * 8.0  # move out a few pixels
-		velocity = push_dir * 200.0        # add knockback velocity
+		if facing_direction == Vector2.RIGHT:
+			var push_dir = global_position.normalized()
+			global_position += push_dir * 8.0  # move out a few pixels
+			velocity = push_dir * -200.0        # add knockback velocity
+		if facing_direction == Vector2.LEFT:
+			var push_dir = global_position.normalized()
+			global_position += push_dir * 8.0  # move out a few pixels
+			velocity = push_dir * 200.0   
