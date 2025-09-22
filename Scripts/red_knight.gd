@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Red_Knight
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const speed = 20
 var is_redknight_chase : bool = false
@@ -59,7 +60,6 @@ func move(delta):
 		velocity.x = 0
 
 func handle_animation():
-	var anim_sprite = $AnimatedSprite2D
 	if !dead and !is_dealing_damage and !taking_damage:
 		anim_sprite.play("Walk")
 		if dir.x == -1:
