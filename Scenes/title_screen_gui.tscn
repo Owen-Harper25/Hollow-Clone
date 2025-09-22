@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4v35scf22mit" path="res://Scripts/title_screen_gui.gd" id="1_cttc7"]
 [ext_resource type="Texture2D" uid="uid://badx14u7wc3hk" path="res://Assets/Sprites/TitleScreen_PlaceHolder.png" id="2_oxdhk"]
-[ext_resource type="Script" uid="uid://dwv73oy32b0vq" path="res://Scenes/play_game.gd" id="3_rvddj"]
+[ext_resource type="Script" uid="uid://dwv73oy32b0vq" path="res://Scripts/play_game.gd" id="3_rvddj"]
 
 [node name="TitleScreenGui" type="Control"]
 layout_mode = 3
