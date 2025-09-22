@@ -15,6 +15,8 @@ extends CharacterBody2D
 signal healthChanged
 #signal pausedGame  #the Paused state of the game
 
+#Global.game_resumed.connect(_on_game_resumed)
+
 enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 
 ## The values for the jump direction, default is UP or -1
@@ -24,6 +26,7 @@ enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
 var DASH_PARTICLE = preload("res://Scenes/DashParticle.tscn")
+var paused: bool = false
 
 @onready var feet: Marker2D = $Feet
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
@@ -61,6 +64,7 @@ var dash_direction: Vector2 = Vector2.ZERO  # Direction of the dash
 @export var dash_duration: float = 0.2  # How long the dash lasts
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes
 @onready var dash_cooldown_timer: Timer = $"Timers/Dash Timer"
+@onready var resume_timer: Timer = $"Timers/Resume Timer"
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
@@ -123,6 +127,7 @@ var state: int = IDLE
 var sprinting := false
 ## The player can jump when [param can_jump] is true
 var can_jump := false
+var pause_jump := false
 ## The player should jump when landing if [param should_jump] is true, this is used for the [param jump_buffering]
 var should_jump := false
 ## The player will execute a wall jump if [param can_wall_jump] is true and the last call of move_and_slide was only colliding with a wall.
@@ -137,11 +142,12 @@ var jumping := false
 
 func _ready() -> void:
 	Global.playerBody = self
-	#var hearts_parent = $Healthbar/HBoxContainer
-	#for child in hearts_parent.get_childern():
-		#hearts_list.append(child)
-	#print(hearts_list)
-	pass
+	Global.game_resumed.connect(_on_game_resumed)
+
+func _on_game_resumed():
+	$"Timers/Resume Timer".start()
+	pause_jump = true
+	
 	
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
@@ -171,7 +177,7 @@ func _process(_delta: float) -> void:
 		SoundLibrary.play_random_dash()
 	
 	#Dashing Code
-	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash:
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and pause_jump == false:
 		var dash_input := get_input_direction()
 		if dash_input == Vector2.ZERO:
 			dash_input = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
@@ -393,7 +399,7 @@ func handle_sprint(sprint_strength: float) -> void:
 # ------------------ Jumping Logic ---------------------------------
 ## Takes delta and the jump action status and strength and handles the jumping logic
 func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0.0, jump_pressed: bool = false, _jump_released: bool = false) -> void:
-	if (jump_pressed or should_jump) and can_jump:
+	if (jump_pressed or should_jump) and can_jump and pause_jump == false:
 		apply_jump(move_direction)
 	elif jump_pressed:
 		buffer_jump()
@@ -502,3 +508,7 @@ func knockback():
 			var push_dir = global_position.normalized()
 			global_position += push_dir * 8.0  # move out a few pixels
 			velocity = push_dir * 200.0   
+
+
+func _on_resume_timer_timeout() -> void:
+	pause_jump = false

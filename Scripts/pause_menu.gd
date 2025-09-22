@@ -10,6 +10,8 @@ func resume():
 	get_tree().paused = false
 	hide()
 	$AnimationPlayer.play_backwards("blur")
+	Global.emit_signal("game_resumed")
+	print("resumed")
 
 func pause():
 	get_tree().paused = true
@@ -25,7 +27,6 @@ func escapeTest():
 
 func _on_resume_button_down() -> void:
 	resume()
-
 
 func _on_settings_button_down() -> void:
 	pass # Replace with function body.
