@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = 0
-		
+	
 	player = Global.playerBody
 	
 	move(delta)
