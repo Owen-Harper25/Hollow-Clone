@@ -13,6 +13,7 @@ extends CharacterBody2D
 ## The four possible character states and the character's current state
 
 signal healthChanged
+#signal pausedGame  #the Paused state of the game
 
 enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 
