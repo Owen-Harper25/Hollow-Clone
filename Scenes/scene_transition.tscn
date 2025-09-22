@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://di0gtr7oqr1lk"]
 
-[ext_resource type="Script" uid="uid://cqun5a77lggl8" path="res://scene_transition.gd" id="1_crfs3"]
+[ext_resource type="Script" uid="uid://cqun5a77lggl8" path="res://Scripts/scene_transition.gd" id="1_crfs3"]
 
 [sub_resource type="Animation" id="Animation_vin40"]
 resource_name = "Fade"
