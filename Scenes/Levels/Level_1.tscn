@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/red_knight.tscn" id="8_akpl7"]
 [ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/breakable_lanturn.tscn" id="8_aur7v"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_00ae1"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hs11j"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -152,7 +152,7 @@ texture = ExtResource("6_lp2uw")
 8:10/0 = 0
 9:10/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0yixo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5ofx"]
 texture = ExtResource("7_pdmgb")
 0:0/0 = 0
 1:0/0 = 0
@@ -350,10 +350,10 @@ texture = ExtResource("7_pdmgb")
 9:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_haapo"]
-sources/0 = SubResource("TileSetAtlasSource_00ae1")
-sources/1 = SubResource("TileSetAtlasSource_0yixo")
+sources/0 = SubResource("TileSetAtlasSource_hs11j")
+sources/1 = SubResource("TileSetAtlasSource_o5ofx")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_211ff"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34y5i"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -528,7 +528,7 @@ texture = ExtResource("6_lp2uw")
 9:10/0 = 0
 9:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_akpl7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nlqrh"]
 texture = ExtResource("6_5r5j8")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -689,7 +689,7 @@ texture = ExtResource("6_5r5j8")
 4:0/0 = 0
 4:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aur7v"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8nmnw"]
 texture = ExtResource("7_akpl7")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -856,11 +856,11 @@ terrain_set_0/terrain_0/name = "Rock 0"
 terrain_set_0/terrain_0/color = Color(0.68518245, 9.048581e-06, 0.4572175, 1)
 terrain_set_0/terrain_1/name = "BRock 1"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_211ff")
-sources/1 = SubResource("TileSetAtlasSource_akpl7")
-sources/2 = SubResource("TileSetAtlasSource_aur7v")
+sources/0 = SubResource("TileSetAtlasSource_34y5i")
+sources/1 = SubResource("TileSetAtlasSource_nlqrh")
+sources/2 = SubResource("TileSetAtlasSource_8nmnw")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8lfqf"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ngxpw"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -1003,7 +1003,7 @@ texture = ExtResource("6_lp2uw")
 9:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_6sdse"]
-sources/0 = SubResource("TileSetAtlasSource_8lfqf")
+sources/0 = SubResource("TileSetAtlasSource_ngxpw")
 
 [node name="Level_1" type="Node2D"]
 
@@ -1050,7 +1050,7 @@ z_index = 2
 tile_map_data = PackedByteArray("AAADAAMAAAAEAAgAAAAEAAMAAAAFAAgAAAAFAAIAAAAGAAcAAAAFAAMAAAAGAAgAAAAGAAIAAAAHAAcAAAAGAAMAAAAHAAgAAAAHAAMAAAAIAAgAAAD9/wIAAAAHAAUAAAD9/wMAAAAHAAYAAAD+/wIAAAAIAAUAAAD+/wMAAAAIAAYAAAD//wIAAAAJAAUAAAD//wMAAAAJAAYAAAAAAAMAAAAEAAUAAAARAAIAAAADAAMAAAARAAMAAAADAAQAAAASAAIAAAAEAAMAAAASAAMAAAAEAAQAAADv/wMAAAAEAAUAAAASAAcAAAAIAAoAAAATAAcAAAAJAAoAAAAIAAcAAAAIAAoAAAAJAAcAAAAJAAoAAAAEAAYAAAAIAAoAAAAFAAYAAAAJAAoAAAD7/wYAAAAIAAoAAAD8/wYAAAAJAAoAAAD1/wcAAAAIAAoAAAD2/wcAAAAJAAoAAADr/wYAAAAJAAoAAADw/wYAAAAIAAoAAADx/wYAAAAJAAoAAADr/wUAAAAGAAoAAADs/wUAAAAHAAoAAAD1/wUAAAAGAAoAAAD2/wUAAAAHAAoAAAD9/wgAAAAGAAoAAAD+/wgAAAAHAAoAAAAGAAkAAAAGAAoAAAAHAAkAAAAHAAoAAAALAAYAAAAGAAoAAAAMAAYAAAAHAAoAAAAQAAcAAAAGAAoAAAARAAcAAAAHAAoAAAAUAAYAAAAGAAoAAAAVAAYAAAAHAAoAAAAOAAUAAAABAAkAAAAPAAUAAAACAAkAAAAQAAUAAAADAAkAAAD//wUAAAABAAkAAAAAAAUAAAACAAkAAAABAAUAAAADAAkAAAABAAMAAAABAAQAAAAMAAMAAAABAAQAAAD5/wMAAAABAAQAAAAJAAMAAAAEAAUAAAA=")
 tile_set = SubResource("TileSet_6sdse")
 
-[node name="Breakable_Lanturn" parent="." groups=["Breakable"] instance=ExtResource("8_aur7v")]
+[node name="Breakable_Lanturn" parent="." instance=ExtResource("8_aur7v")]
 position = Vector2(-55, 58)
 
 [node name="Enemies" type="Node2D" parent="."]
