@@ -29,6 +29,7 @@ window/stretch/mode="viewport"
 
 Player=""
 Enemy=""
+Breakable=""
 
 [input]
 

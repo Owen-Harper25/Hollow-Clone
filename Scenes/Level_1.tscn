@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bqt0nyaqbxt36"]
+[gd_scene load_steps=19 format=4 uid="uid://bqt0nyaqbxt36"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
 [ext_resource type="Texture2D" uid="uid://d0dkbuwsu8o5c" path="res://Assets/Sprites/Stringstar Fields/background_1.png" id="4_ptpgp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://firf1k7kqhgi" path="res://Assets/Sprites/Stringstar Fields/Blue Rock.png" id="7_akpl7"]
 [ext_resource type="Texture2D" uid="uid://xiicnu5yyplj" path="res://Assets/Sprites/Stringstar Fields/tree-export.png" id="7_pdmgb"]
 [ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/red_knight.tscn" id="8_akpl7"]
+[ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/breakable_lanturn.tscn" id="8_aur7v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_00ae1"]
 texture = ExtResource("6_lp2uw")
@@ -1048,6 +1049,9 @@ tile_set = SubResource("TileSet_00ae1")
 z_index = 2
 tile_map_data = PackedByteArray("AAADAAMAAAAEAAgAAAAEAAMAAAAFAAgAAAAFAAIAAAAGAAcAAAAFAAMAAAAGAAgAAAAGAAIAAAAHAAcAAAAGAAMAAAAHAAgAAAAHAAMAAAAIAAgAAAD9/wIAAAAHAAUAAAD9/wMAAAAHAAYAAAD+/wIAAAAIAAUAAAD+/wMAAAAIAAYAAAD//wIAAAAJAAUAAAD//wMAAAAJAAYAAAAAAAMAAAAEAAUAAAARAAIAAAADAAMAAAARAAMAAAADAAQAAAASAAIAAAAEAAMAAAASAAMAAAAEAAQAAADv/wMAAAAEAAUAAAASAAcAAAAIAAoAAAATAAcAAAAJAAoAAAAIAAcAAAAIAAoAAAAJAAcAAAAJAAoAAAAEAAYAAAAIAAoAAAAFAAYAAAAJAAoAAAD7/wYAAAAIAAoAAAD8/wYAAAAJAAoAAAD1/wcAAAAIAAoAAAD2/wcAAAAJAAoAAADr/wYAAAAJAAoAAADw/wYAAAAIAAoAAADx/wYAAAAJAAoAAADr/wUAAAAGAAoAAADs/wUAAAAHAAoAAAD1/wUAAAAGAAoAAAD2/wUAAAAHAAoAAAD9/wgAAAAGAAoAAAD+/wgAAAAHAAoAAAAGAAkAAAAGAAoAAAAHAAkAAAAHAAoAAAALAAYAAAAGAAoAAAAMAAYAAAAHAAoAAAAQAAcAAAAGAAoAAAARAAcAAAAHAAoAAAAUAAYAAAAGAAoAAAAVAAYAAAAHAAoAAAAOAAUAAAABAAkAAAAPAAUAAAACAAkAAAAQAAUAAAADAAkAAAD//wUAAAABAAkAAAAAAAUAAAACAAkAAAABAAUAAAADAAkAAAABAAMAAAABAAQAAAAMAAMAAAABAAQAAAD5/wMAAAABAAQAAAAJAAMAAAAEAAUAAAA=")
 tile_set = SubResource("TileSet_6sdse")
+
+[node name="Breakable_Lanturn" parent="." groups=["Breakable"] instance=ExtResource("8_aur7v")]
+position = Vector2(-55, 58)
 
 [node name="Enemies" type="Node2D" parent="."]
 
