@@ -18,41 +18,57 @@
 [node name="Sound Library" type="Node2D"]
 script = ExtResource("1_0wo6p")
 
-[node name="Dash1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_5npjg")
+[node name="Potion_Sounds" type="Node2D" parent="."]
 
-[node name="Dash2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_hpbth")
-
-[node name="Dash3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_qnjjs")
-
-[node name="Death1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_r3g32")
-
-[node name="Death2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_h7ctd")
-
-[node name="Death3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_jbg1r")
-
-[node name="Hit1" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_aen7p")
-
-[node name="Hit2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_vp0qj")
-
-[node name="Hit3" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_nv5kf")
-
-[node name="Hit4" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_6ja15")
-
-[node name="Potion" type="AudioStreamPlayer2D" parent="."]
+[node name="Potion" type="AudioStreamPlayer2D" parent="Potion_Sounds"]
 stream = ExtResource("12_ylily")
 
-[node name="Secret Found Long" type="AudioStreamPlayer2D" parent="."]
+[node name="Secret_Sounds" type="Node2D" parent="."]
+
+[node name="Secret Found Long" type="AudioStreamPlayer2D" parent="Secret_Sounds"]
 stream = ExtResource("13_vwmpu")
 
-[node name="Secret Found Short" type="AudioStreamPlayer2D" parent="."]
+[node name="Secret Found Short" type="AudioStreamPlayer2D" parent="Secret_Sounds"]
 stream = ExtResource("14_mjb71")
+
+[node name="Death_Sounds" type="Node2D" parent="."]
+
+[node name="Death1" type="AudioStreamPlayer2D" parent="Death_Sounds"]
+stream = ExtResource("5_r3g32")
+
+[node name="Death2" type="AudioStreamPlayer2D" parent="Death_Sounds"]
+stream = ExtResource("6_h7ctd")
+
+[node name="Death3" type="AudioStreamPlayer2D" parent="Death_Sounds"]
+stream = ExtResource("7_jbg1r")
+
+[node name="Hit_Sounds" type="Node2D" parent="."]
+
+[node name="Hit1" type="AudioStreamPlayer2D" parent="Hit_Sounds"]
+stream = ExtResource("8_aen7p")
+
+[node name="Hit2" type="AudioStreamPlayer2D" parent="Hit_Sounds"]
+stream = ExtResource("9_vp0qj")
+
+[node name="Hit3" type="AudioStreamPlayer2D" parent="Hit_Sounds"]
+stream = ExtResource("10_nv5kf")
+
+[node name="Hit4" type="AudioStreamPlayer2D" parent="Hit_Sounds"]
+stream = ExtResource("11_6ja15")
+
+[node name="Dash_Sounds" type="Node2D" parent="."]
+
+[node name="Dash1" type="AudioStreamPlayer2D" parent="Dash_Sounds"]
+stream = ExtResource("2_5npjg")
+
+[node name="Dash2" type="AudioStreamPlayer2D" parent="Dash_Sounds"]
+stream = ExtResource("3_hpbth")
+
+[node name="Dash3" type="AudioStreamPlayer2D" parent="Dash_Sounds"]
+stream = ExtResource("4_qnjjs")
+
+[node name="Break_Sounds" type="Node2D" parent="."]
+
+[node name="Break1" type="AudioStreamPlayer2D" parent="Break_Sounds"]
+stream = ExtResource("5_r3g32")
+pitch_scale = 1.3

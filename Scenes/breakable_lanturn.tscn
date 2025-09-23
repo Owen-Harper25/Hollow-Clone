@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://beruhlndfo8d6"]
+
+[ext_resource type="Texture2D" uid="uid://dasl4yw1txi83" path="res://Assets/Sprites/CastleInteriorTileSet.png" id="1_llbvx"]
+[ext_resource type="Script" uid="uid://d3xkugbng0563" path="res://Scripts/breakable_lanturn.gd" id="2_lchi0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lchi0"]
+atlas = ExtResource("1_llbvx")
+region = Rect2(208, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk4u7"]
+atlas = ExtResource("1_llbvx")
+region = Rect2(224, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llbvx"]
+atlas = ExtResource("1_llbvx")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qms42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lchi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk4u7")
+}],
+"loop": false,
+"name": &"Break",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llbvx")
+}],
+"loop": false,
+"name": &"Default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rqw7f"]
+radius = 6.0
+
+[node name="Breakable_Lanturn" type="Area2D" groups=["Breakable"]]
+script = ExtResource("2_lchi0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_qms42")
+animation = &"Break"
+autoplay = "Default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rqw7f")

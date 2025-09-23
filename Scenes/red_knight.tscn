@@ -145,7 +145,7 @@ _data = {
 radius = 74.0
 
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
-collision_layer = 34
+collision_layer = 2
 collision_mask = 34
 script = ExtResource("1_jr21u")
 
@@ -163,7 +163,7 @@ shape = SubResource("CapsuleShape2D_m8i00")
 [node name="DirectionTimer" type="Timer" parent="." groups=["Enemy"]]
 autostart = true
 
-[node name="hitBox" type="Area2D" parent="." groups=["Enemy"]]
+[node name="hitBox" type="Area2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]

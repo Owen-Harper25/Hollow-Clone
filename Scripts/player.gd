@@ -280,7 +280,6 @@ func damage_check():
 	var results = space_state.intersect_shape(query)
 	for result in results:
 		var area = result.collider
-		print(result)
 		if area.is_in_group("Enemy"):
 			_on_hurt_box_area_entered(area)
 			damage()
