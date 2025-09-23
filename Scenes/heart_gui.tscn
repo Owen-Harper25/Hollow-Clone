@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://10vg6b2pjg8f"]
 
-[ext_resource type="Texture2D" uid="uid://cm5y0rmq3ivg1" path="res://Assets/Sprites/health conatiner.png" id="1_icnxf"]
+[ext_resource type="Texture2D" uid="uid://cm5y0rmq3ivg1" path="res://Assets/Sprites/Owen Art/health conatiner.png" id="1_icnxf"]
 [ext_resource type="Script" uid="uid://cprqp48bqefr7" path="res://Scripts/heart_gui.gd" id="1_vvli4"]
 
 [node name="heart GUI" type="Panel"]

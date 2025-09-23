@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Red_Knight
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death_dissolve_animation_player: AnimationPlayer = $AnimationPlayer
 
 const speed = 20
 var is_redknight_chase : bool = false
@@ -72,6 +73,7 @@ func handle_animation():
 	elif dead and is_roaming:
 		is_roaming = false
 		remove_child($hitBox)
+		death_dissolve_animation_player.play("Death Disolve")
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
 		set_collision_layer_value(1, false)

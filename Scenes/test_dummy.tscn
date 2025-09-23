@@ -1,10 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://vlni72ufvfqd"]
+[gd_scene load_steps=17 format=3 uid="uid://vlni72ufvfqd"]
 
-[ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/ManSheet.png" id="1_ftpm7"]
+[ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/Owen Art/ManSheet.png" id="1_ftpm7"]
+[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Scripts/erosion.gdshader" id="1_m7ntk"]
+[ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_smwm6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ftpm7"]
 radius = 3.0
 height = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smwm6"]
+resource_local_to_scene = true
+shader = ExtResource("1_m7ntk")
+shader_parameter/dissolve_texture = ExtResource("2_smwm6")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.10999999754128
+shader_parameter/burn_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7ntk"]
 atlas = ExtResource("1_ftpm7")
@@ -109,6 +119,7 @@ collision_mask = 2
 shape = SubResource("CapsuleShape2D_ftpm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Enemy"]]
+material = SubResource("ShaderMaterial_smwm6")
 sprite_frames = SubResource("SpriteFrames_q0hgr")
 animation = &"idle"
 autoplay = "idle"

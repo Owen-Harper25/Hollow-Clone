@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://8d4pvawstgha"]
 
 [ext_resource type="Texture2D" uid="uid://k13hwk0i7umv" path="res://Assets/Sprites/Stringstar Fields/Background.png" id="1_dcmhf"]
-[ext_resource type="Texture2D" uid="uid://dasl4yw1txi83" path="res://Assets/Sprites/CastleInteriorTileSet.png" id="1_gt30j"]
+[ext_resource type="Texture2D" uid="uid://dasl4yw1txi83" path="res://Assets/Sprites/Owen Art/CastleInteriorTileSet.png" id="1_gt30j"]
 [ext_resource type="PackedScene" uid="uid://vlni72ufvfqd" path="res://Scenes/test_dummy.tscn" id="2_pj5k7"]
 [ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/red_knight.tscn" id="4_k5iew"]
 

@@ -1,8 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://bayc67pdsup51"]
+[gd_scene load_steps=28 format=3 uid="uid://bayc67pdsup51"]
 
-[ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/ManSheet.png" id="1_isu26"]
+[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Scripts/erosion.gdshader" id="1_1ie4o"]
+[ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/Owen Art/ManSheet.png" id="1_isu26"]
 [ext_resource type="Script" uid="uid://c4okmogv0tvjt" path="res://Scripts/red_knight.gd" id="1_jr21u"]
+[ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_vp183"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Scenes/hit_effect.gdshader" id="2_xghsx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bibtd"]
+resource_local_to_scene = true
+shader = ExtResource("1_1ie4o")
+shader_parameter/dissolve_texture = ExtResource("2_vp183")
+shader_parameter/dissolve_value = 0.0
+shader_parameter/burn_size = 0.0499999988824
+shader_parameter/burn_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ie4o"]
 resource_local_to_scene = true
@@ -104,6 +114,66 @@ height = 25.125
 radius = 7.0
 height = 28.0
 
+[sub_resource type="Animation" id="Animation_actkj"]
+resource_name = "Death Disolve"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.012225666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.012225666, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1w4yp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yjo1"]
+_data = {
+&"Death Disolve": SubResource("Animation_actkj"),
+&"RESET": SubResource("Animation_1w4yp")
+}
+
 [sub_resource type="Animation" id="Animation_vp183"]
 resource_name = "Hurt"
 length = 0.2
@@ -134,9 +204,86 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:use_parent_material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_bibtd")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1ie4o"]
+resource_name = "Death Disolve"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_bibtd")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_actkj"]
 _data = {
+&"Death Disolve": SubResource("Animation_1ie4o"),
 &"Hurt": SubResource("Animation_vp183"),
 &"RESET": SubResource("Animation_bibtd")
 }
@@ -145,6 +292,7 @@ _data = {
 radius = 74.0
 
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
+material = SubResource("ShaderMaterial_bibtd")
 collision_layer = 2
 collision_mask = 34
 script = ExtResource("1_jr21u")
@@ -157,6 +305,7 @@ animation = &"Death"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_m8i00")
 
@@ -167,8 +316,15 @@ autostart = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+visible = false
 position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_jr21u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HitFlashAnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_8yjo1")
+}
 
 [node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -178,6 +334,7 @@ libraries = {
 [node name="DetectionZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+visible = false
 position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_jr21u")
 
