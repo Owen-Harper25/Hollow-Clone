@@ -223,6 +223,10 @@ one_shot = true
 wait_time = 0.4
 one_shot = true
 
+[node name="Resume Timer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Feet" type="Marker2D" parent="."]
 position = Vector2(0, 2.6666667)
 scale = Vector2(0.33333334, 0.33333334)
@@ -261,4 +265,5 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="Timers/Resume Timer" to="." method="_on_resume_timer_timeout"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
