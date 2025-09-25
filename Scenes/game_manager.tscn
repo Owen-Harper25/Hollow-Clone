@@ -15,7 +15,7 @@ shader = ExtResource("2_efn8y")
 shader_parameter/caustics_tex = ExtResource("3_i4mau")
 shader_parameter/speed = 0.05
 shader_parameter/strength = 0.5
-shader_parameter/scale = 100.0
+shader_parameter/scale = 1000.0
 shader_parameter/caustics_color = Vector3(0.2, 0.5, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yqty0"]
@@ -51,7 +51,7 @@ script = ExtResource("1_yqty0")
 material = SubResource("ShaderMaterial_b5cn8")
 offset_left = -956.0
 offset_top = -189.0
-offset_right = -494.0
+offset_right = -559.0
 offset_bottom = 258.0
 
 [node name="Player" parent="." instance=ExtResource("2_mmt5l")]
