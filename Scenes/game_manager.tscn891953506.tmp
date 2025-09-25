@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhpa4osybcxmh"]
+[gd_scene load_steps=9 format=3 uid="uid://bhpa4osybcxmh"]
 
 [ext_resource type="Script" uid="uid://cflpa8rkglgey" path="res://Scripts/game_manager.gd" id="1_yqty0"]
 [ext_resource type="PackedScene" uid="uid://bqt0nyaqbxt36" path="res://Scenes/Levels/Level_1.tscn" id="2_fgdfb"]
@@ -7,29 +7,32 @@
 [ext_resource type="PackedScene" uid="uid://fkximm7bhk4v" path="res://Scenes/hearts_container.tscn" id="5_fgdfb"]
 [ext_resource type="Shader" uid="uid://bkl3otplrtsbx" path="res://Scenes/screen_effect.gdshader" id="6_yqty0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqty0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71d4j"]
 shader = ExtResource("6_yqty0")
 shader_parameter/overlay = false
-shader_parameter/scanlines_opacity = 0.2000000095
-shader_parameter/scanlines_width = 0.0
-shader_parameter/grille_opacity = 0.1390000066025
-shader_parameter/resolution = Vector2(1280, 960)
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
 shader_parameter/pixelate = true
-shader_parameter/roll = false
+shader_parameter/roll = true
 shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 0.0
+shader_parameter/roll_size = 15.0
 shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.20000000298023
+shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/aberration = 0.03
 shader_parameter/brightness = 1.4
-shader_parameter/discolor = false
-shader_parameter/warp_amount = 0.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 1.0
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_efn8y"]
+size = Vector2(1280, 720)
 
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_yqty0")
@@ -49,10 +52,6 @@ script = ExtResource("3_fgdfb")
 
 [node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_fgdfb")]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_yqty0")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_71d4j")
+mesh = SubResource("QuadMesh_efn8y")
