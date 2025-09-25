@@ -20,6 +20,7 @@ config/icon="res://Assets/Sprites/icon.svg"
 SoundLibrary="*res://Scenes/sound_library.tscn"
 Global="*res://Scripts/global.gd"
 SceneTransition="*res://Scenes/scene_transition.tscn"
+save_manager="*res://save_manager.gd"
 
 [display]
 
