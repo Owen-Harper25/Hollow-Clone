@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=3 uid="uid://bayc67pdsup51"]
 
-[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Scripts/erosion.gdshader" id="1_1ie4o"]
+[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_1ie4o"]
 [ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/Owen Art/ManSheet.png" id="1_isu26"]
 [ext_resource type="Script" uid="uid://c4okmogv0tvjt" path="res://Scripts/red_knight.gd" id="1_jr21u"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_vp183"]
-[ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Scenes/hit_effect.gdshader" id="2_xghsx"]
+[ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="2_xghsx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bibtd"]
 resource_local_to_scene = true

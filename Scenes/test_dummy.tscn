@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://vlni72ufvfqd"]
 
 [ext_resource type="Texture2D" uid="uid://bkw45fpuc1ea3" path="res://Assets/Sprites/Owen Art/ManSheet.png" id="1_ftpm7"]
-[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Scripts/erosion.gdshader" id="1_m7ntk"]
+[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_m7ntk"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_smwm6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ftpm7"]

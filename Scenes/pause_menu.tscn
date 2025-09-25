@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cyqwgixwsm453" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
 [ext_resource type="Script" uid="uid://dtuwsn6c5jhwk" path="res://Scripts/resume.gd" id="2_1och7"]
-[ext_resource type="Shader" uid="uid://ci5nniy2f1ft1" path="res://Scenes/pause_menu.gdshader" id="2_bpi0q"]
+[ext_resource type="Shader" uid="uid://ci5nniy2f1ft1" path="res://Shaders/pause_menu.gdshader" id="2_bpi0q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmyb1"]
 shader = ExtResource("2_bpi0q")
