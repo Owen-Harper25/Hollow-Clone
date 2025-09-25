@@ -34,9 +34,9 @@ anchor_left = 0.24375
 anchor_top = 0.6
 anchor_right = 0.65625
 anchor_bottom = 0.67777777
-offset_left = 48.0
+offset_left = 56.0
 offset_top = -3.0517578e-05
-offset_right = 48.0
+offset_right = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "PLAY"
@@ -44,9 +44,9 @@ script = ExtResource("3_rvddj")
 
 [node name="QuitGame" type="Button" parent="."]
 layout_mode = 0
-offset_left = 360.0
+offset_left = 368.0
 offset_top = 504.0
-offset_right = 888.0
+offset_right = 896.0
 offset_bottom = 560.0
 text = "QUIT"
 
