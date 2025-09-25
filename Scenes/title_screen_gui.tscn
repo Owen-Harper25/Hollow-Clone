@@ -14,29 +14,39 @@ grow_vertical = 2
 script = ExtResource("1_cttc7")
 
 [node name="TitlePanel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="TitlePlaceholder" type="Sprite2D" parent="TitlePanel"]
-position = Vector2(576, 324)
-scale = Vector2(0.6, 0.6)
+position = Vector2(640, 360)
+scale = Vector2(0.6666666, 0.66666675)
 texture = ExtResource("2_oxdhk")
 
 [node name="PlayGame" type="Button" parent="."]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 432.0
-offset_right = 840.0
-offset_bottom = 488.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24375
+anchor_top = 0.6
+anchor_right = 0.65625
+anchor_bottom = 0.67777777
+offset_left = 48.0
+offset_top = -3.0517578e-05
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "PLAY"
 script = ExtResource("3_rvddj")
 
 [node name="QuitGame" type="Button" parent="."]
 layout_mode = 0
-offset_left = 312.0
+offset_left = 360.0
 offset_top = 504.0
-offset_right = 840.0
+offset_right = 888.0
 offset_bottom = 560.0
 text = "QUIT"
 
