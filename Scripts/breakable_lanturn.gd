@@ -6,10 +6,10 @@ var broken: bool = false
 var minimum_object_health: int = 0
 
 
-func break_dmg(breakable_dmg: int):
+func break_dmg(attack: Attack):
 	if object_health > minimum_object_health:
 		taking_break_dmg = true
-		object_health -= breakable_dmg
+		object_health -= attack.attack_dmg
 	elif object_health <= minimum_object_health:
 		object_health = minimum_object_health
 		broken = true

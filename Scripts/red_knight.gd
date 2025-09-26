@@ -19,7 +19,8 @@ var is_dealing_damage: bool = false
 
 var dir: Vector2
 const gravity = 300
-var knockback_force = -20
+#var knockback_force = -20
+@export var knockback_resistence: float = 1.00 # 1 is 0% knockback resistence and 0 is 100% knockback resistence so 0.5 would be 50% resistence
 var is_roaming: bool = false
 
 var player: CharacterBody2D
@@ -36,14 +37,17 @@ func _process(delta: float) -> void:
 	handle_animation()
 	move_and_slide()
 	
-func take_damage(damage: int):
+func take_damage(attack: Attack):
 	taking_damage = true
-	health -= damage
+	health -= attack.attack_dmg
 	hit_flash_animation_player.play("Hurt")
 	SoundLibrary.play_random_hit()
 	if health <= health_min:
 		health = health_min
 		dead = true
+	if !dead:
+		var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
+		velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
 
 func move(delta):
 	if !dead:
@@ -53,9 +57,6 @@ func move(delta):
 			var dir_to_player = global_position.direction_to(player.position) * speed
 			velocity.x = dir_to_player.x
 			dir.x = abs(velocity.x) / velocity.x
-		elif taking_damage:
-			var knockback_dir = global_position.direction_to(player.position) * knockback_force
-			velocity.x = knockback_dir.x
 		is_roaming = true
 	elif dead:
 		velocity.x = 0
@@ -76,8 +77,6 @@ func handle_animation():
 		death_dissolve_animation_player.play("Death Disolve")
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
-		set_collision_layer_value(1, false)
-		set_collision_mask_value(1, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
 		await get_tree().create_timer(2).timeout
