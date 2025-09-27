@@ -107,12 +107,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8i00"]
-radius = 6.0
-height = 25.125
+radius = 5.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
-radius = 7.0
-height = 28.0
+radius = 6.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jr21u"]
+radius = 59.25927
 
 [sub_resource type="Animation" id="Animation_actkj"]
 resource_name = "Death Disolve"
@@ -289,25 +292,22 @@ _data = {
 &"RESET": SubResource("Animation_bibtd")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jr21u"]
-radius = 74.0
-
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
 material = SubResource("ShaderMaterial_bibtd")
+scale = Vector2(5, 5)
 collision_layer = 2
 collision_mask = 34
 script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1ie4o")
-scale = Vector2(1.6950004, 1.6950004)
+scale = Vector2(0.32, 0.32)
 sprite_frames = SubResource("SpriteFrames_0tpon")
 animation = &"Death"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1, 1)
+scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_m8i00")
 
 [node name="DirectionTimer" type="Timer" parent="." groups=["Enemy"]]
@@ -317,9 +317,15 @@ autostart = true
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
-visible = false
-position = Vector2(1, 1)
+scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_jr21u")
+
+[node name="detectionZone" type="Area2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionZone"]
+scale = Vector2(0.21599996, 0.21599996)
+shape = SubResource("CircleShape2D_jr21u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../HitFlashAnimationPlayer")
@@ -332,13 +338,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_actkj")
 }
 
-[node name="DetectionZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
-visible = false
-position = Vector2(1, 1)
-shape = SubResource("CircleShape2D_jr21u")
-
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
-[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
-[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="body_entered" from="detectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="detectionZone" to="." method="_on_detection_zone_body_exited"]

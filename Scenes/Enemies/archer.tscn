@@ -1,0 +1,327 @@
+[gd_scene load_steps=25 format=3 uid="uid://dpaaautu0me0m"]
+
+[ext_resource type="Texture2D" uid="uid://b2no6hg7xlyxj" path="res://Assets/Sprites/Owen Art/Archer.png" id="1_36kj3"]
+[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_a6nm7"]
+[ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_7qwat"]
+[ext_resource type="Script" uid="uid://bplboi0faltus" path="res://Scripts/archer.gd" id="3_mticn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bibtd"]
+resource_local_to_scene = true
+shader = ExtResource("1_a6nm7")
+shader_parameter/dissolve_texture = ExtResource("2_7qwat")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.0499999988824
+shader_parameter/burn_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quixy"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mkx7"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6nm7"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qwat"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mticn"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_130ge"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4q7k"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt8dr"]
+atlas = ExtResource("1_36kj3")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_20cwn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quixy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mkx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6nm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qwat")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mticn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_130ge")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4q7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt8dr")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36kj3"]
+radius = 1.8
+height = 5.12
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6nm7"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a6nm7"]
+radius = 59.25927
+
+[sub_resource type="Animation" id="Animation_1ie4o"]
+resource_name = "Death Disolve"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_bibtd")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vp183"]
+resource_name = "Hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bibtd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:use_parent_material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_bibtd")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_actkj"]
+_data = {
+&"Death Disolve": SubResource("Animation_1ie4o"),
+&"Hurt": SubResource("Animation_vp183"),
+&"RESET": SubResource("Animation_bibtd")
+}
+
+[sub_resource type="Animation" id="Animation_actkj"]
+resource_name = "Death Disolve"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.012225666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.012225666, 1.3333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1w4yp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yjo1"]
+_data = {
+&"Death Disolve": SubResource("Animation_actkj"),
+&"RESET": SubResource("Animation_1w4yp")
+}
+
+[node name="Archer" type="CharacterBody2D" groups=["Enemy"]]
+material = SubResource("ShaderMaterial_bibtd")
+scale = Vector2(5, 5)
+collision_layer = 2
+collision_mask = 34
+script = ExtResource("3_mticn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.20000002, 0)
+scale = Vector2(0.32, 0.32)
+sprite_frames = SubResource("SpriteFrames_20cwn")
+animation = &"Death"
+autoplay = "Idle"
+frame_progress = 0.2638187
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_36kj3")
+
+[node name="DirectionTimer" type="Timer" parent="." groups=["Enemy"]]
+autostart = true
+
+[node name="hitBox" type="Area2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+scale = Vector2(0.28800017, 0.36800003)
+shape = SubResource("CapsuleShape2D_a6nm7")
+
+[node name="detectionZone" type="Area2D" parent="."]
+scale = Vector2(2.5520003, 2.5520003)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionZone"]
+scale = Vector2(0.21599996, 0.21599996)
+shape = SubResource("CircleShape2D_a6nm7")
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_actkj")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HitFlashAnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_8yjo1")
+}
+
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_exited" from="hitBox" to="." method="_on_hit_box_body_exited"]
+[connection signal="body_entered" from="detectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="detectionZone" to="." method="_on_detection_zone_body_exited"]

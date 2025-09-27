@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name Red_Knight
+class_name Archer
 
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -9,7 +9,7 @@ class_name Red_Knight
 @export var damage_to_deal = 1
 @export var health: int = 5
 @export var speed: float = 20.00
-@export var knockback_resistence: float = 1.00 # 1 is 0% knockback resistence and 0 is 100% knockback resistence so 0.5 would be 50% resistence
+@export var knockback_resistence: float = 1.00
 var health_min: int = 0
 
 var dir: Vector2
@@ -20,10 +20,8 @@ var dead: bool = false
 var is_dealing_damage: bool = false
 var taking_damage: bool = false
 var player_in_area: bool = false
-var is_redknight_chase: bool = false
+var is_archer_chase: bool = false
 var is_roaming: bool = true
-
-
 
 func _process(delta: float) -> void:
 	if !is_on_floor():
@@ -35,7 +33,7 @@ func _process(delta: float) -> void:
 	move(delta)
 	handle_animation()
 	move_and_slide()
-	
+
 func take_damage(attack: Attack):
 	taking_damage = true
 	health -= attack.attack_dmg
@@ -50,9 +48,9 @@ func take_damage(attack: Attack):
 
 func move(delta):
 	if !dead:
-		if !is_redknight_chase:
+		if !is_archer_chase:
 			velocity += dir * speed * delta
-		elif is_redknight_chase and !taking_damage:
+		elif is_archer_chase and !taking_damage:
 			var dir_to_player = global_position.direction_to(player.position) * speed
 			velocity.x = dir_to_player.x
 			dir.x = abs(velocity.x) / velocity.x
@@ -64,9 +62,9 @@ func handle_animation():
 	if !dead and !is_dealing_damage and !taking_damage:
 		anim_sprite.play("Walk")
 		if dir.x == -1:
-			anim_sprite.flip_h = true
-		elif dir.x == 1:
 			anim_sprite.flip_h = false
+		elif dir.x == 1:
+			anim_sprite.flip_h = true
 	elif !dead and !is_dealing_damage and taking_damage:
 		await get_tree().create_timer(0.6).timeout
 		taking_damage = false
@@ -80,13 +78,13 @@ func handle_animation():
 		SoundLibrary.play_random_death()
 		await get_tree().create_timer(2).timeout
 		handleDeath()
-		
+
 func handleDeath():
 	self.queue_free()
 
 func _on_direction_timer_timeout() -> void:
 	$DirectionTimer.wait_time = choose([1.5, 2.0, 2.5])
-	if !is_redknight_chase: 
+	if !is_archer_chase: 
 		dir = choose([Vector2.RIGHT, Vector2.LEFT])
 		velocity.x = 0
 
@@ -94,12 +92,10 @@ func choose(array):
 	array.shuffle()
 	return array.front()
 
-
 func _on_detection_zone_body_entered(body: Node2D) -> void:
-	if body == player:
-		is_redknight_chase = true
-
+	if body == player: 
+		is_archer_chase = true
 
 func _on_detection_zone_body_exited(body: Node2D) -> void:
 	if body == player: 
-		is_redknight_chase = false
+		is_archer_chase = false

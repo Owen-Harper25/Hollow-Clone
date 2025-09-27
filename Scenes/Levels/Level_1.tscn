@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bqt0nyaqbxt36"]
+[gd_scene load_steps=20 format=4 uid="uid://dvhj3i2714nht"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
 [ext_resource type="Texture2D" uid="uid://d0dkbuwsu8o5c" path="res://Assets/Sprites/Stringstar Fields/background_1.png" id="4_ptpgp"]
@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://c1un7m5tyqg4s" path="res://Assets/Sprites/Stringstar Fields/tileset.png" id="6_lp2uw"]
 [ext_resource type="Texture2D" uid="uid://firf1k7kqhgi" path="res://Assets/Sprites/Stringstar Fields/Blue Rock.png" id="7_akpl7"]
 [ext_resource type="Texture2D" uid="uid://xiicnu5yyplj" path="res://Assets/Sprites/Stringstar Fields/tree-export.png" id="7_pdmgb"]
-[ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/red_knight.tscn" id="8_akpl7"]
-[ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/breakable_lanturn.tscn" id="8_aur7v"]
+[ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/Enemies/red_knight.tscn" id="8_akpl7"]
+[ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/Enviromentals/breakable_lanturn.tscn" id="8_aur7v"]
+[ext_resource type="PackedScene" uid="uid://dpaaautu0me0m" path="res://Scenes/Enemies/archer.tscn" id="10_o5ofx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hs11j"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_00ae1"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -152,7 +153,7 @@ texture = ExtResource("6_lp2uw")
 8:10/0 = 0
 9:10/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5ofx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0yixo"]
 texture = ExtResource("7_pdmgb")
 0:0/0 = 0
 1:0/0 = 0
@@ -350,10 +351,10 @@ texture = ExtResource("7_pdmgb")
 9:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_haapo"]
-sources/0 = SubResource("TileSetAtlasSource_hs11j")
-sources/1 = SubResource("TileSetAtlasSource_o5ofx")
+sources/0 = SubResource("TileSetAtlasSource_00ae1")
+sources/1 = SubResource("TileSetAtlasSource_0yixo")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34y5i"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_211ff"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -528,7 +529,7 @@ texture = ExtResource("6_lp2uw")
 9:10/0 = 0
 9:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nlqrh"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_akpl7"]
 texture = ExtResource("6_5r5j8")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -689,7 +690,7 @@ texture = ExtResource("6_5r5j8")
 4:0/0 = 0
 4:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8nmnw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aur7v"]
 texture = ExtResource("7_akpl7")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -856,11 +857,11 @@ terrain_set_0/terrain_0/name = "Rock 0"
 terrain_set_0/terrain_0/color = Color(0.68518245, 9.048581e-06, 0.4572175, 1)
 terrain_set_0/terrain_1/name = "BRock 1"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_34y5i")
-sources/1 = SubResource("TileSetAtlasSource_nlqrh")
-sources/2 = SubResource("TileSetAtlasSource_8nmnw")
+sources/0 = SubResource("TileSetAtlasSource_211ff")
+sources/1 = SubResource("TileSetAtlasSource_akpl7")
+sources/2 = SubResource("TileSetAtlasSource_aur7v")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ngxpw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8lfqf"]
 texture = ExtResource("6_lp2uw")
 0:0/0 = 0
 1:0/0 = 0
@@ -1003,7 +1004,7 @@ texture = ExtResource("6_lp2uw")
 9:10/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_6sdse"]
-sources/0 = SubResource("TileSetAtlasSource_ngxpw")
+sources/0 = SubResource("TileSetAtlasSource_8lfqf")
 
 [node name="Level_1" type="Node2D"]
 
@@ -1072,3 +1073,6 @@ position = Vector2(-611, 45)
 
 [node name="RedKnight2" parent="Enemies" instance=ExtResource("8_akpl7")]
 position = Vector2(-104, -61)
+
+[node name="Archer" parent="Enemies" instance=ExtResource("10_o5ofx")]
+position = Vector2(492.99994, -229)
