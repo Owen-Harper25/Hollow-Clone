@@ -24,8 +24,8 @@ enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
 
 #Movement Variables
 var canSpawnParticle = true
-var DUST_PARTICLE = preload("res://Scenes/DustParticle.tscn")
-var DASH_PARTICLE = preload("res://Scenes/DashParticle.tscn")
+var DUST_PARTICLE = preload("res://Scenes/PlayerScenes/DustParticle.tscn")
+var DASH_PARTICLE = preload("res://Scenes/PlayerScenes/DashParticle.tscn")
 var paused: bool = false
 
 @onready var feet: Marker2D = $Feet
@@ -35,7 +35,7 @@ var paused: bool = false
 #Attack Variables
 var invincibility: bool = false
 var can_attack: bool = true
-var attack_arc_scene = preload("res://Scenes/attack_arc.tscn")
+var attack_arc_scene = preload("res://Scenes/PlayerScenes/attack_arc.tscn")
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_damage: int = 1  # Damage dealt to enemies
 @export var attack_cooldown: float = 1.0  # Attack cooldown time

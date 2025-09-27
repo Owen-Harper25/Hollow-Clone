@@ -340,6 +340,8 @@ sources/1 = SubResource("TileSetAtlasSource_qvfeu")
 
 [node name="Level_Template" type="Node2D"]
 
+[node name="Background" type="Node2D" parent="."]
+
 [node name="TileMap" type="Node2D" parent="."]
 
 [node name="background" type="TileMapLayer" parent="TileMap"]
@@ -352,3 +354,7 @@ tile_set = SubResource("TileSet_m0v45")
 [node name="foreground" type="TileMapLayer" parent="TileMap"]
 z_index = 2
 tile_set = SubResource("TileSet_0jff0")
+
+[node name="Breakables" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]

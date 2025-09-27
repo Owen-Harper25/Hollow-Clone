@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Owen Art/Man.png" id="2_onrkg"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="2_vgqql"]
-[ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/attack_arc.tscn" id="3_6t5aa"]
-[ext_resource type="PackedScene" uid="uid://bdoxkjk3diuj4" path="res://Scenes/pause_menu.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/PlayerScenes/attack_arc.tscn" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://bdoxkjk3diuj4" path="res://Scenes/GUI/pause_menu.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
 radius = 0.8000001
