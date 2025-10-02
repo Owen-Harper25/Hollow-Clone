@@ -107,15 +107,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8i00"]
-radius = 5.0
-height = 14.0
+radius = 13.586955
+height = 43.478256
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
-radius = 6.0
-height = 16.0
+radius = 17.361101
+height = 48.91304
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jr21u"]
-radius = 59.25927
+radius = 185.18523
 
 [sub_resource type="Animation" id="Animation_actkj"]
 resource_name = "Death Disolve"
@@ -319,6 +319,7 @@ scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_jr21u")
 
 [node name="detectionZone" type="Area2D" parent="."]
+visible = false
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionZone"]
