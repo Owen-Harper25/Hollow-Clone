@@ -275,14 +275,12 @@ _data = {
 
 [node name="Archer" type="CharacterBody2D" groups=["Enemy"]]
 material = SubResource("ShaderMaterial_bibtd")
-scale = Vector2(5, 5)
 collision_layer = 2
 collision_mask = 34
 script = ExtResource("3_mticn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-0.20000002, 0)
-scale = Vector2(0.32, 0.32)
 sprite_frames = SubResource("SpriteFrames_20cwn")
 animation = &"Death"
 autoplay = "Idle"

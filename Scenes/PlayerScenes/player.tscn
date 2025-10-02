@@ -178,7 +178,6 @@ radius = 0.99999994
 height = 4.7999997
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-scale = Vector2(5, 5)
 collision_layer = 3
 collision_mask = 15
 script = ExtResource("1_onrkg")
@@ -191,7 +190,6 @@ shape = SubResource("CapsuleShape2D_hqtel")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fkybt")
 position = Vector2(-0.2, 0)
-scale = Vector2(0.3203125, 0.3203125)
 texture = ExtResource("2_onrkg")
 hframes = 7
 
