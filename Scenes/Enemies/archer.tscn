@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dpaaautu0me0m"]
+[gd_scene load_steps=27 format=3 uid="uid://dpaaautu0me0m"]
 
 [ext_resource type="Texture2D" uid="uid://b2no6hg7xlyxj" path="res://Assets/Sprites/Owen Art/Archer.png" id="1_36kj3"]
 [ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_a6nm7"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_7qwat"]
 [ext_resource type="Script" uid="uid://bplboi0faltus" path="res://Scripts/archer.gd" id="3_mticn"]
+[ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="4_7qwat"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bibtd"]
 resource_local_to_scene = true
@@ -12,6 +13,12 @@ shader_parameter/dissolve_texture = ExtResource("2_7qwat")
 shader_parameter/dissolve_value = 1.0
 shader_parameter/burn_size = 0.0499999988824
 shader_parameter/burn_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mticn"]
+resource_local_to_scene = true
+shader = ExtResource("4_7qwat")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_quixy"]
 atlas = ExtResource("1_36kj3")
@@ -280,6 +287,7 @@ collision_mask = 34
 script = ExtResource("3_mticn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_mticn")
 position = Vector2(-0.09999964, 0)
 scale = Vector2(1.0125, 1)
 sprite_frames = SubResource("SpriteFrames_20cwn")
