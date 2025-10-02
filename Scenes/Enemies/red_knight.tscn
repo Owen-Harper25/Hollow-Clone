@@ -294,14 +294,12 @@ _data = {
 
 [node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
 material = SubResource("ShaderMaterial_bibtd")
-scale = Vector2(5, 5)
 collision_layer = 2
 collision_mask = 34
 script = ExtResource("1_jr21u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1ie4o")
-scale = Vector2(0.32, 0.32)
 sprite_frames = SubResource("SpriteFrames_0tpon")
 animation = &"Death"
 autoplay = "Idle"
