@@ -88,12 +88,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_36kj3"]
-radius = 1.8
-height = 5.12
+radius = 4.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6nm7"]
-radius = 6.0
-height = 16.0
+radius = 20.833324
+height = 43.47826
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a6nm7"]
 radius = 59.25927
@@ -280,13 +280,15 @@ collision_mask = 34
 script = ExtResource("3_mticn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-0.20000002, 0)
+position = Vector2(-0.09999964, 0)
+scale = Vector2(1.0125, 1)
 sprite_frames = SubResource("SpriteFrames_20cwn")
 animation = &"Death"
 autoplay = "Idle"
 frame_progress = 0.2638187
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_36kj3")
 
 [node name="DirectionTimer" type="Timer" parent="." groups=["Enemy"]]
@@ -297,6 +299,7 @@ scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(0, 1.0000001)
 scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_a6nm7")
 

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bdoxkjk3diuj4" path="res://Scenes/GUI/pause_menu.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
-radius = 0.8000001
-height = 4.7999997
+radius = 4.000001
+height = 15.600004
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fkybt"]
 shader = ExtResource("2_vgqql")
@@ -174,8 +174,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 0.99999994
-height = 4.7999997
+radius = 3.0
+height = 13.6
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 3
