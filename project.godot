@@ -122,3 +122,9 @@ textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_clear_color=Color(0.20392157, 0.20784314, 0.36862746, 1)
 renderer/canvas_textures/default_texture_filter=1
 renderer/main_scene="uid://bycbvvxvjb035"
+
+[steam]
+
+initialization/app_id=0
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false

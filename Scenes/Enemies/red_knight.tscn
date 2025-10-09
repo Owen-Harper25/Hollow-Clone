@@ -107,12 +107,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8i00"]
-radius = 13.586955
-height = 43.478256
+radius = 13.888881
+height = 38.043472
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jr21u"]
 radius = 17.361101
-height = 48.91304
+height = 43.478256
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jr21u"]
 radius = 185.18523
@@ -292,7 +292,7 @@ _data = {
 &"RESET": SubResource("Animation_bibtd")
 }
 
-[node name="RedKnight" type="CharacterBody2D" groups=["Enemy"]]
+[node name="RedKnight" type="CharacterBody2D" groups=["Enemy", "can_pogo"]]
 material = SubResource("ShaderMaterial_bibtd")
 collision_layer = 2
 collision_mask = 34
@@ -305,20 +305,23 @@ animation = &"Death"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_m8i00")
 
 [node name="DirectionTimer" type="Timer" parent="." groups=["Enemy"]]
 autostart = true
 
-[node name="hitBox" type="Area2D" parent="." groups=["can_pogo"]]
+[node name="hitBox" type="Area2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(0, 1)
 scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_jr21u")
 
 [node name="detectionZone" type="Area2D" parent="."]
+visible = false
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionZone"]
