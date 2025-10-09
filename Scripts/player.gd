@@ -38,10 +38,8 @@ var can_attack: bool = true
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
-#@onready var pogo_timer: Timer = $Timers/PogoTimer
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
-#var pogoing: bool = false
 
 #New Attck Variables
 @onready var AttackParent: Node2D = $Attack
@@ -155,8 +153,6 @@ func _ready() -> void:
 	Global.game_resumed.connect(_on_game_resumed)
 	AttackSprite.modulate.a = 0.0
 	AttackArea2D.get_node("CollisionShape2D").disabled = true
-	#AttackArea2D.connect("area_entered", _attack_area_hit)
-	#AttackArea2D.connect("body_entered", _attack_area_hit)
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -303,13 +299,6 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = max(0.0, attack_duration_timer - delta)
 			if attack_duration_timer == 0.0:
 				AttackArea2D.get_node("CollisionShape2D").disabled = true
-
-#func _attack_area_hit(target_node: Node) -> void:
-	#if target_node == self:
-		#return
-	#
-	#if target_node.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
-		#velocity.y = -300
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
@@ -526,16 +515,15 @@ func _on_resume_timer_timeout() -> void:
 	pause_jump = false
 
 func _on_attack_area_2d_body_entered(body: Node2D) -> void:
-	print(body)
 	if body == self:
 		return
 	
 	if body.is_in_group("Enemy") and body.has_method("take_damage") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
-		print("Pogo")
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
 		velocity.y = -300
+	
 	elif body.is_in_group("Enemy") and body.has_method("take_damage"):
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
