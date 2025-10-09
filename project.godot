@@ -33,6 +33,7 @@ window/stretch/mode="viewport"
 Player=""
 Enemy=""
 Breakable=""
+can_pogo=""
 
 [input]
 

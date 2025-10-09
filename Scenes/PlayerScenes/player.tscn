@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=23 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Owen Art/Man.png" id="2_onrkg"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="2_vgqql"]
 [ext_resource type="PackedScene" uid="uid://c73wr4xjul056" path="res://Scenes/PlayerScenes/attack_arc.tscn" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://dxibi0qelb7bv" path="res://Assets/Sprites/Owen Art/slash2.png" id="4_c45ss"]
 [ext_resource type="PackedScene" uid="uid://bdoxkjk3diuj4" path="res://Scenes/GUI/pause_menu.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
@@ -173,6 +174,9 @@ _data = {
 &"hit_flash": SubResource("Animation_fkybt")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acd72"]
+size = Vector2(22.504196, 18.231953)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 3.0
 height = 13.6
@@ -183,6 +187,7 @@ collision_mask = 15
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.19999996)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("CapsuleShape2D_hqtel")
@@ -226,8 +231,26 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
+visible = false
 position = Vector2(0, 2.6666667)
 scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Attack" type="Node2D" parent="."]
+position = Vector2(0, 0.19999997)
+scale = Vector2(1e-05, 0.9999998)
+
+[node name="Attack Sprite" type="Sprite2D" parent="Attack"]
+position = Vector2(0, -0.2)
+scale = Vector2(44436.176, 0.42507794)
+texture = ExtResource("4_c45ss")
+offset = Vector2(10, 0)
+
+[node name="AttackArea2D" type="Area2D" parent="Attack/Attack Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Attack Sprite/AttackArea2D"]
+position = Vector2(13.502513, 0)
+scale = Vector2(0.9999997, 1)
+shape = SubResource("RectangleShape2D_acd72")
 
 [node name="AttackArc" parent="." instance=ExtResource("3_6t5aa")]
 visible = false
@@ -235,6 +258,7 @@ position = Vector2(0, 0.19999997)
 scale = Vector2(1e-05, 0.9999998)
 
 [node name="Directions" type="Node2D" parent="."]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="Directions"]
 position = Vector2(2, 0)
@@ -249,6 +273,7 @@ position = Vector2(-2, 0)
 position = Vector2(0, 2.75)
 
 [node name="hurtBox" type="Area2D" parent="."]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
@@ -258,10 +283,13 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 [node name="Menu\'s" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="Menu\'s" instance=ExtResource("5_fkybt")]
+visible = false
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="Timers/Resume Timer" to="." method="_on_resume_timer_timeout"]
+[connection signal="area_entered" from="Attack/Attack Sprite/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
+[connection signal="body_entered" from="Attack/Attack Sprite/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]

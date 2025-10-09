@@ -35,7 +35,7 @@ var paused: bool = false
 #Attack Variables
 var invincibility: bool = false
 var can_attack: bool = true
-var attack_arc_scene = preload("res://Scenes/PlayerScenes/attack_arc.tscn")
+#var attack_arc_scene = preload("res://Scenes/PlayerScenes/attack_arc.tscn")
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_damage: int = 1  # Damage dealt to enemies
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
@@ -43,6 +43,18 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var attack_arc: Node2D = $AttackArc
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
+
+#New Attck Variables
+@onready var AttackParent: Node2D = $Attack
+@onready var AttackSprite: Node2D = $"Attack/Attack Sprite"
+@onready var AttackArea2D: Area2D = $"Attack/Attack Sprite/AttackArea2D"
+var attack_distance: float = 6.0
+var TotalAttackDuration: float = 0.26
+var attack_duration_timer: float = 0.0
+var look_dir: Vector2 = Vector2.RIGHT
+@export var attack_dmg: int = 1  # damage
+@export var kb: float = 40.00
+@export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 
 #Health Variables
 @onready var currentHealth: int = maxHealth
@@ -143,6 +155,10 @@ var jumping := false
 func _ready() -> void:
 	Global.playerBody = self
 	Global.game_resumed.connect(_on_game_resumed)
+	AttackSprite.modulate.a = 0.0
+	AttackArea2D.get_node("CollisionShape2D").disabled = true
+	AttackArea2D.connect("area_entered", _attack_area_hit)
+	AttackArea2D.connect("body_entered", _attack_area_hit)
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -170,11 +186,11 @@ func _process(_delta: float) -> void:
 	if input_dir != Vector2.ZERO:
 		facing_direction = get_cardinal_direction(input_dir)
 	
-	if Input.is_action_just_pressed("attack") and can_attack == true:
-		start_attack()
-		can_attack = false
-		$"Timers/Attack Timer".start()
-		SoundLibrary.play_random_dash()
+	#if Input.is_action_just_pressed("attack") and can_attack == true:
+		#start_attack()
+		#can_attack = false
+		#$"Timers/Attack Timer".start()
+		#SoundLibrary.play_random_dash()
 	
 	#Dashing Code
 	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and pause_jump == false:
@@ -216,33 +232,33 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 	else:
 		return Vector2(0, sign(dir.y))  # only switch if clearly vertical
 
-func start_attack():
-	attack_arc = attack_arc_scene.instantiate()  # Create attack arc
-	get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
-	attack_arc.global_position = global_position  # Set position to player
-
-	if facing_direction == Vector2.RIGHT:
-		attack_arc.rotation = 0
-	elif facing_direction == Vector2.LEFT:
-		attack_arc.rotation = PI
-	elif facing_direction == Vector2.UP:
-		attack_arc.rotation = -PI/2
-	elif facing_direction == Vector2.DOWN:
-		if not is_on_floor():  # only allow down slash in air
-			attack_arc.rotation = PI/2
-		else:
-			# force into horizontal slash instead
-			if PLAYER_SPRITE.flip_h:
-				attack_arc.rotation = PI   # face left
-			else:
-				attack_arc.rotation = 0    # face right2
-
-	attack_timer.start()  # Start attack duration
-
-func _on_AttackTimer_timeout():
-	if attack_arc and is_instance_valid(attack_arc):  # Ensure it's still valid
-		attack_arc.queue_free()  # Remove attack arc
-	attack_arc = null
+#func start_attack():
+	#attack_arc = attack_arc_scene.instantiate()  # Create attack arc
+	#get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
+	#attack_arc.global_position = global_position  # Set position to player
+#
+	#if facing_direction == Vector2.RIGHT:
+		#attack_arc.rotation = 0
+	#elif facing_direction == Vector2.LEFT:
+		#attack_arc.rotation = PI
+	#elif facing_direction == Vector2.UP:
+		#attack_arc.rotation = -PI/2
+	#elif facing_direction == Vector2.DOWN:
+		#if not is_on_floor():  # only allow down slash in air
+			#attack_arc.rotation = PI/2
+		#else:
+			## force into horizontal slash instead
+			#if PLAYER_SPRITE.flip_h:
+				#attack_arc.rotation = PI   # face left
+			#else:
+				#attack_arc.rotation = 0    # face right2
+#
+	#attack_timer.start()  # Start attack duration
+#
+#func _on_AttackTimer_timeout():
+	#if attack_arc and is_instance_valid(attack_arc):  # Ensure it's still valid
+		#attack_arc.queue_free()  # Remove attack arc
+	#attack_arc = null
 
 
 ## Overrideable physics process used by the controller that calls whatever functions should be called
@@ -270,7 +286,7 @@ func physics_tick(delta: float) -> void:
 
 	manage_animations()
 	manage_state()
-	
+	_attack_logic(delta)
 	# We have to handle the gravity after the state
 	handle_gravity(delta) 
 
@@ -290,6 +306,49 @@ func damage_check():
 			_on_hurt_box_area_entered(area)
 			damage()
 
+func _attack_logic(delta: float) -> void:
+	if can_attack:
+		if Input.is_action_just_pressed("attack"):
+			print("Attack!")
+			can_attack = false
+			attack_timer.start()
+			if facing_direction == Vector2.RIGHT:
+				AttackParent.rotation_degrees = 0
+			elif facing_direction == Vector2.LEFT:
+				AttackParent.rotation_degrees = 180
+			elif facing_direction == Vector2.UP:
+				AttackParent.rotation_degrees = -90
+			elif facing_direction == Vector2.DOWN:
+				if not is_on_floor():  # only allow down slash in air
+					AttackParent.rotation_degrees = 90
+			else:
+				# force into horizontal slash instead
+				if PLAYER_SPRITE.flip_h:
+					AttackParent.rotation_degrees = 180   # face left
+				else:
+					AttackParent.rotation_degrees = 0   # face right2
+
+			AttackArea2D.get_node("CollisionShape2D").disabled = false
+			attack_duration_timer = TotalAttackDuration
+			AttackSprite.position.x = 0.0
+			
+			var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			attack_pos_tween.tween_property(AttackSprite, "position.x", attack_distance, TotalAttackDuration)
+			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
+			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)
+			
+		else:
+			attack_duration_timer = max(0.0, attack_duration_timer - delta)
+			if attack_duration_timer == 0.0:
+				AttackArea2D.get_node("CollisionShape2D").disabled = true
+
+func _attack_area_hit(target_node: Node) -> void:
+	if target_node == self:
+		return
+	
+	if target_node.is_in_group("can_pogo") or (target_node.get_parent() and target_node.get_parent().is_in_group("can_pogo")):
+		velocity.y = -300
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
@@ -511,3 +570,18 @@ func knockback():
 
 func _on_resume_timer_timeout() -> void:
 	pause_jump = false
+
+func _on_attack_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Enemy") and body.has_method("take_damage"):
+		var attack = Attack.new()
+		attack.attack_dmg = attack_dmg
+		attack.kb = kb
+		body.take_damage(attack)
+
+
+
+func _on_attack_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Breakable") and area.has_method("break_dmg"):
+		var attack = Attack.new()
+		attack.attack_dmg = attack_dmg
+		area.break_dmg(attack)
