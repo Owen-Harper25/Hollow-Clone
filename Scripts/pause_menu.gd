@@ -2,16 +2,14 @@ extends Control
 
 func _ready() -> void:
 	hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func _process(_delta: float) -> void:
 	escapeTest()
 
 func resume():
 	get_tree().paused = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	hide()
 	$AnimationPlayer.play_backwards("blur")
 	Global.emit_signal("game_resumed")
