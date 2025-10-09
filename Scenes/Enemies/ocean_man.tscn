@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ctkbxn8rmmnrh" path="res://Assets/Sprites/Owen Art/Reposition-the-subject-into-a-relaxed-idle-stance--256px-36.png" id="1_28yeh"]
 [ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_42qol"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_l06i4"]
-[ext_resource type="Script" uid="uid://c6h8g6gc0yly3" path="res://Scenes/Enemies/ocean_man.gd" id="2_oqkwd"]
+[ext_resource type="Script" uid="uid://c6h8g6gc0yly3" path="res://Scripts/ocean_man.gd" id="2_oqkwd"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="3_l06i4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xfup8"]
@@ -271,24 +271,8 @@ radius = 31.0
 height = 218.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28yeh"]
-radius = 31.0
+radius = 45.0
 height = 260.0
-
-[sub_resource type="Animation" id="Animation_hv8bu"]
-resource_name = "hit_flash"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
 
 [sub_resource type="Animation" id="Animation_pxa8s"]
 length = 0.001
@@ -332,11 +316,54 @@ tracks/0/keys = {
 "values": [0.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_hv8bu"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74k22"]
 _data = {
 &"RESET": SubResource("Animation_pxa8s"),
 &"death": SubResource("Animation_oqkwd"),
 &"hit_flash": SubResource("Animation_hv8bu")
+}
+
+[sub_resource type="Animation" id="Animation_uf5s3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:use_parent_material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_xfup8"]
@@ -365,33 +392,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_uf5s3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/dissolve_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:use_parent_material")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hv8bu"]
