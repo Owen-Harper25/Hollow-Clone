@@ -289,8 +289,8 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = TotalAttackDuration
 			AttackSprite.position.x = 0.0
 			
-			var attack_pos_tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			attack_pos_tween.tween_property(AttackParent, "position", facing_direction * attack_distance, TotalAttackDuration)
+			#var attack_pos_tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			#attack_pos_tween.tween_property(AttackParent, "position", facing_direction * attack_distance, TotalAttackDuration)
 			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
 			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)
