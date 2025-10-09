@@ -48,7 +48,7 @@ func take_damage(attack: Attack):
 		var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
 		velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
 
-func move(delta):
+func move(delta: float):
 	if !dead:
 		if !is_redknight_chase:
 			velocity += dir * speed * delta

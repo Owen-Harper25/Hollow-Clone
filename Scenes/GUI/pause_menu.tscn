@@ -69,7 +69,7 @@ _data = {
 &"blur": SubResource("Animation_1och7")
 }
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("PauseMenu", "Settings")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -78,6 +78,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k0w1u")
+PauseMenu = NodePath("PanelContainer")
+Settings = NodePath("Settings")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_vmyb1")
@@ -88,6 +90,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vmyb1")
+}
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -95,18 +102,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -161.125
+offset_left = -109.5625
 offset_top = -59.703125
-offset_right = 161.125
+offset_right = 109.5625
 offset_bottom = 59.703125
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(225, 125)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -123,10 +133,84 @@ text = "Settings"
 layout_mode = 2
 text = "Save and Quit"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vmyb1")
-}
+[node name="Settings" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.4082
+offset_top = -288.625
+offset_right = 552.4082
+offset_bottom = 288.625
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsMargin" type="MarginContainer" parent="Settings"]
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMargin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/SettingsMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Random Settings Ngl"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="Settings/SettingsMargin/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -26.0
+offset_right = 124.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Random Check Box"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Is This Center?"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CheckButton" type="CheckButton" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="CheckButton2" type="CheckButton" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_button_down"]
 [connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
