@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dvhj3i2714nht"]
+[gd_scene load_steps=18 format=4 uid="uid://dvhj3i2714nht"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_nlqrh"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
@@ -11,9 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/Enviromentals/breakable_lanturn.tscn" id="8_aur7v"]
 [ext_resource type="TileSet" uid="uid://cqnw1qkbbw853" path="res://Scenes/Levels/GroundSet.tres" id="8_ngxpw"]
 [ext_resource type="PackedScene" uid="uid://dpaaautu0me0m" path="res://Scenes/Enemies/archer.tscn" id="10_o5ofx"]
-[ext_resource type="PackedScene" uid="uid://6mqk367qw0pw" path="res://Scenes/Enemies/ocean_man.tscn" id="13_8nmnw"]
-[ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="14_trw0a"]
-[ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="15_tjcye"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trw0a"]
 texture = ExtResource("6_lp2uw")
@@ -809,14 +806,6 @@ texture = ExtResource("6_lp2uw")
 [sub_resource type="TileSet" id="TileSet_6sdse"]
 sources/0 = SubResource("TileSetAtlasSource_8lfqf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_557vl"]
-resource_local_to_scene = true
-shader = ExtResource("14_trw0a")
-shader_parameter/dissolve_texture = ExtResource("15_tjcye")
-shader_parameter/dissolve_value = 0.0
-shader_parameter/burn_size = 0.11999999731776
-shader_parameter/burn_color = Color(1, 1, 1, 1)
-
 [node name="Level_1" type="Node2D"]
 
 [node name="Lights" type="Node2D" parent="."]
@@ -954,8 +943,3 @@ position = Vector2(492.99994, -229)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0.13, 0.13, 0.13, 1)
-
-[node name="Ocean Man" parent="." instance=ExtResource("13_8nmnw")]
-material = SubResource("ShaderMaterial_557vl")
-position = Vector2(47, 2)
-scale = Vector2(0.50135946, 0.50135946)

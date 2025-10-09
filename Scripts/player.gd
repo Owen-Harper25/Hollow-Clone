@@ -309,7 +309,6 @@ func damage_check():
 func _attack_logic(delta: float) -> void:
 	if can_attack:
 		if Input.is_action_just_pressed("attack"):
-			print("Attack!")
 			can_attack = false
 			attack_timer.start()
 			if facing_direction == Vector2.RIGHT:
@@ -332,8 +331,8 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = TotalAttackDuration
 			AttackSprite.position.x = 0.0
 			
-			var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			attack_pos_tween.tween_property(AttackSprite, "position.x", attack_distance, TotalAttackDuration)
+			#var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			#attack_pos_tween.tween_property(AttackSprite, "position.x", attack_distance, TotalAttackDuration)
 			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
 			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)
@@ -347,7 +346,7 @@ func _attack_area_hit(target_node: Node) -> void:
 	if target_node == self:
 		return
 	
-	if target_node.is_in_group("can_pogo") or (target_node.get_parent() and target_node.get_parent().is_in_group("can_pogo")):
+	if target_node.is_in_group("can_pogo") or (target_node.get_parent() and target_node.get_parent().is_in_group("can_pogo") and facing_direction == Vector2.DOWN):
 		velocity.y = -300
 
 ## Manages the character's current state based on the current velocity vector
