@@ -40,14 +40,13 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_damage: int = 1  # Damage dealt to enemies
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
-@onready var attack_arc: Node2D = $AttackArc
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
 
 #New Attck Variables
 @onready var AttackParent: Node2D = $Attack
-@onready var AttackSprite: Node2D = $"Attack/Attack Sprite"
-@onready var AttackArea2D: Area2D = $"Attack/Attack Sprite/AttackArea2D"
+@onready var AttackSprite: Sprite2D = $Attack/Sprite2D
+@onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
 var attack_distance: float = 6.0
 var TotalAttackDuration: float = 0.26
 var attack_duration_timer: float = 0.0
@@ -164,7 +163,7 @@ func _on_game_resumed():
 	$"Timers/Resume Timer".start()
 	pause_jump = true
 	
-	
+
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
 
@@ -180,17 +179,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed(ACTION_UP):
 		input_dir.y -= 1
 
-	if attack_arc and is_instance_valid(attack_arc):
-		attack_arc.global_position = global_position  # Keep it attached
 # only update if we actually pressed a direction
 	if input_dir != Vector2.ZERO:
 		facing_direction = get_cardinal_direction(input_dir)
-	
-	#if Input.is_action_just_pressed("attack") and can_attack == true:
-		#start_attack()
-		#can_attack = false
-		#$"Timers/Attack Timer".start()
-		#SoundLibrary.play_random_dash()
 	
 	#Dashing Code
 	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and pause_jump == false:
@@ -231,35 +222,6 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 		return Vector2(sign(dir.x), 0)  # prefer left/right
 	else:
 		return Vector2(0, sign(dir.y))  # only switch if clearly vertical
-
-#func start_attack():
-	#attack_arc = attack_arc_scene.instantiate()  # Create attack arc
-	#get_parent().add_child.call_deferred(attack_arc)  # Add to the main scene
-	#attack_arc.global_position = global_position  # Set position to player
-#
-	#if facing_direction == Vector2.RIGHT:
-		#attack_arc.rotation = 0
-	#elif facing_direction == Vector2.LEFT:
-		#attack_arc.rotation = PI
-	#elif facing_direction == Vector2.UP:
-		#attack_arc.rotation = -PI/2
-	#elif facing_direction == Vector2.DOWN:
-		#if not is_on_floor():  # only allow down slash in air
-			#attack_arc.rotation = PI/2
-		#else:
-			## force into horizontal slash instead
-			#if PLAYER_SPRITE.flip_h:
-				#attack_arc.rotation = PI   # face left
-			#else:
-				#attack_arc.rotation = 0    # face right2
-#
-	#attack_timer.start()  # Start attack duration
-#
-#func _on_AttackTimer_timeout():
-	#if attack_arc and is_instance_valid(attack_arc):  # Ensure it's still valid
-		#attack_arc.queue_free()  # Remove attack arc
-	#attack_arc = null
-
 
 ## Overrideable physics process used by the controller that calls whatever functions should be called
 ## and any logic that needs to be done on the [param _physics_process] tick
@@ -309,6 +271,7 @@ func damage_check():
 func _attack_logic(delta: float) -> void:
 	if can_attack:
 		if Input.is_action_just_pressed("attack"):
+			SoundLibrary.play_random_dash()
 			can_attack = false
 			attack_timer.start()
 			if facing_direction == Vector2.RIGHT:
@@ -331,8 +294,8 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = TotalAttackDuration
 			AttackSprite.position.x = 0.0
 			
-			#var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			#attack_pos_tween.tween_property(AttackSprite, "position.x", attack_distance, TotalAttackDuration)
+			var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			attack_pos_tween.tween_property(AttackSprite, "position:x", attack_distance, TotalAttackDuration)
 			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
 			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)

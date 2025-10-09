@@ -236,15 +236,15 @@ scale = Vector2(0.33333334, 0.33333334)
 position = Vector2(0, 0.19999997)
 scale = Vector2(1e-05, 0.9999998)
 
-[node name="Attack Sprite" type="Sprite2D" parent="Attack"]
+[node name="Sprite2D" type="Sprite2D" parent="Attack"]
 position = Vector2(0, -0.2)
 scale = Vector2(44436.176, 0.42507794)
 texture = ExtResource("4_c45ss")
 offset = Vector2(10, 0)
 
-[node name="AttackArea2D" type="Area2D" parent="Attack/Attack Sprite"]
+[node name="AttackArea2D" type="Area2D" parent="Attack/Sprite2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Attack Sprite/AttackArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Sprite2D/AttackArea2D"]
 position = Vector2(13.502513, 0)
 scale = Vector2(0.9999997, 1)
 shape = SubResource("RectangleShape2D_acd72")
@@ -282,6 +282,6 @@ visible = false
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="Timers/Resume Timer" to="." method="_on_resume_timer_timeout"]
-[connection signal="area_entered" from="Attack/Attack Sprite/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
-[connection signal="body_entered" from="Attack/Attack Sprite/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
+[connection signal="area_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
+[connection signal="body_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
