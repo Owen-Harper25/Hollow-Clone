@@ -35,9 +35,7 @@ var paused: bool = false
 #Attack Variables
 var invincibility: bool = false
 var can_attack: bool = true
-#var attack_arc_scene = preload("res://Scenes/PlayerScenes/attack_arc.tscn")
 var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
-@export var attack_damage: int = 1  # Damage dealt to enemies
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
@@ -47,12 +45,11 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var AttackParent: Node2D = $Attack
 @onready var AttackSprite: Sprite2D = $Attack/Sprite2D
 @onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
-var attack_distance: float = 6.0
+var attack_distance: float = 8.0
 var TotalAttackDuration: float = 0.26
 var attack_duration_timer: float = 0.0
 var look_dir: Vector2 = Vector2.RIGHT
 @export var attack_dmg: int = 1  # damage
-@export var kb: float = 40.00
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 
 #Health Variables
@@ -156,8 +153,6 @@ func _ready() -> void:
 	Global.game_resumed.connect(_on_game_resumed)
 	AttackSprite.modulate.a = 0.0
 	AttackArea2D.get_node("CollisionShape2D").disabled = true
-	AttackArea2D.connect("area_entered", _attack_area_hit)
-	AttackArea2D.connect("body_entered", _attack_area_hit)
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -294,8 +289,8 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = TotalAttackDuration
 			AttackSprite.position.x = 0.0
 			
-			var attack_pos_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			attack_pos_tween.tween_property(AttackSprite, "position:x", attack_distance, TotalAttackDuration)
+			#var attack_pos_tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			#attack_pos_tween.tween_property(AttackParent, "position", facing_direction * attack_distance, TotalAttackDuration)
 			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
 			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)
@@ -304,13 +299,6 @@ func _attack_logic(delta: float) -> void:
 			attack_duration_timer = max(0.0, attack_duration_timer - delta)
 			if attack_duration_timer == 0.0:
 				AttackArea2D.get_node("CollisionShape2D").disabled = true
-
-func _attack_area_hit(target_node: Node) -> void:
-	if target_node == self:
-		return
-	
-	if target_node.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
-		velocity.y = -300
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
@@ -361,14 +349,12 @@ func get_inputs() -> Dictionary:
 		sprint_strength = Input.get_action_strength(ACTION_SPRINT) if ENABLE_SPRINT else 0.0,
 	}
 
-
 ## Gets the X/Y axis movement direction using the input mappings assigned to the ACTION UP/DOWN/LEFT/RIGHT variables
 func get_input_direction() -> Vector2:
 	var x_dir: float = Input.get_action_strength(ACTION_RIGHT) - Input.get_action_strength(ACTION_LEFT)
 	var y_dir: float = Input.get_action_strength(ACTION_DOWN) - Input.get_action_strength(ACTION_UP)
 
 	return Vector2(x_dir if JOYSTICK_MOVEMENT else sign(x_dir), y_dir if JOYSTICK_MOVEMENT else sign(y_dir))
-
 
 # ------------------ Movement Logic ---------------------------------
 ## Takes the delta and applies gravity to the player depending on their state.  This has
@@ -383,21 +369,18 @@ func handle_gravity(delta: float) -> void:
 	if not is_on_floor() and can_jump:
 		coyote_time()
 
-
 ## Takes delta and the current input direction and either applies the movement or applies friction
 func handle_velocity(delta: float, input_direction: Vector2 = Vector2.ZERO) -> void:
 	if input_direction.x != 0:
 		apply_velocity(delta, input_direction)
 	else:
 		apply_friction(delta)
-	
 
 ## Applies velocity in the current input direction using the [param ACCELERATION], [param MAX_SPEED], and [param SPRINT_MULTIPLIER]
 func apply_velocity(delta: float, move_direction: Vector2) -> void:
 	var sprint_strength: float = SPRINT_MULTIPLIER if sprinting else 1.0
 	velocity.x += move_direction.x * ACCELERATION * delta * (sprint_strength if is_on_floor() else 1.0)
 	velocity.x = clamp(velocity.x, -MAX_SPEED * abs(move_direction.x) * sprint_strength, MAX_SPEED * abs(move_direction.x) * sprint_strength)
-
 
 ## Applies friction to the horizontal axis when not moving using the [param FRICTION] and [param AIR_RESISTENCE] values
 func apply_friction(delta: float) -> void:
@@ -407,14 +390,12 @@ func apply_friction(delta: float) -> void:
 	else:
 		velocity.x += fric
 
-
 ## Sets the sprinting variable according to the strength of the sprint input action
 func handle_sprint(sprint_strength: float) -> void:
 	if sprint_strength != 0 and can_sprint:
 		sprinting = true
 	else:
 		sprinting = false
-
 
 # ------------------ Jumping Logic ---------------------------------
 ## Takes delta and the jump action status and strength and handles the jumping logic
@@ -534,16 +515,25 @@ func _on_resume_timer_timeout() -> void:
 	pause_jump = false
 
 func _on_attack_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy") and body.has_method("take_damage"):
+	if body == self:
+		return
+	
+	if body.is_in_group("Enemy") and body.has_method("take_damage") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
-		attack.kb = kb
 		body.take_damage(attack)
-
-
+		velocity.y = -300
+	
+	elif body.is_in_group("Enemy") and body.has_method("take_damage"):
+		var attack = Attack.new()
+		attack.attack_dmg = attack_dmg
+		body.take_damage(attack)
 
 func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Breakable") and area.has_method("break_dmg"):
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		area.break_dmg(attack)
+
+#func _on_pogo_timer_timeout() -> void:
+	#pogoing = false

@@ -68,7 +68,7 @@ func handle_animation():
 		elif dir.x == 1:
 			anim_sprite.flip_h = false
 	elif !dead and !is_dealing_damage and taking_damage:
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.4).timeout
 		taking_damage = false
 	elif dead and is_roaming:
 		is_roaming = false
