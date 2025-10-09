@@ -346,7 +346,7 @@ func _attack_area_hit(target_node: Node) -> void:
 	if target_node == self:
 		return
 	
-	if target_node.is_in_group("can_pogo") or (target_node.get_parent() and target_node.get_parent().is_in_group("can_pogo") and facing_direction == Vector2.DOWN):
+	if target_node.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
 		velocity.y = -300
 
 ## Manages the character's current state based on the current velocity vector
