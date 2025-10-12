@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://jip7uc7rsksu"]
+
+[ext_resource type="Script" uid="uid://bok0lqssuwxv8" path="res://Scenes/bench.gd" id="1_rgxpg"]
+[ext_resource type="Texture2D" uid="uid://bm2c1hh2ucubx" path="res://Assets/Sprites/Owen Art/Bench.png" id="2_lwohs"]
+[ext_resource type="PackedScene" uid="uid://cyowr518ht03d" path="res://Scenes/interactable.tscn" id="3_2j4nf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgxpg"]
+size = Vector2(46, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sht6a"]
+radius = 31.0
+
+[node name="Bench" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_rgxpg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_rgxpg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lwohs")
+
+[node name="Interactable" parent="." instance=ExtResource("3_2j4nf")]
+interact_name = "Sit on Bench"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_sht6a")

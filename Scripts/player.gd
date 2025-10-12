@@ -56,8 +56,6 @@ var look_dir: Vector2 = Vector2.RIGHT
 @onready var currentHealth: int = maxHealth
 @export var maxHealth = 5
 
-var health = 5
-#var hearts_list : Array[TextureRect]
 var health_min = 0
 var alive: bool = true
 

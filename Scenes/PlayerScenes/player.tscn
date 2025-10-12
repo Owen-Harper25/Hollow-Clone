@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://ba6pf7ajyadmn"]
+[gd_scene load_steps=23 format=3 uid="uid://ba6pf7ajyadmn"]
 
 [ext_resource type="Script" uid="uid://winlmn0ndna3" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://d37dmp26mfjr6" path="res://Assets/Sprites/Owen Art/Man.png" id="2_onrkg"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="2_vgqql"]
 [ext_resource type="Texture2D" uid="uid://dxibi0qelb7bv" path="res://Assets/Sprites/Owen Art/slash2.png" id="4_c45ss"]
 [ext_resource type="PackedScene" uid="uid://bdoxkjk3diuj4" path="res://Scenes/GUI/pause_menu.tscn" id="5_fkybt"]
+[ext_resource type="PackedScene" uid="uid://cy2mtfcxj7ehe" path="res://Scenes/interacting_component.tscn" id="6_c45ss"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
 radius = 4.000001
@@ -278,6 +279,8 @@ layer = 5
 
 [node name="PauseMenu" parent="Menu\'s" instance=ExtResource("5_fkybt")]
 visible = false
+
+[node name="InteractingComponent" parent="." instance=ExtResource("6_c45ss")]
 
 [connection signal="timeout" from="Timers/ParticleTimer" to="." method="_on_particle_timer_timeout"]
 [connection signal="timeout" from="Timers/Attack Timer" to="." method="_on_attack_timer_timeout"]
