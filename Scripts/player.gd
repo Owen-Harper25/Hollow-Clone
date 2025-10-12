@@ -54,8 +54,8 @@ var look_dir: Vector2 = Vector2.RIGHT
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 
 #Health Variables
-#@onready var currentHealth: int = maxHealth
-#@export var maxHealth = 5
+@onready var currentHealth: int = maxHealth
+@export var maxHealth = 5
 
 var health_min = 0
 var alive: bool = true
@@ -479,20 +479,20 @@ func _on_invincibility_timer_timeout() -> void:
 	damage_check()
 
 func damage():
-	Global.currentHealth -= 1
+	currentHealth -= 1
 	SoundLibrary.play_random_hit()
 	hit_flash_animation_player.play("hit_flash")
-	healthChanged.emit(Global.currentHealth)
+	healthChanged.emit(currentHealth)
 	knockback()
-	if Global.currentHealth > 0:
+	if currentHealth > 0:
 		invincibility_timer.start()
 		invincibility = true
 		set_collision_mask_value(2, false)
 		set_collision_layer_value(2, false)
 		
-	if Global.currentHealth <= 0:
+	if currentHealth <= 0:
 		SoundLibrary.play_random_death()
-		Global.currentHealth = Global.maxHealth
+		currentHealth = maxHealth
 		print("Dead")
 	
 func knockback():

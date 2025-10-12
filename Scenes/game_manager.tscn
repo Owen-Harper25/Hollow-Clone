@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhpa4osybcxmh"]
+[gd_scene load_steps=9 format=3 uid="uid://bhpa4osybcxmh"]
 
 [ext_resource type="Script" uid="uid://cflpa8rkglgey" path="res://Scripts/game_manager.gd" id="1_yqty0"]
 [ext_resource type="PackedScene" uid="uid://dvhj3i2714nht" path="res://Scenes/Levels/Level_1.tscn" id="2_fgdfb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="3_fgdfb"]
 [ext_resource type="PackedScene" uid="uid://fkximm7bhk4v" path="res://Scenes/PlayerScenes/hearts_container.tscn" id="5_fgdfb"]
 [ext_resource type="Shader" uid="uid://bkl3otplrtsbx" path="res://Shaders/screen_effect.gdshader" id="6_yqty0"]
+[ext_resource type="PackedScene" uid="uid://cyowr518ht03d" path="res://Scenes/interactable.tscn" id="7_71d4j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yqty0"]
 shader = ExtResource("6_yqty0")
@@ -59,3 +60,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Interactable" parent="." instance=ExtResource("7_71d4j")]
