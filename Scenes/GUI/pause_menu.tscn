@@ -1,42 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdoxkjk3diuj4"]
 
 [ext_resource type="Script" uid="uid://cyqwgixwsm453" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
-[ext_resource type="Script" uid="uid://dtuwsn6c5jhwk" path="res://Scripts/resume.gd" id="2_1och7"]
 [ext_resource type="Shader" uid="uid://ci5nniy2f1ft1" path="res://Shaders/pause_menu.gdshader" id="2_bpi0q"]
+[ext_resource type="Script" uid="uid://b4m2s57amcunu" path="res://Scenes/GUI/settings.gd" id="4_o572i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmyb1"]
 shader = ExtResource("2_bpi0q")
 shader_parameter/lod = 0.0
 
-[sub_resource type="Animation" id="Animation_bpi0q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_1och7"]
-resource_name = "blur"
+[sub_resource type="Animation" id="Animation_ceptl"]
+resource_name = "Blur"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -53,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/path = NodePath("MainPauseMenu:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,13 +36,40 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmyb1"]
-_data = {
-&"RESET": SubResource("Animation_bpi0q"),
-&"blur": SubResource("Animation_1och7")
+[sub_resource type="Animation" id="Animation_o572i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainPauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("PauseMenu", "Settings")]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmyb1"]
+_data = {
+&"Blur": SubResource("Animation_ceptl"),
+&"RESET": SubResource("Animation_o572i")
+}
+
+[node name="PauseMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -78,8 +78,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k0w1u")
-PauseMenu = NodePath("PanelContainer")
-Settings = NodePath("Settings")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_vmyb1")
@@ -95,45 +93,46 @@ libraries = {
 &"": SubResource("AnimationLibrary_vmyb1")
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MainPauseMenu" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.5625
-offset_top = -59.703125
-offset_right = 109.5625
-offset_bottom = 59.703125
+offset_left = -112.5
+offset_top = -62.5
+offset_right = 112.5
+offset_bottom = 62.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="PauseMenu_Box" type="MarginContainer" parent="MainPauseMenu"]
 custom_minimum_size = Vector2(225, 125)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="Button_List" type="VBoxContainer" parent="MainPauseMenu/PauseMenu_Box"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
 text = "Resume
 "
-script = ExtResource("2_1och7")
 
-[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
 text = "Settings"
 
-[node name="Save and Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Save and Quit" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
 text = "Save and Quit"
 
-[node name="Settings" type="PanelContainer" parent="."]
+[node name="Settings" type="PanelContainer" parent="." node_paths=PackedStringArray("GameplayPopup", "VisualsPopup", "AudioPopup", "InfoPopup")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -146,6 +145,11 @@ offset_right = 552.4082
 offset_bottom = 288.625
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_o572i")
+GameplayPopup = NodePath("SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay")
+VisualsPopup = NodePath("SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Visuals")
+AudioPopup = NodePath("SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Audio")
+InfoPopup = NodePath("SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Info")
 
 [node name="SettingsMargin" type="MarginContainer" parent="Settings"]
 custom_minimum_size = Vector2(500, 400)
@@ -153,64 +157,119 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMargin"]
+[node name="Settings_holder" type="VBoxContainer" parent="Settings/SettingsMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings/SettingsMargin/VBoxContainer"]
+[node name="Settings_label" type="Label" parent="Settings/SettingsMargin/Settings_holder"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Random Settings Ngl"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="Settings/SettingsMargin/VBoxContainer"]
+[node name="Settings_panel" type="Panel" parent="Settings/SettingsMargin/Settings_holder"]
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel"]
+[node name="Settings_Screen" type="VBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -26.0
-offset_right = 124.0
-offset_bottom = 26.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Settings_buttons" type="HBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen"]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Gameplay" type="Button" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Gameplay"
+
+[node name="Visuals" type="Button" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Visuals"
+
+[node name="Audio" type="Button" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Audio"
+
+[node name="Info" type="Button" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Info"
+
+[node name="SettingsMenu_Holder" type="HBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer"]
+[node name="Gameplay" type="MarginContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Random Check Box"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Is This Center?"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="CheckButton" type="CheckButton" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+[node name="CheckButton" type="CheckButton" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="CheckButton2" type="CheckButton" parent="Settings/SettingsMargin/VBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+[node name="CheckButton2" type="CheckButton" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder/Gameplay/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_button_down"]
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
-[connection signal="button_down" from="PanelContainer/MarginContainer/VBoxContainer/Save and Quit" to="." method="_on_quit_button_down"]
+[node name="Visuals" type="MarginContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder"]
+visible = false
+layout_mode = 2
+
+[node name="Audio" type="MarginContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder"]
+visible = false
+layout_mode = 2
+
+[node name="Info" type="MarginContainer" parent="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/SettingsMenu_Holder"]
+visible = false
+layout_mode = 2
+
+[connection signal="button_down" from="MainPauseMenu/PauseMenu_Box/Button_List/Resume" to="." method="_on_resume_button_down"]
+[connection signal="button_down" from="MainPauseMenu/PauseMenu_Box/Button_List/Settings" to="." method="_on_settings_button_down"]
+[connection signal="button_down" from="MainPauseMenu/PauseMenu_Box/Button_List/Save and Quit" to="." method="_on_quit_button_down"]
+[connection signal="pressed" from="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Gameplay" to="Settings" method="_on_gameplay_pressed"]
+[connection signal="pressed" from="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Visuals" to="Settings" method="_on_visuals_pressed"]
+[connection signal="pressed" from="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Audio" to="Settings" method="_on_audio_pressed"]
+[connection signal="pressed" from="Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Info" to="Settings" method="_on_info_pressed"]

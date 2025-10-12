@@ -5,3 +5,6 @@ extends Node2D
 
 #Things to do - Create breakable objects that can be placed around the scene
 # - 
+
+#BB CODE TEXT EFFECTS
+#Using RichText with BB code can get fancy text effect like motion and color
