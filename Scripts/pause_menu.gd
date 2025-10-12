@@ -1,7 +1,8 @@
 extends Control
 
-@export var PauseMenu : PanelContainer
-@export var Settings : PanelContainer
+@onready var MainPauseMenu = $MainPauseMenu
+@onready var Settings = $Settings
+@onready var BlurAnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	hide()
@@ -14,36 +15,38 @@ func resume():
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	hide()
-	$AnimationPlayer.play_backwards("blur")
+	BlurAnimationPlayer.play_backwards("Blur")
 	Global.emit_signal("game_resumed")
+	if MainPauseMenu.visible == false:
+		MainPauseMenu.visible = true
+		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
 func pause():
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show()
-	$AnimationPlayer.play("blur")
-	$PanelContainer/MarginContainer/VBoxContainer/Resume.grab_focus()
-
-func toggle_visibility(object):
-	if object.visible:
-		object.visible = false
-	else:
-		object.visible = true
+	BlurAnimationPlayer.play("Blur")
+	$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
 func escapeTest():
 	if Input.is_action_just_pressed("escape") and !get_tree().paused:
 		pause()
 	elif Input.is_action_just_pressed("escape") or Input.is_action_just_pressed("ui_cancel") and get_tree().paused:
-		resume()
+		if Settings.visible:
+			Settings.visible = false
+			MainPauseMenu.visible = true
+			$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
+		else:
+			resume()
 
 func _on_resume_button_down() -> void:
 	resume()
-	SoundLibrary.play_random_death()
 
 func _on_settings_button_down() -> void:
-	SoundLibrary.play_random_death()
-
+	if MainPauseMenu.visible:
+		MainPauseMenu.visible = false
+	Settings.visible = true
+	$Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Gameplay.grab_focus()
 
 func _on_quit_button_down() -> void:
-	SoundLibrary.play_random_death()
 	get_tree().quit()
