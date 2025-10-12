@@ -10,6 +10,9 @@ var playerAlive: bool
 
 var pausedGame: bool
 
+@export var maxHealth = 5
+@onready var currentHealth: int = maxHealth
+
 signal game_resumed
 
 func _ready() -> void:

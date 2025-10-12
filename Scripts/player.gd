@@ -13,6 +13,7 @@ extends CharacterBody2D
 ## The four possible character states and the character's current state
 
 signal healthChanged
+
 #signal pausedGame  #the Paused state of the game
 
 #Global.game_resumed.connect(_on_game_resumed)
@@ -53,8 +54,8 @@ var look_dir: Vector2 = Vector2.RIGHT
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 
 #Health Variables
-@onready var currentHealth: int = maxHealth
-@export var maxHealth = 5
+#@onready var currentHealth: int = maxHealth
+#@export var maxHealth = 5
 
 var health_min = 0
 var alive: bool = true
@@ -478,20 +479,20 @@ func _on_invincibility_timer_timeout() -> void:
 	damage_check()
 
 func damage():
-	currentHealth -= 1
+	Global.currentHealth -= 1
 	SoundLibrary.play_random_hit()
 	hit_flash_animation_player.play("hit_flash")
-	healthChanged.emit(currentHealth)
+	healthChanged.emit(Global.currentHealth)
 	knockback()
-	if currentHealth > 0:
+	if Global.currentHealth > 0:
 		invincibility_timer.start()
 		invincibility = true
 		set_collision_mask_value(2, false)
 		set_collision_layer_value(2, false)
 		
-	if currentHealth <= 0:
+	if Global.currentHealth <= 0:
 		SoundLibrary.play_random_death()
-		currentHealth = maxHealth
+		Global.currentHealth = Global.maxHealth
 		print("Dead")
 	
 func knockback():
@@ -532,6 +533,3 @@ func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		area.break_dmg(attack)
-
-#func _on_pogo_timer_timeout() -> void:
-	#pogoing = false

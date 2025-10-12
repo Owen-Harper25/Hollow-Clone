@@ -4,7 +4,7 @@ extends Node2D
 @onready var player = $Player
 
 func _ready() -> void:
-	heartsContainer.setMaxHearts(player.maxHealth)
-	heartsContainer.updateHearts(player.currentHealth)
+	heartsContainer.setMaxHearts(Global.maxHealth)
+	heartsContainer.updateHearts(Global.currentHealth)
 	player.healthChanged.connect(heartsContainer.updateHearts)
 	$CanvasLayer.visible = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://jip7uc7rsksu"]
 
-[ext_resource type="Script" uid="uid://bok0lqssuwxv8" path="res://Scenes/bench.gd" id="1_rgxpg"]
+[ext_resource type="Script" uid="uid://bok0lqssuwxv8" path="res://Scripts/bench.gd" id="1_rgxpg"]
 [ext_resource type="Texture2D" uid="uid://bm2c1hh2ucubx" path="res://Assets/Sprites/Owen Art/Bench.png" id="2_lwohs"]
 [ext_resource type="PackedScene" uid="uid://cyowr518ht03d" path="res://Scenes/interactable.tscn" id="3_2j4nf"]
 
