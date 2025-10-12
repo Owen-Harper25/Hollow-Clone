@@ -9,5 +9,5 @@ func _ready() -> void:
 			
 func _on_interact():
 	if Interactable.player:
-		Interactable.player.currentHealth = 5
+		Interactable.player.currentHealth = Interactable.player.maxHealth
 		Interactable.player.healthChanged.emit(Interactable.player.currentHealth)
