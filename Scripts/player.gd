@@ -39,9 +39,6 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @export var attack_cooldown: float = 1.0  # Attack cooldown time
 @onready var attack_timer: Timer = $"Timers/Attack Timer"  # Timer to control attack duration
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
-@onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
-
-#New Attck Variables
 @onready var AttackParent: Node2D = $Attack
 @onready var AttackSprite: Sprite2D = $Attack/Sprite2D
 @onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
@@ -51,12 +48,12 @@ var attack_duration_timer: float = 0.0
 var look_dir: Vector2 = Vector2.RIGHT
 @export var attack_dmg: int = 1  # damage
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
+var pogo_power = -300
 
 #Health Variables
 @export var maxHealth = 5
 var currentHealth: int = maxHealth
-
-
+@onready var invincibility_timer: Timer = $Timers/InvincibilityTimer
 var health_min = 0
 var alive: bool = true
 
@@ -274,6 +271,7 @@ func _attack_logic(delta: float) -> void:
 			SoundLibrary.play_random_dash()
 			can_attack = false
 			attack_timer.start()
+			
 			if facing_direction == Vector2.RIGHT:
 				AttackParent.rotation_degrees = 0
 			elif facing_direction == Vector2.LEFT:
@@ -299,7 +297,7 @@ func _attack_logic(delta: float) -> void:
 			var attack_modulate_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 			attack_modulate_tween.tween_property(AttackSprite, "modulate:a", 1.0, TotalAttackDuration*0.1)
 			attack_modulate_tween.chain().tween_property(AttackSprite, "modulate:a", 0.0, TotalAttackDuration*0.9)
-			
+		
 		else:
 			attack_duration_timer = max(0.0, attack_duration_timer - delta)
 			if attack_duration_timer == 0.0:
@@ -474,9 +472,10 @@ func _on_attack_timer_timeout() -> void:
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
-#func _on_hurt_box_area_entered(area):
+func _on_hurt_box_area_entered(_area):
 	#if area.name == "hitBox" and dash_immunity == false and invincibility == false:
 		#damage()
+	pass
 
 func _on_invincibility_timer_timeout() -> void:
 	invincibility = false
@@ -489,7 +488,6 @@ func damage():
 	SoundLibrary.play_random_hit()
 	hit_flash_animation_player.play("hit_flash")
 	healthChanged.emit(currentHealth)
-	#apply_knockback()
 	if currentHealth > 0:
 		invincibility_timer.start()
 		invincibility = true
@@ -514,16 +512,20 @@ func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 		return
 	
 	if body.is_in_group("Enemy") and body.has_method("take_damage") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
+		var knockback_direction = (body.global_position - global_position).normalized()
 		attack_duration_timer = 0.1
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
-		velocity.y = -300
-	
+		velocity.y = pogo_power
+		body.apply_knockback(knockback_direction, 50, 0.08)
+		
 	elif body.is_in_group("Enemy") and body.has_method("take_damage"):
+		var knockback_direction = (body.global_position - global_position).normalized()
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
+		body.apply_knockback(knockback_direction, 50, 0.08)
 
 func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Breakable") and area.has_method("break_dmg"):

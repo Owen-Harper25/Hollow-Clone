@@ -9,7 +9,8 @@ class_name Red_Knight
 @export var speed: float = 20.00
 @export var knockback_resistence: float = 1.00 # 1 is 0% knockback resistence and 0 is 100% knockback resistence so 0.5 would be 50% resistence
 var health_min: int = 0
-
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 var dir: Vector2
 var player: CharacterBody2D
 const gravity = 300
@@ -25,6 +26,13 @@ func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = 0
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
+		else:
+			move_and_slide()
 	
 	player = Global.playerBody
 	
@@ -91,7 +99,10 @@ func choose(array):
 	array.shuffle()
 	return array.front()
 
-
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
+	
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body == player:
 		is_redknight_chase = true
