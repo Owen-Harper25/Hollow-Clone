@@ -22,6 +22,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_bagqn"]
 length = 0.001
@@ -37,6 +49,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dq33m"]
 _data = {
@@ -49,7 +73,7 @@ script = ExtResource("1_bagqn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cjfl1")
-hframes = 3
+hframes = 4
 
 [node name="Interactable" parent="." instance=ExtResource("2_bagqn")]
 interact_name = "Open Chest"
@@ -64,4 +88,11 @@ libraries = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-8, 8, 8, 8, 8, 1, 5, 1, 3, 1, -4, 1, -6, 1, -8, 1)
+polygon = PackedVector2Array(-8, 8, 8, 8, 8, 1, 5, 1, 5, 7, -6, 7, -6, 1, -8, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+z_index = 15
+texture = ExtResource("1_cjfl1")
+hframes = 4
+frame = 3

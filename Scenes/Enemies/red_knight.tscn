@@ -320,7 +320,6 @@ scale = Vector2(0.28800017, 0.36800003)
 shape = SubResource("CapsuleShape2D_jr21u")
 
 [node name="detectionZone" type="Area2D" parent="."]
-visible = false
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionZone"]

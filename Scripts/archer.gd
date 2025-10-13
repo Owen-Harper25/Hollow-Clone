@@ -25,6 +25,14 @@ var is_archer_chase: bool = false
 var is_roaming: bool = true
 
 func _process(delta: float) -> void:
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
+		else:
+			pass
+	 
 	if !is_on_floor():
 		velocity.y += gravity * delta
 		velocity.x = 0

@@ -330,6 +330,5 @@ libraries = {
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
 [connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]
-[connection signal="body_exited" from="hitBox" to="." method="_on_hit_box_body_exited"]
 [connection signal="body_entered" from="detectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="detectionZone" to="." method="_on_detection_zone_body_exited"]
