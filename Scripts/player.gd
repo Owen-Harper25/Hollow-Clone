@@ -14,9 +14,8 @@ extends CharacterBody2D
 
 signal healthChanged
 
-#signal pausedGame  #the Paused state of the game
-
-#Global.game_resumed.connect(_on_game_resumed)
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 
 enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
 
@@ -54,8 +53,9 @@ var look_dir: Vector2 = Vector2.RIGHT
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 
 #Health Variables
-@onready var currentHealth: int = maxHealth
 @export var maxHealth = 5
+var currentHealth: int = maxHealth
+
 
 var health_min = 0
 var alive: bool = true
@@ -234,7 +234,13 @@ func physics_tick(delta: float) -> void:
 		
 		move_and_slide()
 		return  # skip normal physics while dashing
-		
+	if knockback_timer > 0.0:
+		velocity = knockback
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			knockback = Vector2.ZERO
+		else:
+			move_and_slide()
 	var inputs: Dictionary = get_inputs()
 	handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released)
 	handle_sprint(inputs.sprint_strength)
@@ -483,7 +489,7 @@ func damage():
 	SoundLibrary.play_random_hit()
 	hit_flash_animation_player.play("hit_flash")
 	healthChanged.emit(currentHealth)
-	knockback()
+	#apply_knockback()
 	if currentHealth > 0:
 		invincibility_timer.start()
 		invincibility = true
@@ -495,21 +501,24 @@ func damage():
 		currentHealth = maxHealth
 		print("Dead")
 	
-func knockback():
-	var knockbackDirection = -velocity.normalized() * MAX_SPEED * 1.5
-	velocity = knockbackDirection
-	move_and_slide()
-	if velocity == Vector2.ZERO:
-		if facing_direction == Vector2.RIGHT:
-			var push_dir = global_position.normalized()
-			global_position += push_dir * 8.0  # move out a few pixels
-			velocity = push_dir * -200.0        # add knockback velocity
-		if facing_direction == Vector2.LEFT:
-			var push_dir = global_position.normalized()
-			global_position += push_dir * 8.0  # move out a few pixels
-			velocity = push_dir * 200.0   
+#func knockback():
+	#var knockbackDirection = -velocity.normalized() * MAX_SPEED * 1.5
+	#velocity = knockbackDirection
+	#move_and_slide()
+	#if velocity == Vector2.ZERO:
+		#if facing_direction == Vector2.RIGHT:
+			#var push_dir = global_position.normalized()
+			#global_position += push_dir * 8.0  # move out a few pixels
+			#velocity = push_dir * -200.0        # add knockback velocity
+		#if facing_direction == Vector2.LEFT:
+			#var push_dir = global_position.normalized()
+			#global_position += push_dir * 8.0  # move out a few pixels
+			#velocity = push_dir * 200.0   
 
-
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
+	
 func _on_resume_timer_timeout() -> void:
 	pause_jump = false
 

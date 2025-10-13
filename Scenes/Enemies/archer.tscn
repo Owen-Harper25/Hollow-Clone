@@ -304,7 +304,6 @@ autostart = true
 
 [node name="hitBox" type="Area2D" parent="."]
 scale = Vector2(0.99999994, 0.99999994)
-collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(0, 1.0000001)

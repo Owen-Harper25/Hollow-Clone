@@ -62,3 +62,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Interactable" parent="." instance=ExtResource("7_71d4j")]
+visible = false
+position = Vector2(0, 378)
