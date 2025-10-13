@@ -5,7 +5,8 @@ class_name Archer
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_dissolve_animation_player: AnimationPlayer = $AnimationPlayer
-
+var knockback: Vector2 = Vector2.ZERO
+var knockback_timer: float = 0.0
 @export var damage_to_deal = 1
 @export var health: int = 5
 @export var speed: float = 20.00
@@ -42,9 +43,9 @@ func take_damage(attack: Attack):
 	if health <= health_min:
 		health = health_min
 		dead = true
-	if !dead:
-		var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
-		velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
+	#if !dead:
+		#var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
+		#velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
 
 func move(delta):
 	if !dead:
@@ -91,6 +92,10 @@ func _on_direction_timer_timeout() -> void:
 func choose(array):
 	array.shuffle()
 	return array.front()
+
+func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
+	knockback = direction * force
+	knockback_timer = knockback_duration
 
 func _on_detection_zone_body_entered(body: Node2D) -> void:
 	if body == player: 

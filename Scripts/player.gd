@@ -518,14 +518,14 @@ func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
 		velocity.y = pogo_power
-		body.apply_knockback(knockback_direction, 50, 0.08)
+		body.apply_knockback(knockback_direction, 50, 0.5)
 		
 	elif body.is_in_group("Enemy") and body.has_method("take_damage"):
 		var knockback_direction = (body.global_position - global_position).normalized()
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
-		body.apply_knockback(knockback_direction, 50, 0.08)
+		body.apply_knockback(knockback_direction, 50, 0.5)
 
 func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Breakable") and area.has_method("break_dmg"):

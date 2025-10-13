@@ -23,17 +23,17 @@ var is_redknight_chase: bool = false
 var is_roaming: bool = true
 
 func _process(delta: float) -> void:
-	if !is_on_floor():
-		velocity.y += gravity * delta
-		velocity.x = 0
+
 	if knockback_timer > 0.0:
 		velocity = knockback
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
 			knockback = Vector2.ZERO
 		else:
-			move_and_slide()
-	
+			pass
+	if !is_on_floor():
+		velocity.y += gravity * delta
+		velocity.x = 0	
 	player = Global.playerBody
 	
 	move(delta)
@@ -49,9 +49,7 @@ func take_damage(attack: Attack):
 		if health <= health_min:
 			health = health_min
 			dead = true
-		if !dead:
-			var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
-			velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
+
 
 func move(delta: float):
 	if !dead:

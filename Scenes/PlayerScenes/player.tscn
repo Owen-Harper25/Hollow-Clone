@@ -182,6 +182,7 @@ radius = 3.0
 height = 13.6
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 1
 collision_mask = 15
 script = ExtResource("1_onrkg")
 

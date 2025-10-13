@@ -32,7 +32,7 @@ func play_random_death():
 	random_sound.play()
 
 func play_random_pickup():
-	item_short[0].play()
+	$"Secret_Sounds/Secret Found Short".play()
 
 func play_potion():
 	potion[0].play()
