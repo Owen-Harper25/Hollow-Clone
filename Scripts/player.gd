@@ -265,7 +265,7 @@ func damage_check():
 	for result in results:
 		var area = result.collider
 		if area.is_in_group("Enemy"):
-			_on_hurt_box_area_entered(area)
+			#_on_hurt_box_area_entered(area)
 			damage()
 
 func _attack_logic(delta: float) -> void:
@@ -474,9 +474,9 @@ func _on_attack_timer_timeout() -> void:
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
-func _on_hurt_box_area_entered(area):
-	if area.name == "hitBox" and dash_immunity == false and invincibility == false:
-		damage()
+#func _on_hurt_box_area_entered(area):
+	#if area.name == "hitBox" and dash_immunity == false and invincibility == false:
+		#damage()
 
 func _on_invincibility_timer_timeout() -> void:
 	invincibility = false
