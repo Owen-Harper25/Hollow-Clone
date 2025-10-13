@@ -103,3 +103,9 @@ func _on_detection_zone_body_entered(body: Node2D) -> void:
 func _on_detection_zone_body_exited(body: Node2D) -> void:
 	if body == player: 
 		is_redknight_chase = false
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+	if body == player and player.is_dashing == false:
+		var knockback_direction = (body.global_position - global_position).normalized()
+		body.apply_knockback(knockback_direction, 100, 0.12)
+		player.damage()

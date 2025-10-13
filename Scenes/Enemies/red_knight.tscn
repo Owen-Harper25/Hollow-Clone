@@ -313,7 +313,6 @@ shape = SubResource("CapsuleShape2D_m8i00")
 autostart = true
 
 [node name="hitBox" type="Area2D" parent="."]
-collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
 position = Vector2(0, 1)
@@ -340,5 +339,7 @@ libraries = {
 }
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="detectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="detectionZone" to="." method="_on_detection_zone_body_exited"]
