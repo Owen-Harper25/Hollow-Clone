@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dvhj3i2714nht"]
+[gd_scene load_steps=20 format=4 uid="uid://dvhj3i2714nht"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_nlqrh"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/Enviromentals/breakable_lanturn.tscn" id="8_aur7v"]
 [ext_resource type="TileSet" uid="uid://cqnw1qkbbw853" path="res://Scenes/Levels/GroundSet.tres" id="8_ngxpw"]
 [ext_resource type="PackedScene" uid="uid://dpaaautu0me0m" path="res://Scenes/Enemies/archer.tscn" id="10_o5ofx"]
+[ext_resource type="PackedScene" uid="uid://brtv3n7ugwtm3" path="res://Scenes/Enemies/flying_enemy.tscn" id="12_8nmnw"]
 [ext_resource type="PackedScene" uid="uid://jip7uc7rsksu" path="res://Scenes/bench.tscn" id="12_nlqrh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trw0a"]
@@ -940,6 +941,8 @@ position = Vector2(-104, -61)
 
 [node name="Archer" parent="Enemies" instance=ExtResource("10_o5ofx")]
 position = Vector2(492.99994, -229)
+
+[node name="Flying_enemy" parent="Enemies" instance=ExtResource("12_8nmnw")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
