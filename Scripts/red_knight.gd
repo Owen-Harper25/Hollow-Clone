@@ -1,11 +1,9 @@
 extends CharacterBody2D
 
 class_name Red_Knight
-
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_dissolve_animation_player: AnimationPlayer = $AnimationPlayer
-
 @export var damage_to_deal = 1
 @export var health: int = 5
 @export var speed: float = 20.00
@@ -23,8 +21,6 @@ var player_in_area: bool = false
 var is_redknight_chase: bool = false
 var is_roaming: bool = true
 
-
-
 func _process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
@@ -37,16 +33,17 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 func take_damage(attack: Attack):
-	taking_damage = true
-	health -= attack.attack_dmg
-	hit_flash_animation_player.play("Hurt")
-	SoundLibrary.play_random_hit()
-	if health <= health_min:
-		health = health_min
-		dead = true
-	if !dead:
-		var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
-		velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
+	if health > 0:
+		taking_damage = true
+		health -= attack.attack_dmg
+		hit_flash_animation_player.play("Hurt")
+		SoundLibrary.play_random_hit()
+		if health <= health_min:
+			health = health_min
+			dead = true
+		if !dead:
+			var knockback_dir = global_position.direction_to(player.position) * (attack.knockback * knockback_resistence) * -1
+			velocity.x = knockback_dir.x # We NEED to work on this so its not bad knockback anymore.
 
 func move(delta: float):
 	if !dead:
@@ -105,7 +102,7 @@ func _on_detection_zone_body_exited(body: Node2D) -> void:
 		is_redknight_chase = false
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
-	if body == player and player.is_dashing == false:
+	if body == player and player.is_dashing == false and player.invincibility == false:
 		var knockback_direction = (body.global_position - global_position).normalized()
 		body.apply_knockback(knockback_direction, 100, 0.12)
 		player.damage()

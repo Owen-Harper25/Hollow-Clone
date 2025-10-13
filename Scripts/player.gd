@@ -45,7 +45,7 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var AttackParent: Node2D = $Attack
 @onready var AttackSprite: Sprite2D = $Attack/Sprite2D
 @onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
-var attack_distance: float = 8.0
+var attack_distance: float = 10.0
 var TotalAttackDuration: float = 0.26
 var attack_duration_timer: float = 0.0
 var look_dir: Vector2 = Vector2.RIGHT
@@ -501,19 +501,6 @@ func damage():
 		currentHealth = maxHealth
 		print("Dead")
 	
-#func knockback():
-	#var knockbackDirection = -velocity.normalized() * MAX_SPEED * 1.5
-	#velocity = knockbackDirection
-	#move_and_slide()
-	#if velocity == Vector2.ZERO:
-		#if facing_direction == Vector2.RIGHT:
-			#var push_dir = global_position.normalized()
-			#global_position += push_dir * 8.0  # move out a few pixels
-			#velocity = push_dir * -200.0        # add knockback velocity
-		#if facing_direction == Vector2.LEFT:
-			#var push_dir = global_position.normalized()
-			#global_position += push_dir * 8.0  # move out a few pixels
-			#velocity = push_dir * 200.0   
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force
@@ -527,6 +514,7 @@ func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 		return
 	
 	if body.is_in_group("Enemy") and body.has_method("take_damage") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
+		attack_duration_timer = 0.1
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
