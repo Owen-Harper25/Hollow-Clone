@@ -10,9 +10,10 @@ radius = 2.0
 radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_whwud"]
-radius = 20.677418
+radius = 2.0
 
 [node name="Coin" type="RigidBody2D"]
+collision_layer = 0
 script = ExtResource("1_ixiiq")
 
 [node name="Area2D2" type="Area2D" parent="."]
