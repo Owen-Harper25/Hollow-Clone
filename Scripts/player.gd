@@ -511,7 +511,7 @@ func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 	if body == self:
 		return
 	
-	if body.is_in_group("Enemy") and body.has_method("take_damage") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
+	if body.is_in_group("Enemy") and body.is_in_group("can_pogo") and facing_direction == Vector2.DOWN:
 		var knockback_direction = (body.global_position - global_position).normalized()
 		attack_duration_timer = 0.1
 		var attack = Attack.new()
