@@ -13,91 +13,65 @@ var can_pickup: bool = false
 
 func _ready():
 	player = Global.playerBody
-
-	# Apply random burst and spin
 	var random_angle = randf_range(-PI / 3, -2 * PI / 3)
 	var direction = Vector2(cos(random_angle), sin(random_angle))
 	apply_impulse(direction * spawn_force)
 	apply_torque_impulse(randf_range(-torque_force, torque_force))
-
-	# Disable pickup for a short time
 	can_pickup = false
 	$Area2D.monitoring = false
 	await get_tree().create_timer(pickup_delay).timeout
 	can_pickup = true
 	$Area2D.monitoring = true
-
-
+		
+		
 func _physics_process(_delta: float) -> void:
 	if collected or not player:
 		return
-
 	var distance = global_position.distance_to(player.global_position)
 	in_range = distance <= attraction_range
-
+	
 	if in_range and can_pickup:
 		var dir_to_player = (player.global_position - global_position).normalized()
 		var pull_strength = clamp(1.0 - (distance / attraction_range), 0.2, 1.0)
 		linear_velocity = dir_to_player * speed * pull_strength
-
-
+		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and can_pickup and not collected:
 		collected = true
 		_pickup_effect()
-
-
+		
+		
 func _pickup_effect():
-	# Stop physics
 	linear_velocity = Vector2.ZERO
 	set_deferred("freeze", true)
 	set_physics_process(false)
-
-	# --- Sparkle particles (GPUParticles2D) ---
+		
 	var sparkle := GPUParticles2D.new()
-	# configure basic particle node
 	sparkle.amount = 5
 	sparkle.one_shot = true
 	sparkle.lifetime = 0.4
 	sparkle.emitting = true
-	# slight visual tint (gold)
 	sparkle.modulate = Color(1.0, 0.9, 0.4, 1.0)
-	# assign texture if you have one
 	sparkle.texture = preload("res://Assets/Sprites/Owen Art/plus particle.png")
-
-	# create and assign a ParticleProcessMaterial with properly-typed fields
 	var mat := ParticleProcessMaterial.new()
-	# gravity must be Vector3 for GPUParticles2D in Godot 4
 	mat.gravity = Vector3(0, 300, 0)
-	# use min/max initial velocity for spread
 	mat.initial_velocity_min = 80.0
 	mat.initial_velocity_max = 120.0
-	# a little randomness in direction
-	mat.direction = Vector3(0, -1, 0) # mostly up in 2D (y negative)
-	mat.spread = 1.2                   # radians spread
+	mat.direction = Vector3(0, -1, 0)
+	mat.spread = 1.2
 	sparkle.process_material = mat
-
-	# add the sparkle node at the coin's position (local origin is fine)
 	add_child(sparkle)
 	sparkle.position = Vector2.ZERO
-
-	# --- Pickup shrink animation ---
+	
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ZERO, 0.2)\
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.tween_callback(func ():
-		queue_free()
-	)
-
-	# --- Play sound ---
+	tween.tween_property(self, "scale", Vector2.ZERO, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func ():queue_free())
+	
 	var sfx = AudioStreamPlayer2D.new()
-	sfx.stream = preload("res://Assets/SFX/Secret Found Short.mp3") # replace with your sound
+	sfx.stream = preload("res://Assets/SFX/Secret Found Short.mp3")
 	add_child(sfx)
 	sfx.play()
-
-
-
-
+	
 #extends RigidBody2D
 #
 #var player: CharacterBody2D
