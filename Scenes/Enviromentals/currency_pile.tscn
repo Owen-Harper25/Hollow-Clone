@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnrm085du1680"]
+
+[ext_resource type="Script" uid="uid://bqkbhjcbedh1p" path="res://Scripts/currency_pile.gd" id="1_hy7aj"]
+[ext_resource type="Texture2D" uid="uid://divs23sseckni" path="res://Assets/Sprites/Owen Art/Currency Pile.png" id="2_a3ntl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3ntl"]
+
+[node name="Currency Pile" type="Area2D" groups=["Breakable", "can_pogo"]]
+script = ExtResource("1_hy7aj")
+object_health = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_a3ntl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_a3ntl")
+hframes = 4
+frame = 1
