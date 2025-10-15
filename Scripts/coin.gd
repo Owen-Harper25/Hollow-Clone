@@ -76,8 +76,6 @@ func _pickup_effect():
 #@onready var in_range: bool = false
 #@export var speed: float = 20.0
 #var dir: Vector2
-#
-## --- Spawn animation settings ---
 #@export var float_height: float = 16.0    # how high the coin jumps
 #@export var float_time: float = 0.4       # how long it floats up
 #@export var spin_speed: float = 360.0     # rotation speed during float
@@ -89,10 +87,8 @@ func _pickup_effect():
 	#start_y = position.y
 	#linear_velocity = Vector2.ZERO
 #
-	## Disable gravity during spawn animation for consistency
 	#gravity_scale = 0
 #
-	## Play float + spin animation
 	#_spawn_float_animation()
 #
 #
