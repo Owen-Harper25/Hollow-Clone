@@ -14,6 +14,11 @@ var knockback_timer: float = 0.0
 var dir: Vector2
 var player: CharacterBody2D
 const gravity = 300
+@onready var coin_scene = preload("res://Scenes/Enviromentals/coin.tscn")
+@export var coin_spread_angle: float = PI / 3
+@export var coin_min_speed: float = 10.0
+@export var coin_max_speed: float = 20.0
+
 
 var dead: bool = false
 var is_dealing_damage: bool = false
@@ -81,11 +86,21 @@ func handle_animation():
 		set_collision_mask_value(2, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
-		await get_tree().create_timer(2).timeout
+		var instance = coin_scene.instantiate()
+		instance.position = global_position
+		var angle = randf_range(-coin_spread_angle/2, coin_spread_angle/2)
+		var direction = Vector2(cos(angle), sin(angle))
+		var cspeed = randf_range(coin_min_speed, coin_max_speed)
+		
+		
+		if instance is RigidBody2D:
+			instance.linear_velocity = direction * cspeed
+		get_tree().current_scene.call_deferred("add_child", instance)
 		handleDeath()
 		
 func handleDeath():
-	self.queue_free()
+	#self.queue_free()
+	pass
 
 func _on_direction_timer_timeout() -> void:
 	$DirectionTimer.wait_time = choose([1.5, 2.0, 2.5])
