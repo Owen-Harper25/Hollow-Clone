@@ -99,7 +99,7 @@ func handle_animation():
 		handleDeath()
 		
 func handleDeath():
-	#self.queue_free()
+	self.queue_free()
 	pass
 
 func _on_direction_timer_timeout() -> void:

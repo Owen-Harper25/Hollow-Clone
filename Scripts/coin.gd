@@ -25,11 +25,9 @@ func _ready():
 		
 		
 func _physics_process(_delta: float) -> void:
-	print(in_range)
 	if collected or not player:
 		return
 	var distance = global_position.distance_to(player.global_position)
-	#in_range = distance <= attraction_range
 	
 	if in_range and can_pickup:
 		var dir_to_player = (player.global_position - global_position).normalized()
@@ -41,7 +39,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		collected = true
 		_pickup_effect()
 		
-		
 func _pickup_effect():
 	linear_velocity = Vector2.ZERO
 	set_deferred("freeze", true)
@@ -52,7 +49,7 @@ func _pickup_effect():
 	sparkle.one_shot = true
 	sparkle.lifetime = 0.4
 	sparkle.emitting = true
-	sparkle.modulate = Color(1.0, 0.9, 0.4, 5.0)
+	sparkle.modulate = Color(0.596, 0.518, 0.0, 0.875)
 	sparkle.texture = preload("res://Assets/Sprites/Owen Art/plus particle.png")
 	var mat := ParticleProcessMaterial.new()
 	mat.gravity = Vector3(0, 300, 0)
@@ -66,7 +63,7 @@ func _pickup_effect():
 	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.tween_callback(func ():queue_free())
+	tween.tween_callback(func():queue_free())
 	
 	var sfx = AudioStreamPlayer2D.new()
 	sfx.stream = preload("res://Assets/SFX/Secret Found Short.mp3")
