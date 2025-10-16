@@ -149,6 +149,7 @@ func _ready() -> void:
 	Global.game_resumed.connect(_on_game_resumed)
 	AttackSprite.modulate.a = 0.0
 	AttackArea2D.get_node("CollisionShape2D").disabled = true
+	Global.connect("pogo_now", Callable(self, "_on_pogo_now"))
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -508,6 +509,7 @@ func _on_resume_timer_timeout() -> void:
 	pause_jump = false
 
 func _on_attack_area_2d_body_entered(body: Node2D) -> void:
+	print(body)
 	if body == self:
 		return
 	
@@ -526,9 +528,15 @@ func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 		attack.attack_dmg = attack_dmg
 		body.take_damage(attack)
 		body.apply_knockback(knockback_direction, 50, 0.5)
-
+	
+	elif body.is_in_group("can_pogo"):
+		velocity.y = pogo_power
+		
 func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Breakable") and area.has_method("break_dmg"):
 		var attack = Attack.new()
 		attack.attack_dmg = attack_dmg
 		area.break_dmg(attack)
+
+func _on_pogo_now() -> void:
+	velocity.y = pogo_power
