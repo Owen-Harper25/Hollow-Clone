@@ -43,8 +43,8 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var AttackSprite: Sprite2D = $Attack/Sprite2D
 @onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
 var attack_distance: float = 10.0
-var TotalAttackDuration: float = 0.26
-var attack_duration_timer: float = 0.0
+var TotalAttackDuration: float = 0.3
+var attack_duration_timer: float = 0.2
 var look_dir: Vector2 = Vector2.RIGHT
 @export var attack_dmg: int = 1  # damage
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
@@ -290,7 +290,7 @@ func _attack_logic(delta: float) -> void:
 					AttackParent.rotation_degrees = 0   # face right2
 
 			AttackArea2D.get_node("CollisionShape2D").disabled = false
-			attack_duration_timer = TotalAttackDuration
+			#attack_duration_timer = TotalAttackDuration
 			AttackSprite.position.x = 0.0
 			
 			#var attack_pos_tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
