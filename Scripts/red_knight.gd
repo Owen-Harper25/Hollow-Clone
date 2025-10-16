@@ -81,22 +81,24 @@ func handle_animation():
 	elif dead and is_roaming:
 		is_roaming = false
 		remove_child($hitBox)
-		death_dissolve_animation_player.play("Death Disolve")
+		
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
+
 		var instance = coin_scene.instantiate()
 		instance.position = global_position
-		var angle = randf_range(-coin_spread_angle/2, coin_spread_angle/2)
+		var angle = randf_range(-coin_spread_angle / 2, coin_spread_angle / 2)
 		var direction = Vector2(cos(angle), sin(angle))
 		var cspeed = randf_range(coin_min_speed, coin_max_speed)
-		
-		
+		death_dissolve_animation_player.play("Death Disolve")
 		if instance is RigidBody2D:
 			instance.linear_velocity = direction * cspeed
 		get_tree().current_scene.call_deferred("add_child", instance)
+		await death_dissolve_animation_player.animation_finished
 		handleDeath()
+
 		
 func handleDeath():
 	self.queue_free()
