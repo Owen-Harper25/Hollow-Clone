@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dvhj3i2714nht"]
+[gd_scene load_steps=23 format=4 uid="uid://dvhj3i2714nht"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_nlqrh"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="3_aur7v"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://jip7uc7rsksu" path="res://Scenes/bench.tscn" id="12_nlqrh"]
 [ext_resource type="PackedScene" uid="uid://dgjkmwpi7vjek" path="res://Scenes/chest.tscn" id="14_ngxpw"]
 [ext_resource type="PackedScene" uid="uid://bnrm085du1680" path="res://Scenes/Enviromentals/currency_pile.tscn" id="15_trw0a"]
+[ext_resource type="PackedScene" uid="uid://c4ftutkblxwk3" path="res://Scenes/Enviromentals/spikes.tscn" id="16_tjcye"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trw0a"]
 texture = ExtResource("6_lp2uw")
@@ -960,3 +961,12 @@ collision_mask = 67
 
 [node name="Currency Pile" parent="." instance=ExtResource("15_trw0a")]
 position = Vector2(-138, 56)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("16_tjcye")]
+position = Vector2(-376, 72)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("16_tjcye")]
+position = Vector2(-392, 72)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("16_tjcye")]
+position = Vector2(-408, 72)
