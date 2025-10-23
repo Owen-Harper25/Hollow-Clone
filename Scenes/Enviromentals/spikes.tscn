@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4ftutkblxwk3"]
 
-[ext_resource type="Script" uid="uid://bk7j6cqbndtho" path="res://Scenes/Enviromentals/spikes.gd" id="1_6lh45"]
+[ext_resource type="Script" uid="uid://bk7j6cqbndtho" path="res://Scripts/spikes.gd" id="1_6lh45"]
 [ext_resource type="Texture2D" uid="uid://dtb4m7ekc4dcb" path="res://Assets/Sprites/Owen Art/spikes.png" id="1_14tla"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lh45"]

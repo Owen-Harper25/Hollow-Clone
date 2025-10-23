@@ -11,6 +11,7 @@ extends CharacterBody2D
 ## be adjusted to fit your specific needs
 
 ## The four possible character states and the character's current state
+@onready var coin_label: Label = $"../Camera2D/Label"
 
 signal healthChanged
 
@@ -27,6 +28,7 @@ var canSpawnParticle = true
 var DUST_PARTICLE = preload("res://Scenes/PlayerScenes/DustParticle.tscn")
 var DASH_PARTICLE = preload("res://Scenes/PlayerScenes/DashParticle.tscn")
 var paused: bool = false
+var coin_counter = 0
 
 @onready var feet: Marker2D = $Feet
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
@@ -304,6 +306,7 @@ func _attack_logic(delta: float) -> void:
 			if attack_duration_timer == 0.0:
 				AttackArea2D.get_node("CollisionShape2D").disabled = true
 
+
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
 	if velocity.y == 0:
@@ -509,7 +512,6 @@ func _on_resume_timer_timeout() -> void:
 	pause_jump = false
 
 func _on_attack_area_2d_body_entered(body: Node2D) -> void:
-	print(body)
 	if body == self:
 		return
 	
@@ -540,3 +542,13 @@ func _on_attack_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_pogo_now() -> void:
 	velocity.y = pogo_power
+		
+func pickupcoin():
+	coin_counter += 1
+	coin_label.text = str(coin_counter)
+	fade_label()
+	
+func fade_label():
+	var tween := create_tween()
+	coin_label.modulate.a = 1.0
+	tween.tween_property(coin_label, "modulate:a", 0.0, 1.0).set_delay(0.5)
