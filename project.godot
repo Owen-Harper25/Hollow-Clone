@@ -13,7 +13,6 @@ config_version=5
 config/name="Hollow Knight"
 run/main_scene="uid://bycbvvxvjb035"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Assets/Sprites/icon.svg"
 
 [autoload]
 
