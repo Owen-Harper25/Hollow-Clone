@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c63wiwox50y31"
-path="res://.godot/imported/Copper.png-b45672547441826f8be85a3b89be182d.ctex"
+uid="uid://dyvnwl4ut78a4"
+path="res://.godot/imported/Bio_Cave_TileSet.png-071c186385a762a7c7d68d752a0520ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Copper.png"
-dest_files=["res://.godot/imported/Copper.png-b45672547441826f8be85a3b89be182d.ctex"]
+source_file="res://Scripts/Bio_Cave_TileSet.png"
+dest_files=["res://.godot/imported/Bio_Cave_TileSet.png-071c186385a762a7c7d68d752a0520ae.ctex"]
 
 [params]
 

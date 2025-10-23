@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://70e7gvsn7cu6"]
+
+[ext_resource type="TileSet" uid="uid://cqnw1qkbbw853" path="res://Scenes/Levels/GroundSet.tres" id="1_us8ef"]
+
+[sub_resource type="TileSet" id="TileSet_08cxd"]
+
+[sub_resource type="TileSet" id="TileSet_0jff0"]
+
+[node name="Level_3" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="background" type="TileMapLayer" parent="TileMap"]
+tile_set = SubResource("TileSet_08cxd")
+
+[node name="ground" type="TileMapLayer" parent="TileMap"]
+z_index = 1
+tile_set = ExtResource("1_us8ef")
+
+[node name="foreground" type="TileMapLayer" parent="TileMap"]
+z_index = 2
+tile_set = SubResource("TileSet_0jff0")
+
+[node name="Breakables" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]

@@ -40,7 +40,6 @@ script = ExtResource("1_yqty0")
 [node name="Level_1" parent="Levels" instance=ExtResource("2_fgdfb")]
 
 [node name="Player" parent="." instance=ExtResource("2_mmt5l")]
-z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2.9999998, 2.9999998)
