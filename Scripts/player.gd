@@ -51,6 +51,7 @@ var look_dir: Vector2 = Vector2.RIGHT
 @export var attack_dmg: int = 1  # damage
 @export var breakable_dmg: int = 1 # damage delt to objects that are breakable
 var pogo_power = -300
+var fade_tween: Tween
 
 #Health Variables
 @export var maxHealth = 5
@@ -549,6 +550,8 @@ func pickupcoin():
 	fade_label()
 	
 func fade_label():
-	var tween := create_tween()
+	if fade_tween and fade_tween.is_running():
+		fade_tween.kill()
+	fade_tween = create_tween()
 	coin_label.modulate.a = 1.0
-	tween.tween_property(coin_label, "modulate:a", 0.0, 1.0).set_delay(0.5)
+	fade_tween.tween_property(coin_label, "modulate:a", 0.0, 1.0).set_delay(0.5)
