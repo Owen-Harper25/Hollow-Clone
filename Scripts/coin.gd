@@ -36,6 +36,7 @@ func _physics_process(_delta: float) -> void:
 		
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and can_pickup and not collected:
+		body.pickupcoin()
 		collected = true
 		_pickup_effect()
 		
@@ -43,23 +44,23 @@ func _pickup_effect():
 	linear_velocity = Vector2.ZERO
 	set_deferred("freeze", true)
 	set_physics_process(false)
-		
-	var sparkle := GPUParticles2D.new()
-	sparkle.amount = 5
-	sparkle.one_shot = true
-	sparkle.lifetime = 0.4
-	sparkle.emitting = true
-	sparkle.modulate = Color(0.596, 0.518, 0.0, 0.875)
-	sparkle.texture = preload("res://Assets/Sprites/Owen Art/plus particle.png")
-	var mat := ParticleProcessMaterial.new()
-	mat.gravity = Vector3(0, 300, 0)
-	mat.initial_velocity_min = 80.0
-	mat.initial_velocity_max = 120.0
-	mat.direction = Vector3(0, -1, 0)
-	mat.spread = 1.2
-	sparkle.process_material = mat
-	add_child(sparkle)
-	sparkle.position = Vector2.ZERO
+	
+	#var sparkle:= GPUParticles2D.new()
+	#sparkle.amount = 5
+	#sparkle.one_shot = true
+	#sparkle.lifetime = 0.4
+	#sparkle.emitting = true
+	#sparkle.modulate = Color(0.596, 0.518, 0.0, 0.875)
+	#sparkle.texture = preload("res://Assets/Sprites/Owen Art/plus particle.png")
+	#var mat := ParticleProcessMaterial.new()
+	#mat.gravity = Vector3(0, 300, 0)
+	#mat.initial_velocity_min = 80.0
+	#mat.initial_velocity_max = 120.0
+	#mat.direction = Vector3(0, -1, 0)
+	#mat.spread = 1.2
+	#sparkle.process_material = mat
+	#add_child(sparkle)
+	#sparkle.position = Vector2.ZERO
 	
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)

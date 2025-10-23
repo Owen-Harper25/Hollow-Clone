@@ -40,13 +40,26 @@ script = ExtResource("1_yqty0")
 [node name="Level_1" parent="Levels" instance=ExtResource("2_fgdfb")]
 
 [node name="Player" parent="." instance=ExtResource("2_mmt5l")]
-z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2.9999998, 2.9999998)
 offset = Vector2(0, -30)
 zoom = Vector2(4, 4)
 script = ExtResource("3_fgdfb")
+
+[node name="Label" type="Label" parent="Camera2D"]
+z_index = 20
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 13.333334
+offset_top = -40.0
+offset_right = 53.333336
+offset_bottom = -17.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 6
+text = "0"
+horizontal_alignment = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
