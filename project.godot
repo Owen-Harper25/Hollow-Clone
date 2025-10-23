@@ -35,6 +35,7 @@ Player=""
 Enemy=""
 Breakable=""
 can_pogo=""
+coin=""
 
 [input]
 
