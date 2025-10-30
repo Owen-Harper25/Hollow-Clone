@@ -7,7 +7,7 @@ var minimum_object_health: int = 0
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coin_scene = preload("res://Scenes/Enviromentals/coin.tscn")
 @export var coins_per_hit: int = 3
-@export var coin_spread_angle: float = PI / 3
+@export var coin_spread_angle: float = PI / 2
 @export var coin_min_speed: float = 20.0
 @export var coin_max_speed: float = 70.0
 

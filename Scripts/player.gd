@@ -153,6 +153,7 @@ func _ready() -> void:
 	AttackSprite.modulate.a = 0.0
 	AttackArea2D.get_node("CollisionShape2D").disabled = true
 	Global.connect("pogo_now", Callable(self, "_on_pogo_now"))
+	coin_label.modulate.a = 0.0
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -548,7 +549,8 @@ func pickupcoin():
 	coin_counter += 1
 	coin_label.text = str(coin_counter)
 	fade_label()
-	
+	#fade_label()
+
 func fade_label():
 	if fade_tween and fade_tween.is_running():
 		fade_tween.kill()

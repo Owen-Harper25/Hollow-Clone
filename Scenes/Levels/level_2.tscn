@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bjsu2xyt720j0"]
+[gd_scene load_steps=12 format=4 uid="uid://bjsu2xyt720j0"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="1_ovj6s"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Stringstar Fields/Rocks.png" id="1_smnlx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://firf1k7kqhgi" path="res://Assets/Sprites/Stringstar Fields/Blue Rock.png" id="2_12fag"]
 [ext_resource type="Texture2D" uid="uid://ddhi6cq5oxlbb" path="res://Assets/Sprites/Stringstar Fields/background_2.png" id="3_fphuk"]
 [ext_resource type="TileSet" uid="uid://cqnw1qkbbw853" path="res://Scenes/Levels/GroundSet.tres" id="4_8qsmg"]
+[ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="7_fphuk"]
 
 [sub_resource type="TileSet" id="TileSet_08cxd"]
 
@@ -113,3 +114,19 @@ tile_set = SubResource("TileSet_0jff0")
 [node name="Breakables" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="E" parent="Doors" instance=ExtResource("7_fphuk")]
+position = Vector2(710, 22)
+destination_level_tag = "level_1"
+destination_door_tag = "W"
+spawn_direction = "left"
+
+[node name="Spawn" parent="Doors/E" index="1"]
+position = Vector2(-20, 0)
+
+[node name="spawn_2" type="Marker2D" parent="Doors/E"]
+position = Vector2(-20, 0)
+
+[editable path="Doors/E"]
