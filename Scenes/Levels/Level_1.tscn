@@ -982,10 +982,23 @@ destination_level_tag = "level_2"
 destination_door_tag = "E"
 spawn_direction = "right"
 
-[node name="spawn_1" type="Marker2D" parent="Doors/W"]
-position = Vector2(22, 0)
+[node name="Spawn" parent="Doors/W" index="1"]
+position = Vector2(22, 1)
 
-[node name="Spawn" parent="Doors/W" index="2"]
-position = Vector2(22, 0)
+[node name="spawn_1" type="Marker2D" parent="Doors/W"]
+position = Vector2(22, 1)
+
+[node name="E" parent="Doors" instance=ExtResource("17_k1rx4")]
+position = Vector2(458, 134)
+destination_level_tag = "level_2"
+destination_door_tag = "W"
+spawn_direction = "left"
+
+[node name="Spawn" parent="Doors/E" index="1"]
+position = Vector2(23, 1)
+
+[node name="spawn_1" type="Marker2D" parent="Doors/E"]
+position = Vector2(23, 1)
 
 [editable path="Doors/W"]
+[editable path="Doors/E"]

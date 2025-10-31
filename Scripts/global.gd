@@ -15,7 +15,7 @@ const level_3 = preload("res://Scenes/Levels/level_3.tscn")
 
 var current_level: Node
 var spawn_door_tag: String
-var game_manager: Node # Reference to GameManager (holds UI, player, transition layer)
+var game_manager: Node # Reference to GameManager (UI + Player + Transition)
 
 func _ready() -> void:
 	print("Global ready")
@@ -25,13 +25,10 @@ func load_level(level_tag: String, spawn_tag: String) -> void:
 	var scene_to_load: PackedScene = null
 
 	match level_tag:
-		"level_1":
-			scene_to_load = level_1
-		"level_2":
-			scene_to_load = level_2
-		"level_3":
-			scene_to_load = level_3
-		_:
+		"level_1": scene_to_load = level_1
+		"level_2": scene_to_load = level_2
+		"level_3": scene_to_load = level_3
+		_: 
 			push_error("Unknown level tag: " + level_tag)
 			return
 
@@ -39,30 +36,33 @@ func load_level(level_tag: String, spawn_tag: String) -> void:
 		push_error("Scene for " + level_tag + " not found")
 		return
 
-	# Start fade-out before changing
-	var transition_layer: CanvasLayer = null
-	if game_manager:
-		transition_layer = game_manager.get_node_or_null("SceneTransition")
-
+	# Locate SceneTransition
+	var transition_layer: CanvasLayer = game_manager.get_node_or_null("SceneTransition") if game_manager else null
+	var anim_player: AnimationPlayer = null
 	if transition_layer:
-		var anim_player: AnimationPlayer = transition_layer.get_node("AnimationPlayer")
+		anim_player = transition_layer.get_node_or_null("AnimationPlayer")
+
+	# --- Freeze player during transition ---
+	if playerBody:
+		playerBody.set_process(false)
+		playerBody.set_physics_process(false)
+		playerBody.velocity = Vector2.ZERO
+
+	# --- Start fade OUT ---
+	if anim_player:
 		anim_player.play("Fade")
+		# Wait halfway through the fade before loading new level (so it's covered)
 		await anim_player.animation_finished
 
-	# Remove previous level
+	# Remove old level while screen is black
 	if current_level and is_instance_valid(current_level):
 		current_level.queue_free()
 		current_level = null
 		await get_tree().process_frame
 
-	# Add new level deferred to avoid physics issues
-	call_deferred("_add_new_level", scene_to_load, level_tag, spawn_tag, transition_layer)
-
-
-func _add_new_level(scene_to_load: PackedScene, level_tag: String, spawn_tag: String, transition_layer: CanvasLayer) -> void:
+	# Instance new level immediately (while still faded)
 	current_level = scene_to_load.instantiate()
 
-	# Add under GameManager (keeps UI/player persistent)
 	if game_manager:
 		game_manager.add_child(current_level)
 	else:
@@ -71,7 +71,7 @@ func _add_new_level(scene_to_load: PackedScene, level_tag: String, spawn_tag: St
 
 	await get_tree().process_frame
 
-	# Find the door and its spawn marker
+	# --- Find door and Spawn marker ---
 	var spawn_door: Node = current_level.get_node_or_null(spawn_tag)
 	if not spawn_door:
 		spawn_door = current_level.find_child(spawn_tag, true, false)
@@ -87,7 +87,12 @@ func _add_new_level(scene_to_load: PackedScene, level_tag: String, spawn_tag: St
 	elif playerBody:
 		playerBody.global_position = spawn_door.global_position
 
-	# Fade back in
-	if transition_layer:
-		var anim_player: AnimationPlayer = transition_layer.get_node("AnimationPlayer")
+	# --- Fade IN (reveal the new level) ---
+	if anim_player:
 		anim_player.play_backwards("Fade")
+		await anim_player.animation_finished
+
+	# --- Unfreeze player after fade ---
+	if playerBody:
+		playerBody.set_process(true)
+		playerBody.set_physics_process(true)
