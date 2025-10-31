@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Stringstar Fields/Rocks.png" id="2_2551j"]
 [ext_resource type="Texture2D" uid="uid://firf1k7kqhgi" path="res://Assets/Sprites/Stringstar Fields/Blue Rock.png" id="3_uo3jp"]
 [ext_resource type="Texture2D" uid="uid://4rkyv317ld5v" path="res://Assets/Sprites/Owen Art/Copper.png" id="4_ialgx"]
-[ext_resource type="Texture2D" uid="uid://dg4avpdjky216" path="res://Assets/Tilesets/Bio_Cave_TileSet.png" id="5_2551j"]
+[ext_resource type="Texture2D" uid="uid://dyvnwl4ut78a4" path="res://Assets/Tilesets/Bio_Cave_TileSet.png" id="5_2551j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_211ff"]
 texture = ExtResource("1_5a16d")

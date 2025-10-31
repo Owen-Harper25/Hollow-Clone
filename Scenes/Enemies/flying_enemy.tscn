@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_dtyhl"]
 [ext_resource type="Script" uid="uid://nkh0pkfdp10k" path="res://Scripts/flying_enemy.gd" id="1_slg0n"]
-[ext_resource type="Texture2D" uid="uid://cbjukl5mee370" path="res://Assets/Sprites/icon.svg" id="2_ewn43"]
+[ext_resource type="Texture2D" uid="uid://be60ulg7eqfqq" path="res://Assets/Sprites/Owen Art/Chair.png" id="2_ewn43"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_qfmaq"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="4_s5pxv"]
 

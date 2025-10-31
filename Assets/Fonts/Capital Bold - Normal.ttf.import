@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c350m17mql3a6"
-path="res://.godot/imported/Capital Bold - Normal.ttf-aab41c8b7678846bb91a4bb52d1991a6.fontdata"
+path="res://.godot/imported/Capital Bold - Normal.ttf-04139c828d0728c9034333d28afefa7c.fontdata"
 
 [deps]
 
-source_file="res://Shaders/Capital Bold - Normal.ttf"
-dest_files=["res://.godot/imported/Capital Bold - Normal.ttf-aab41c8b7678846bb91a4bb52d1991a6.fontdata"]
+source_file="res://Assets/Fonts/Capital Bold - Normal.ttf"
+dest_files=["res://.godot/imported/Capital Bold - Normal.ttf-04139c828d0728c9034333d28afefa7c.fontdata"]
 
 [params]
 
