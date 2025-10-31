@@ -68,7 +68,7 @@ texture = ExtResource("2_12fag")
 sources/0 = SubResource("TileSetAtlasSource_pnnky")
 sources/1 = SubResource("TileSetAtlasSource_blpqv")
 
-[node name="Level_2" type="Node2D"]
+[node name="level_2" type="Node2D"]
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -119,9 +119,7 @@ tile_set = SubResource("TileSet_0jff0")
 
 [node name="E" parent="Doors" instance=ExtResource("7_fphuk")]
 position = Vector2(710, 22)
-destination_level_tag = "level_1"
-destination_door_tag = "W"
-spawn_direction = "left"
+script = null
 
 [node name="Spawn" parent="Doors/E" index="1"]
 position = Vector2(-20, 0)

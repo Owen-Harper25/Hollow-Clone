@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhpa4osybcxmh"]
+[gd_scene load_steps=10 format=3 uid="uid://bhpa4osybcxmh"]
 
 [ext_resource type="Script" uid="uid://cflpa8rkglgey" path="res://Scripts/game_manager.gd" id="1_yqty0"]
-[ext_resource type="PackedScene" uid="uid://dvhj3i2714nht" path="res://Scenes/Levels/Level_1.tscn" id="2_fgdfb"]
 [ext_resource type="PackedScene" uid="uid://ba6pf7ajyadmn" path="res://Scenes/PlayerScenes/player.tscn" id="2_mmt5l"]
 [ext_resource type="Script" uid="uid://bxw3oecys3lra" path="res://Scripts/SmoothCamera.gd" id="3_fgdfb"]
 [ext_resource type="FontFile" uid="uid://c350m17mql3a6" path="res://Assets/Fonts/Capital Bold - Normal.ttf" id="5_efn8y"]
@@ -39,8 +38,6 @@ script = ExtResource("1_yqty0")
 
 [node name="Levels" type="Node2D" parent="."]
 
-[node name="Level_1" parent="Levels" instance=ExtResource("2_fgdfb")]
-
 [node name="Player" parent="." instance=ExtResource("2_mmt5l")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -67,7 +64,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_fgdfb")]
 

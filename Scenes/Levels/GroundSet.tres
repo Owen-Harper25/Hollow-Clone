@@ -1,10 +1,9 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cqnw1qkbbw853"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://cqnw1qkbbw853"]
 
 [ext_resource type="Texture2D" uid="uid://c1un7m5tyqg4s" path="res://Assets/Sprites/Stringstar Fields/tileset.png" id="1_5a16d"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Stringstar Fields/Rocks.png" id="2_2551j"]
 [ext_resource type="Texture2D" uid="uid://firf1k7kqhgi" path="res://Assets/Sprites/Stringstar Fields/Blue Rock.png" id="3_uo3jp"]
 [ext_resource type="Texture2D" uid="uid://4rkyv317ld5v" path="res://Assets/Sprites/Owen Art/Copper.png" id="4_ialgx"]
-[ext_resource type="Texture2D" uid="uid://dyvnwl4ut78a4" path="res://Assets/Tilesets/Bio_Cave_TileSet.png" id="5_2551j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_211ff"]
 texture = ExtResource("1_5a16d")
@@ -867,7 +866,6 @@ texture = ExtResource("4_ialgx")
 11:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2551j"]
-texture = ExtResource("5_2551j")
 1:0/0 = 0
 2:0/0 = 0
 1:1/0 = 0

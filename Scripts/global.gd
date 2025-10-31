@@ -43,6 +43,7 @@ func load_level(level_tag: String, spawn_tag: String) -> void:
 	# Remove previous level
 	if current_level and is_instance_valid(current_level):
 		print("Freeing " + current_level.name)
+		current_level.queue_free()
 		current_level = null
 		await get_tree().process_frame
 
