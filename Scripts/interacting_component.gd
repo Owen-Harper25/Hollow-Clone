@@ -30,6 +30,8 @@ func _process(_delta: float) -> void:
 	else: pass
 
 func _input(event: InputEvent) -> void:
+	if Global.buffer_inputs:
+		return
 	if event.is_action_pressed("Interact") and can_interact:
 		_interact_action()
 
