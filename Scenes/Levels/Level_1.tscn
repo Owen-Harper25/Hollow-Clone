@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dvhj3i2714nht"]
+[gd_scene load_steps=24 format=4 uid="uid://crj1am4a8e5ke"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_irw6p"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="2_31phq"]
@@ -982,10 +982,10 @@ destination_level_tag = "level_2"
 destination_door_tag = "E"
 spawn_direction = "right"
 
-[node name="Spawn" parent="Doors/W" index="1"]
-position = Vector2(15, 0)
-
 [node name="spawn_1" type="Marker2D" parent="Doors/W"]
-position = Vector2(15, 0)
+position = Vector2(22, 0)
+
+[node name="Spawn" parent="Doors/W" index="2"]
+position = Vector2(22, 0)
 
 [editable path="Doors/W"]

@@ -36,7 +36,19 @@ shader_parameter/vignette_opacity = 0.506000024035
 [node name="Game Manager" type="Node2D"]
 script = ExtResource("1_yqty0")
 
-[node name="Levels" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_fgdfb")]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_yqty0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SceneTransition" parent="." instance=ExtResource("9_i4mau")]
 
 [node name="Player" parent="." instance=ExtResource("2_mmt5l")]
 
@@ -63,20 +75,8 @@ text = "0"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_fgdfb")]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_yqty0")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Levels" type="Node2D" parent="."]
 
 [node name="Interactable" parent="." instance=ExtResource("7_71d4j")]
 visible = false
 position = Vector2(0, 378)
-
-[node name="SceneTransition" parent="." instance=ExtResource("9_i4mau")]
