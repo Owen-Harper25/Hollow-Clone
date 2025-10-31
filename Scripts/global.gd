@@ -5,7 +5,11 @@ var playerBody: CharacterBody2D
 var playerWeaponEquip: bool
 var playerAlive: bool
 var pausedGame: bool
-var controllerPlayer: bool
+var controllerPlayer: bool = false:
+	set(value):
+		if value != controllerPlayer:
+			controllerPlayer = value
+			emit_signal("controller_connected")
 
 
 #NPC Dialogue Variables
@@ -14,6 +18,7 @@ var buffer_inputs: bool = false
 
 signal game_resumed
 signal pogo_now
+signal controller_connected
 
 const level_1 = preload("res://Scenes/Levels/level_1.tscn")
 const level_2 = preload("res://Scenes/Levels/level_2.tscn")
