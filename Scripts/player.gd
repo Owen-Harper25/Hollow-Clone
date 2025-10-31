@@ -14,7 +14,6 @@ extends CharacterBody2D
 @onready var coin_label: Label = $"../Camera2D/Label"
 
 signal healthChanged
-
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
@@ -157,8 +156,7 @@ func _ready() -> void:
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
-	pause_jump = true
-	
+	Global.buffer_inputs = true
 
 func _physics_process(delta: float) -> void:
 	physics_tick(delta)
@@ -180,7 +178,7 @@ func _process(_delta: float) -> void:
 		facing_direction = get_cardinal_direction(input_dir)
 	
 	#Dashing Code
-	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and pause_jump == false:
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and Global.buffer_inputs == false:
 		var dash_input := get_input_direction()
 		if dash_input == Vector2.ZERO:
 			dash_input = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
@@ -189,7 +187,6 @@ func _process(_delta: float) -> void:
 		can_dash = false
 		dash_cooldown_timer.start()
 
-		
 func start_dash(direction: Vector2) -> void:
 	direction.y = 0
 	$AnimationPlayer.play("dash")
@@ -222,39 +219,43 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 ## Overrideable physics process used by the controller that calls whatever functions should be called
 ## and any logic that needs to be done on the [param _physics_process] tick
 func physics_tick(delta: float) -> void:
-	if is_dashing:
-		# Dash overrides normal movement
-		set_collision_layer_value(2, false)
-		velocity = dash_direction * dash_speed
-		dash_timer -= delta
-		if dash_timer <= 0.0:
-			is_dashing = false
-			dash_immunity = false
-			set_collision_layer_value(2, true)
-			velocity.x = dash_direction.x * MAX_SPEED
-			damage_check()
+	if Global.buffer_inputs == true:
+		handle_gravity(delta)
 		
-		move_and_slide()
-		return  # skip normal physics while dashing
-	if knockback_timer > 0.0:
-		velocity = knockback
-		knockback_timer -= delta
-		if knockback_timer <= 0.0:
-			knockback = Vector2.ZERO
-		else:
+	else: 
+		if is_dashing:
+			# Dash overrides normal movement
+			set_collision_layer_value(2, false)
+			velocity = dash_direction * dash_speed
+			dash_timer -= delta
+			if dash_timer <= 0.0:
+				is_dashing = false
+				dash_immunity = false
+				set_collision_layer_value(2, true)
+				velocity.x = dash_direction.x * MAX_SPEED
+				damage_check()
+			
 			move_and_slide()
-	var inputs: Dictionary = get_inputs()
-	handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released)
-	handle_sprint(inputs.sprint_strength)
-	handle_velocity(delta, inputs.input_direction)
+			return  # skip normal physics while dashing
+		if knockback_timer > 0.0:
+			velocity = knockback
+			knockback_timer -= delta
+			if knockback_timer <= 0.0:
+				knockback = Vector2.ZERO
+			else:
+				move_and_slide()
+		var inputs: Dictionary = get_inputs()
+		handle_jump(delta, inputs.input_direction, inputs.jump_strength, inputs.jump_pressed, inputs.jump_released)
+		handle_sprint(inputs.sprint_strength)
+		handle_velocity(delta, inputs.input_direction)
 
-	manage_animations()
-	manage_state()
-	_attack_logic(delta)
-	# We have to handle the gravity after the state
-	handle_gravity(delta) 
+		manage_animations()
+		manage_state()
+		_attack_logic(delta)
+		# We have to handle the gravity after the state
+		handle_gravity(delta) 
 
-	move_and_slide()
+		move_and_slide()
 
 func damage_check():
 	var space_state = get_world_2d().direct_space_state
@@ -262,12 +263,11 @@ func damage_check():
 	query.shape = $hurtBox/CollisionShape2D.shape
 	query.transform = $hurtBox/CollisionShape2D.global_transform
 	query.collide_with_areas = true
-	query.collision_mask = 2  # enemy hitboxes layer
+	query.collision_mask = 2
 	var results = space_state.intersect_shape(query)
 	for result in results:
 		var area = result.collider
 		if area.is_in_group("Enemy"):
-			#_on_hurt_box_area_entered(area)
 			damage()
 
 func _attack_logic(delta: float) -> void:
@@ -287,7 +287,6 @@ func _attack_logic(delta: float) -> void:
 				if not is_on_floor():  # only allow down slash in air
 					AttackParent.rotation_degrees = 90
 			else:
-				# force into horizontal slash instead
 				if PLAYER_SPRITE.flip_h:
 					AttackParent.rotation_degrees = 180   # face left
 				else:
@@ -409,7 +408,7 @@ func handle_sprint(sprint_strength: float) -> void:
 # ------------------ Jumping Logic ---------------------------------
 ## Takes delta and the jump action status and strength and handles the jumping logic
 func handle_jump(delta: float, move_direction: Vector2, jump_strength: float = 0.0, jump_pressed: bool = false, _jump_released: bool = false) -> void:
-	if (jump_pressed or should_jump) and can_jump and pause_jump == false:
+	if (jump_pressed or should_jump) and can_jump and Global.buffer_inputs == false:
 		apply_jump(move_direction)
 	elif jump_pressed:
 		buffer_jump()
@@ -511,7 +510,7 @@ func apply_knockback(direction: Vector2, force: float, knockback_duration: float
 	knockback_timer = knockback_duration
 	
 func _on_resume_timer_timeout() -> void:
-	pause_jump = false
+	Global.buffer_inputs = false
 
 func _on_attack_area_2d_body_entered(body: Node2D) -> void:
 	if body == self:

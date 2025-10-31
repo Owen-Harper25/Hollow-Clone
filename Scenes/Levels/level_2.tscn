@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bjsu2xyt720j0"]
+[gd_scene load_steps=14 format=4 uid="uid://bjsu2xyt720j0"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="1_ovj6s"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Stringstar Fields/Rocks.png" id="1_smnlx"]
@@ -8,6 +8,7 @@
 [ext_resource type="TileSet" uid="uid://cqnw1qkbbw853" path="res://Scenes/Levels/GroundSet.tres" id="4_8qsmg"]
 [ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="7_fphuk"]
 [ext_resource type="PackedScene" uid="uid://jip7uc7rsksu" path="res://Scenes/bench.tscn" id="8_pnnky"]
+[ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="9_blpqv"]
 
 [sub_resource type="TileSet" id="TileSet_08cxd"]
 
@@ -147,6 +148,9 @@ position = Vector2(-782, -31)
 
 [node name="Bench" parent="." instance=ExtResource("8_pnnky")]
 position = Vector2(497, 64)
+
+[node name="NPC" parent="." instance=ExtResource("9_blpqv")]
+position = Vector2(0, -8)
 
 [editable path="Doors/E"]
 [editable path="Doors/W"]

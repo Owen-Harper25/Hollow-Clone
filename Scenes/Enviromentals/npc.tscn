@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c16nfgi37ki5h"]
+
+[ext_resource type="Script" uid="uid://dtvqlbvex6twd" path="res://Scripts/npc.gd" id="1_75555"]
+[ext_resource type="Texture2D" uid="uid://b2no6hg7xlyxj" path="res://Assets/Sprites/Owen Art/Archer.png" id="1_qmw48"]
+[ext_resource type="PackedScene" uid="uid://cyowr518ht03d" path="res://Scenes/interactable.tscn" id="2_75555"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3wxa"]
+radius = 3.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apw11"]
+radius = 25.0
+
+[node name="NPC" type="Area2D"]
+script = ExtResource("1_75555")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_r3wxa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qmw48")
+hframes = 8
+vframes = 2
+frame = 10
+
+[node name="Interactable" parent="." instance=ExtResource("2_75555")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+shape = SubResource("CircleShape2D_apw11")

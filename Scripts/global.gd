@@ -6,6 +6,11 @@ var playerWeaponEquip: bool
 var playerAlive: bool
 var pausedGame: bool
 
+
+#NPC Dialogue Variables
+var test_status: String = ""
+var buffer_inputs: bool = false
+
 signal game_resumed
 signal pogo_now
 
