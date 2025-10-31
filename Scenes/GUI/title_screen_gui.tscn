@@ -1,8 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bycbvvxvjb035"]
+[gd_scene load_steps=16 format=3 uid="uid://bycbvvxvjb035"]
 
 [ext_resource type="Script" uid="uid://4v35scf22mit" path="res://Scripts/title_screen_gui.gd" id="1_cttc7"]
 [ext_resource type="Texture2D" uid="uid://badx14u7wc3hk" path="res://Assets/Sprites/Owen Art/TitleScreen_PlaceHolder.png" id="2_oxdhk"]
+[ext_resource type="FontFile" uid="uid://57l6c6biguxb" path="res://Assets/Fonts/CrimsonText-Regular.ttf" id="3_c4veq"]
 [ext_resource type="Script" uid="uid://dwv73oy32b0vq" path="res://Scripts/play_game.gd" id="3_rvddj"]
+
+[sub_resource type="Theme" id="Theme_yclhp"]
+default_font = ExtResource("3_c4veq")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7juc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c4veq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yclhp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_navb7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyikp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yclhp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_evh3y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vaoor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2shpy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ulqda"]
 
 [node name="TitleScreenGui" type="Control"]
 layout_mode = 3
@@ -27,34 +51,58 @@ position = Vector2(640, 360)
 scale = Vector2(0.6666666, 0.66666675)
 texture = ExtResource("2_oxdhk")
 
-[node name="PlayGame" type="Button" parent="."]
+[node name="Buttons" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(150, 80)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.287
-anchor_top = 0.606
-anchor_right = 0.70000005
-anchor_bottom = 0.68500006
-offset_left = -0.35998535
-offset_top = -0.32000732
-offset_right = -6.1035156e-05
-offset_bottom = -0.19970703
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = 100.465
+offset_right = 76.0
+offset_bottom = 272.46497
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
+custom_minimum_size = Vector2(150, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PlayGame" type="Button" parent="Buttons/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_yclhp")
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r7juc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_c4veq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yclhp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_navb7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uyikp")
 text = "PLAY"
 script = ExtResource("3_rvddj")
 
-[node name="QuitGame" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.287
-anchor_top = 0.70000005
-anchor_right = 0.70000005
-anchor_bottom = 0.77800006
-offset_left = 0.64001465
-offset_top = -3.0517578e-05
-offset_right = -6.1035156e-05
-offset_bottom = -0.16003418
+[node name="QuitGame" type="Button" parent="Buttons/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yclhp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_evh3y")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vaoor")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2shpy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ulqda")
 text = "QUIT"
 
-[connection signal="button_down" from="PlayGame" to="." method="_on_play_game_button_down"]
-[connection signal="button_down" from="QuitGame" to="." method="_on_quit_game_button_down"]
+[connection signal="button_down" from="Buttons/VBoxContainer/PlayGame" to="." method="_on_play_game_button_down"]
+[connection signal="button_down" from="Buttons/VBoxContainer/QuitGame" to="." method="_on_quit_game_button_down"]
