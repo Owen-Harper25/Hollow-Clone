@@ -163,6 +163,10 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	var input_dir: Vector2 = Vector2.ZERO
+	if Input.get_connected_joypads().has(null):
+		pass
+	else:
+		print("Stick Diddler Confirmed")
 
 	if Input.is_action_pressed(ACTION_RIGHT):
 		input_dir.x += 1

@@ -150,7 +150,7 @@ size_flags_vertical = 4
 
 [node name="Resume" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
-theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_focus_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
 theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
@@ -168,7 +168,7 @@ layout_mode = 2
 
 [node name="Settings" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
-theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_focus_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
 theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
@@ -185,7 +185,7 @@ layout_mode = 2
 
 [node name="Save and Quit" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
-theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_focus_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
 theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
