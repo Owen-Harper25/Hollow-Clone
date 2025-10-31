@@ -22,6 +22,10 @@ SceneTransition="*res://Scenes/scene_transition.tscn"
 save_manager="*res://Scripts/save_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://Dialogue/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=1280
