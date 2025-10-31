@@ -18,6 +18,8 @@ var spawn_door_tag: String
 var game_manager: Node # Reference to GameManager (UI + Player + Transition)
 
 func _ready() -> void:
+	print(game_resumed)
+	print(pogo_now)
 	print("Global ready")
 
 
