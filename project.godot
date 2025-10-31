@@ -20,6 +20,7 @@ SoundLibrary="*res://Scenes/sound_library.tscn"
 Global="*res://Scripts/global.gd"
 SceneTransition="*res://Scenes/scene_transition.tscn"
 save_manager="*res://Scripts/save_manager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
@@ -27,6 +28,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://b7klr584m011e"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 
