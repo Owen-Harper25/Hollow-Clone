@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdoxkjk3diuj4"]
+[gd_scene load_steps=23 format=3 uid="uid://bdoxkjk3diuj4"]
 
 [ext_resource type="Script" uid="uid://cyqwgixwsm453" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
 [ext_resource type="Shader" uid="uid://ci5nniy2f1ft1" path="res://Shaders/pause_menu.gdshader" id="2_bpi0q"]
@@ -69,6 +69,36 @@ _data = {
 &"RESET": SubResource("Animation_o572i")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ceptl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o572i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjfu5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b8nr0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xiio"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqck2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h2mv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h64wm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ih1e4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wevsm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ydyrr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1aoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yacp7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_033fd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no3q3"]
+
 [node name="PauseMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
@@ -120,15 +150,50 @@ size_flags_vertical = 4
 
 [node name="Resume" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
+theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ceptl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o572i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tjfu5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b8nr0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6xiio")
 text = "Resume
 "
 
+[node name="HSeparator" type="HSeparator" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="Settings" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
+theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kqck2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6h2mv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h64wm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ih1e4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wevsm")
 text = "Settings"
+
+[node name="HSeparator2" type="HSeparator" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="Save and Quit" type="Button" parent="MainPauseMenu/PauseMenu_Box/Button_List"]
 layout_mode = 2
+theme_override_colors/font_focus_color = Color(1, 0.81664085, 0.26842794, 1)
+theme_override_colors/font_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_colors/font_hover_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.29586652, 0.2958665, 0.2958665, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ydyrr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j1aoj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yacp7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_033fd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_no3q3")
 text = "Save and Quit"
 
 [node name="Settings" type="PanelContainer" parent="." node_paths=PackedStringArray("GameplayPopup", "VisualsPopup", "AudioPopup", "InfoPopup")]
