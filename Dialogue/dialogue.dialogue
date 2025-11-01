@@ -1,16 +1,19 @@
 ~ start
 #set Global.talking = true
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
+Skele: [[Hi|Hello|Howdy]], [shake]kiddo[/shake].
+Skele: Here are some [wave]choices[/wave].
+- Make a joke
+	You: What's a skeleton's favourite snack? [wait 0.2] [wave]RIBS![/wave]
+	Skele: [shake]HAHAHAHAHAHA[/shake]
+- Punch him
+	Skele: [shake]OUCH![/shake] [wait 0.2]What was that for?
 - Start again => start
-- End the conversation 
+- Leave
 	set Global.emit_signal("talking_done")
 	=> END
-Nathan: For more information see the online documentation.
+Skele: Stay safe kid
 set Global.emit_signal("talking_done")
 
 => END
+
+#  % signs at the start of lines will make them random. Put a number after the % sign to assing weight like %5

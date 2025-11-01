@@ -230,7 +230,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Resume Timer 2" type="Timer" parent="Timers"]
-wait_time = 0.02
+wait_time = 0.1
 one_shot = true
 
 [node name="Feet" type="Marker2D" parent="."]
