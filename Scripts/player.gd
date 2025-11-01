@@ -229,8 +229,9 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 ## and any logic that needs to be done on the [param _physics_process] tick
 func physics_tick(delta: float) -> void:
 	if Global.talking == true:
-		handle_gravity(delta)
-	
+		manage_animations()
+		manage_state()
+		handle_gravity(delta) 
 	else:
 		if is_dashing:
 			# Dash overrides normal movement
@@ -319,6 +320,9 @@ func _attack_logic(delta: float) -> void:
 
 ## Manages the character's current state based on the current velocity vector
 func manage_state() -> void:
+	if Global.talking:
+		state = IDLE
+		return
 	if velocity.y == 0:
 		run_particles()
 		if velocity.x == 0:

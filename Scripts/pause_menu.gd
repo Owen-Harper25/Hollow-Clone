@@ -30,7 +30,7 @@ func pause():
 		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
 func escapeTest():
-	if Input.is_action_just_pressed("escape") and !get_tree().paused:
+	if Input.is_action_just_pressed("escape") and !get_tree().paused and !Global.talking:
 		pause()
 	elif Input.is_action_just_pressed("escape") or Input.is_action_just_pressed("ui_cancel") and get_tree().paused:
 		if Settings.visible:
