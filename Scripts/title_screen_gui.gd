@@ -1,22 +1,27 @@
 extends Control
 
-var my_bool: bool = true:
+@onready var Focus_button = $Buttons/VBoxContainer/PlayGame
+
+func _ready() -> void:
+	if Global.controller_connected:
+		Focus_button.grab_focus()
+
+var controller_connected: bool = false:
 	set(value):
-		if value != my_bool:  # Check if the value actually changed
-			my_bool = value
-			# Code to run when the bool changes
-			print("Boolean has changed to:", value)
+		if value != controller_connected:  # Check if the value actually changed
+			controller_connected = value
 			if value:
-				$Buttons/VBoxContainer/PlayGame.grab_focus()
+				Focus_button.grab_focus()
+				print("Variable changed to ", value)
 			else:
 				get_viewport().gui_release_focus()
 
 func _process(_delta: float) -> void:
-	my_bool = Global.controllerPlayer
+	Global.controller_connected = controller_connected
 	if Input.get_connected_joypads().count(0):
-		Global.controllerPlayer = true
+		controller_connected = true
 	else:
-		Global.controllerPlayer = false
+		controller_connected = false
 
 func _on_quit_game_button_down() -> void:
 	get_tree().quit()

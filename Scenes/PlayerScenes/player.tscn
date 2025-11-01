@@ -297,3 +297,5 @@ visible = false
 [connection signal="area_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
 [connection signal="body_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="Menu\'s/PauseMenu"]

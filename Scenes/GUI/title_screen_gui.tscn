@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bycbvvxvjb035"]
+[gd_scene load_steps=15 format=3 uid="uid://bycbvvxvjb035"]
 
 [ext_resource type="Script" uid="uid://4v35scf22mit" path="res://Scripts/title_screen_gui.gd" id="1_cttc7"]
 [ext_resource type="Texture2D" uid="uid://badx14u7wc3hk" path="res://Assets/Sprites/Owen Art/TitleScreen_PlaceHolder.png" id="2_oxdhk"]
 [ext_resource type="FontFile" uid="uid://57l6c6biguxb" path="res://Assets/Fonts/CrimsonText-Regular.ttf" id="3_c4veq"]
-[ext_resource type="Script" uid="uid://s5lipr86vmwa" path="res://Scenes/GUI/play_game.gd" id="4_c4veq"]
 
 [sub_resource type="Theme" id="Theme_yclhp"]
 default_font = ExtResource("3_c4veq")
@@ -87,7 +86,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_yclhp")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_navb7")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uyikp")
 text = "PLAY"
-script = ExtResource("4_c4veq")
 
 [node name="QuitGame" type="Button" parent="Buttons/VBoxContainer"]
 layout_mode = 2
