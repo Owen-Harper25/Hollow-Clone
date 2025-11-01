@@ -1,5 +1,5 @@
 ~ start
-set Global.buffer_inputs = true
+#set Global.talking = true
 Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
 Nathan: Here are some choices.
 - First one
@@ -7,10 +7,11 @@ Nathan: Here are some choices.
 - Second one
 	Nathan: You picked the second one.
 - Start again => start
-- End the conversation => END
+- End the conversation 
+	set Global.emit_signal("talking_done")
+	=> END
 Nathan: For more information see the online documentation.
-set Global.buffer_inputs = false
-set Global.emit_signal("game_resumed")
+set Global.emit_signal("talking_done")
 
 
 => END

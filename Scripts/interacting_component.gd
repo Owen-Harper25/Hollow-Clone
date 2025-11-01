@@ -9,7 +9,7 @@ var joystick_threshold := -0.9  # how far up you need to tilt to trigger
 
 func _process(_delta: float) -> void:
 	# Handle joystick-based interact (like Hollow Knight)
-	var joy_y = Input.get_action_strength("up") - Input.get_action_strength("down")
+	var joy_y = Input.get_action_strength("up")
 
 	if joy_y < joystick_threshold and !interact_buffer and can_interact:
 		_interact_action()
@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 		interact_label.hide()
 
 func _input(event: InputEvent) -> void:
-	if Global.buffer_inputs:
+	if Global.buffer_inputs or Global.talking:
 		return
 	if event.is_action_pressed("Interact") and can_interact:
 		_interact_action()

@@ -71,6 +71,7 @@ var dash_direction: Vector2 = Vector2.ZERO  # Direction of the dash
 @export var dash_cooldown: float = 1.0  # Cooldown between dashes
 @onready var dash_cooldown_timer: Timer = $"Timers/Dash Timer"
 @onready var resume_timer: Timer = $"Timers/Resume Timer"
+@onready var resume_timer2: Timer = $"Timers/Resume Timer 2"
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
@@ -149,10 +150,14 @@ var jumping := false
 func _ready() -> void:
 	Global.playerBody = self
 	Global.game_resumed.connect(_on_game_resumed)
+	Global.talking_done.connect(talking_now_done)
 	AttackSprite.modulate.a = 0.0
 	AttackArea2D.get_node("CollisionShape2D").disabled = true
 	Global.connect("pogo_now", Callable(self, "_on_pogo_now"))
 	coin_label.modulate.a = 0.0
+
+func talking_now_done():
+	resume_timer2.start()
 
 func _on_game_resumed():
 	$"Timers/Resume Timer".start()
@@ -182,7 +187,7 @@ func _process(_delta: float) -> void:
 		facing_direction = get_cardinal_direction(input_dir)
 	
 	#Dashing Code
-	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and Global.buffer_inputs == false:
+	if Input.is_action_just_pressed("dash") and !is_dashing and can_dash and !Global.buffer_inputs and !Global.talking:
 		var dash_input := get_input_direction()
 		if dash_input == Vector2.ZERO:
 			dash_input = Vector2.RIGHT if PLAYER_SPRITE.flip_h == false else Vector2.LEFT
@@ -223,10 +228,10 @@ func get_cardinal_direction(dir: Vector2) -> Vector2:
 ## Overrideable physics process used by the controller that calls whatever functions should be called
 ## and any logic that needs to be done on the [param _physics_process] tick
 func physics_tick(delta: float) -> void:
-	if Global.buffer_inputs == true:
+	if Global.talking == true:
 		handle_gravity(delta)
-		
-	else: 
+	
+	else:
 		if is_dashing:
 			# Dash overrides normal movement
 			set_collision_layer_value(2, false)
@@ -560,3 +565,7 @@ func fade_label():
 	fade_tween = create_tween()
 	coin_label.modulate.a = 1.0
 	fade_tween.tween_property(coin_label, "modulate:a", 0.0, 1.0).set_delay(0.5)
+
+
+func _on_resume_timer_2_timeout() -> void:
+	Global.talking = false

@@ -15,7 +15,9 @@ var controllerPlayer: bool = false:
 #NPC Dialogue Variables
 var test_status: String = ""
 var buffer_inputs: bool = false
+var talking: bool = false
 
+signal talking_done
 signal game_resumed
 signal pogo_now
 signal controller_connected
@@ -31,6 +33,7 @@ var game_manager: Node
 func _ready() -> void:
 	print(game_resumed)
 	print(pogo_now)
+	print(talking_done)
 
 
 func load_level(level_tag: String, spawn_tag: String) -> void:

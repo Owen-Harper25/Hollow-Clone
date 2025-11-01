@@ -229,6 +229,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="Resume Timer 2" type="Timer" parent="Timers"]
+wait_time = 0.02
+one_shot = true
+
 [node name="Feet" type="Marker2D" parent="."]
 visible = false
 position = Vector2(0, 2.6666667)
@@ -289,6 +293,7 @@ visible = false
 [connection signal="timeout" from="Timers/Dash Timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="Timers/Resume Timer" to="." method="_on_resume_timer_timeout"]
+[connection signal="timeout" from="Timers/Resume Timer 2" to="." method="_on_resume_timer_2_timeout"]
 [connection signal="area_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
 [connection signal="body_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
