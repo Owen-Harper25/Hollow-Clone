@@ -1,14 +1,16 @@
 ~ start
 #set Global.talking = true
 Skele: [[Hi|Hello|Howdy]], [shake]kiddo[/shake].
-Skele: Here are some [wave]choices[/wave].
+Skele: Here are [b]some[/b] [wave]choices[/wave].
 - Make a joke
 	You: What's a skeleton's favourite snack? [wait 0.2] [wave]RIBS![/wave]
 	Skele: [shake]HAHAHAHAHAHA[/shake]
 - Punch him
 	Skele: [shake]OUCH![/shake] [wait 0.2]What was that for?
-- Start again => start
+- Let me see some cool text
+	Skele: [wave][rainbow freq=.7 sat=.8 val=.8 speed=3]Rainbow Effect [/rainbow][/wave] [pulse]Pulse[/pulse] [tornado]tornado[/tornado] [fade lenght = 8]AHHHHHHHH[/fade] [color=red]red[/color]
 - Leave
+	Skele: [wave]See you around[/wave]
 	set Global.emit_signal("talking_done")
 	=> END
 Skele: Stay safe kid
@@ -16,4 +18,16 @@ set Global.emit_signal("talking_done")
 
 => END
 
-#  % signs at the start of lines will make them random. Put a number after the % sign to assing weight like %5
+# % signs at the start of lines will make them random. Put a number after the % sign to assing weight like %5
+#[b] bold
+#[i] italic
+#[s] strikethrough
+#[u] underline
+#[color=red] [/color] color
+#[pulse] [/pulse]
+#[wave]
+#[shake]
+#[tornado] [/tornado]
+#[fade lenght = 8] [/fade]
+#[wave][rainbow freq=.7 sat=.8 val=.8 speed=3]Rainbow Effect [/rainbow][/wave]
+#[test]
