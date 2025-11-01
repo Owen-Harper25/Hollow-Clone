@@ -8,7 +8,8 @@ Skele: Here are [b]some[/b] [wave]choices[/wave].
 - Punch him
 	Skele: [shake]OUCH![/shake] [wait 0.2]What was that for?
 - Let me see some cool text
-	Skele: [wave][rainbow freq=.7 sat=.8 val=.8 speed=3]Rainbow Effect [/rainbow][/wave] [pulse]Pulse[/pulse] [tornado]tornado[/tornado] [fade lenght = 8]AHHHHHHHH[/fade] [color=red]red[/color]
+	Skele: [wave][rainbow freq=.7 sat=.8 val=.8 speed=3]Rainbow Effect [/rainbow][/wave] [pulse]Pulse[/pulse] [tornado]tornado[/tornado] [fade lenght = 8]AHHHHHHHH[/fade]
+	Skele: [test freq=7 amp=2 off=.4 duration=10]Caterpillar[/test]  [color=red]red[/color]
 - Leave
 	Skele: [wave]See you around[/wave]
 	set Global.emit_signal("talking_done")
@@ -30,4 +31,4 @@ set Global.emit_signal("talking_done")
 #[tornado] [/tornado]
 #[fade lenght = 8] [/fade]
 #[wave][rainbow freq=.7 sat=.8 val=.8 speed=3]Rainbow Effect [/rainbow][/wave]
-#[test]
+#[test freq=7 amp=2 off=.4 duration=10]Caterpillar[/test]
