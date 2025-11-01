@@ -17,7 +17,7 @@ func resume():
 	hide()
 	BlurAnimationPlayer.play_backwards("Blur")
 	Global.emit_signal("game_resumed")
-	if MainPauseMenu.visible == false and Global.controllerPlayer:
+	if MainPauseMenu.visible == false and Global.controller_connected:
 		MainPauseMenu.visible = true
 		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
@@ -26,7 +26,7 @@ func pause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show()
 	BlurAnimationPlayer.play("Blur")
-	if Global.controllerPlayer:
+	if Global.controller_connected:
 		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
 func escapeTest():
@@ -36,7 +36,7 @@ func escapeTest():
 		if Settings.visible:
 			Settings.visible = false
 			MainPauseMenu.visible = true
-			if Global.controllerPlayer:
+			if Global.controller_connected == true:
 				$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 		else:
 			resume()
@@ -48,7 +48,7 @@ func _on_settings_button_down() -> void:
 	if MainPauseMenu.visible:
 		MainPauseMenu.visible = false
 	Settings.visible = true
-	if Global.controllerPlayer:
+	if Global.controller_connected:
 		$Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Gameplay.grab_focus()
 
 func _on_quit_button_down() -> void:

@@ -5,11 +5,15 @@ var playerBody: CharacterBody2D
 var playerWeaponEquip: bool
 var playerAlive: bool
 var pausedGame: bool
-var controllerPlayer: bool = false:
-	set(value):
-		if value != controllerPlayer:
-			controllerPlayer = value
-			emit_signal("controller_connected")
+
+var controller_connected: bool = false
+	#set(value):
+		#if value != controller_connected:  # Check if the value actually changed
+			#controller_connected = value
+			#if value:
+				#Focus_button.grab_focus()
+			#else:
+				#get_viewport().gui_release_focus()
 
 
 #NPC Dialogue Variables
@@ -20,7 +24,6 @@ var talking: bool = false
 signal talking_done
 signal game_resumed
 signal pogo_now
-signal controller_connected
 
 const level_1 = preload("res://Scenes/Levels/level_1.tscn")
 const level_2 = preload("res://Scenes/Levels/level_2.tscn")

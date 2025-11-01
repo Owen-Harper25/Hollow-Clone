@@ -12,6 +12,7 @@ extends CharacterBody2D
 
 ## The four possible character states and the character's current state
 @onready var coin_label: Label = $"../Camera2D/Label"
+@onready var Focus_button = $"Menu's/PauseMenu/MainPauseMenu/PauseMenu_Box/Button_List/Resume"
 
 signal healthChanged
 var knockback: Vector2 = Vector2.ZERO
@@ -147,6 +148,15 @@ var jumping := false
 ## The player can wall jump when [param can_wall_jump] is true
 @onready var can_wall_jump: bool = ENABLE_WALL_JUMPING
 
+var controller_connected: bool = false:
+	set(value):
+		if value != controller_connected:  # Check if the value actually changed
+			controller_connected = value
+			if value:
+				Focus_button.grab_focus()
+			else:
+				get_viewport().gui_release_focus()
+
 func _ready() -> void:
 	Global.playerBody = self
 	Global.game_resumed.connect(_on_game_resumed)
@@ -167,11 +177,13 @@ func _physics_process(delta: float) -> void:
 	physics_tick(delta)
 
 func _process(_delta: float) -> void:
+	Global.controller_connected = controller_connected
 	var input_dir: Vector2 = Vector2.ZERO
+	
 	if Input.get_connected_joypads().count(0):
-		Global.controllerPlayer = true
+		controller_connected = true
 	else:
-		Global.controllerPlayer = false
+		controller_connected = false
 
 	if Input.is_action_pressed(ACTION_RIGHT):
 		input_dir.x += 1
