@@ -6,18 +6,18 @@ extends Control
 
 func _ready() -> void:
 	hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _process(_delta: float) -> void:
 	escapeTest()
 
 func resume():
 	get_tree().paused = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	hide()
 	BlurAnimationPlayer.play_backwards("Blur")
 	Global.emit_signal("game_resumed")
-	if MainPauseMenu.visible == false:
+	if MainPauseMenu.visible == false and Global.controllerPlayer:
 		MainPauseMenu.visible = true
 		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
@@ -26,7 +26,8 @@ func pause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show()
 	BlurAnimationPlayer.play("Blur")
-	$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
+	if Global.controllerPlayer:
+		$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 
 func escapeTest():
 	if Input.is_action_just_pressed("escape") and !get_tree().paused:
@@ -35,7 +36,8 @@ func escapeTest():
 		if Settings.visible:
 			Settings.visible = false
 			MainPauseMenu.visible = true
-			$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
+			if Global.controllerPlayer:
+				$MainPauseMenu/PauseMenu_Box/Button_List/Resume.grab_focus()
 		else:
 			resume()
 
@@ -46,7 +48,8 @@ func _on_settings_button_down() -> void:
 	if MainPauseMenu.visible:
 		MainPauseMenu.visible = false
 	Settings.visible = true
-	$Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Gameplay.grab_focus()
+	if Global.controllerPlayer:
+		$Settings/SettingsMargin/Settings_holder/Settings_panel/Settings_Screen/Settings_buttons/Gameplay.grab_focus()
 
 func _on_quit_button_down() -> void:
 	get_tree().quit()
