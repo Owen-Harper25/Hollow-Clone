@@ -178,6 +178,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	Global.controller_connected = controller_connected
+	controller_connected = Global.controller_connected
 	var input_dir: Vector2 = Vector2.ZERO
 	
 	if Input.get_connected_joypads().count(0):
