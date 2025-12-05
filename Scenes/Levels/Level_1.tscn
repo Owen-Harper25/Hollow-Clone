@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://ceh4xi3ujmy1p"]
+[gd_scene load_steps=26 format=4 uid="uid://ceh4xi3ujmy1p"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_irw6p"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="2_31phq"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bnrm085du1680" path="res://Scenes/Enviromentals/currency_pile.tscn" id="15_hnn05"]
 [ext_resource type="PackedScene" uid="uid://c4ftutkblxwk3" path="res://Scenes/Enviromentals/spikes.tscn" id="16_wxmgb"]
 [ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="17_k1rx4"]
+[ext_resource type="Material" uid="uid://e2isui1nvh72" path="res://Shaders/outlineshader.tres" id="18_7hll7"]
 [ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="18_31phq"]
 [ext_resource type="PackedScene" uid="uid://cskoyirmvhif8" path="res://Scenes/Characters/Goblin_Girl.tscn" id="19_qxyq8"]
 
@@ -1018,13 +1019,14 @@ position = Vector2(23, 1)
 [node name="spawn_1" type="Marker2D" parent="Doors/E"]
 position = Vector2(23, 1)
 
-[node name="NPC" parent="Doors/E" instance=ExtResource("18_31phq")]
-position = Vector2(-630, -77)
-
 [node name="Characters" type="Node" parent="."]
 
 [node name="CharacterBody2D" parent="Characters" instance=ExtResource("19_qxyq8")]
+material = ExtResource("18_7hll7")
 position = Vector2(-929, -368)
+
+[node name="NPC" parent="Characters" instance=ExtResource("18_31phq")]
+position = Vector2(-172, 57)
 
 [editable path="Doors/W"]
 [editable path="Doors/W2"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=137 format=3 uid="uid://cskoyirmvhif8"]
+[gd_scene load_steps=138 format=3 uid="uid://cskoyirmvhif8"]
 
-[ext_resource type="Script" uid="uid://bu5kv47875fh5" path="res://Scripts/goblin_girl.gd" id="1_lpvjb"]
+[ext_resource type="Script" path="res://Scripts/goblin_girl.gd" id="1_lpvjb"]
 [ext_resource type="Texture2D" uid="uid://cqk6tixi6lno" path="res://Assets/Sprites/Mixmo_Testing/Green_lady_32x32_12fps.png" id="1_txlfj"]
 [ext_resource type="PackedScene" uid="uid://cyowr518ht03d" path="res://Scenes/interactable.tscn" id="2_4ji8g"]
+[ext_resource type="Material" uid="uid://e2isui1nvh72" path="res://Shaders/outlineshader.tres" id="2_l5cfi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ji8g"]
 atlas = ExtResource("1_txlfj")
@@ -938,6 +939,7 @@ radius = 14.035668
 script = ExtResource("1_lpvjb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_l5cfi")
 sprite_frames = SubResource("SpriteFrames_qj3hm")
 animation = &"Hip_hop"
 autoplay = "Hip_hop"
