@@ -12,7 +12,9 @@ Goblin Girl: Hello, little knight.
 		Goblin Girl: Suit yourself...
 		set Global.emit_signal("talking_done")
 		=> END
-- End the conversation => END
+- End the conversation
 	set Global.emit_signal("talking_done")
+	=> END
+	
 set Global.emit_signal("talking_done")
 => END

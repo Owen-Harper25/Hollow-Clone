@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dqda0yn1mlkk1"]
+[gd_scene load_steps=25 format=4 uid="uid://ceh4xi3ujmy1p"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_irw6p"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="2_31phq"]
@@ -1029,4 +1029,3 @@ position = Vector2(-929, -368)
 [editable path="Doors/W"]
 [editable path="Doors/W2"]
 [editable path="Doors/E"]
-[editable path="Doors/E2"]
