@@ -11,6 +11,7 @@ extends CharacterBody2D
 ## be adjusted to fit your specific needs
 
 ## The four possible character states and the character's current state
+#@onready var coin_label: Label = $Label
 @onready var coin_label: Label = $"../Camera2D/Label"
 @onready var Focus_button = $"Menu's/PauseMenu/MainPauseMenu/PauseMenu_Box/Button_List/Resume"
 @onready var camera_2d: Camera2D = $"../Camera2D"
