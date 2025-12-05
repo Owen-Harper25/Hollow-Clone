@@ -11,13 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://beruhlndfo8d6" path="res://Scenes/Enviromentals/breakable_lanturn.tscn" id="9_ksf1i"]
 [ext_resource type="PackedScene" uid="uid://bayc67pdsup51" path="res://Scenes/Enemies/red_knight.tscn" id="10_vif5h"]
 [ext_resource type="PackedScene" uid="uid://dpaaautu0me0m" path="res://Scenes/Enemies/archer.tscn" id="11_i7ma5"]
-[ext_resource type="PackedScene" uid="uid://brtv3n7ugwtm3" path="res://Scenes/Enemies/flying_enemy.tscn" id="12_t8afp"]
 [ext_resource type="PackedScene" uid="uid://jip7uc7rsksu" path="res://Scenes/bench.tscn" id="13_1fgkh"]
 [ext_resource type="PackedScene" uid="uid://dgjkmwpi7vjek" path="res://Scenes/chest.tscn" id="14_hd8f4"]
 [ext_resource type="PackedScene" uid="uid://bnrm085du1680" path="res://Scenes/Enviromentals/currency_pile.tscn" id="15_hnn05"]
 [ext_resource type="PackedScene" uid="uid://c4ftutkblxwk3" path="res://Scenes/Enviromentals/spikes.tscn" id="16_wxmgb"]
 [ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="17_k1rx4"]
 [ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="18_31phq"]
+[ext_resource type="PackedScene" uid="uid://cskoyirmvhif8" path="res://Scenes/Characters/Goblin_Girl.tscn" id="19_qxyq8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trw0a"]
 texture = ExtResource("5_nojx8")
@@ -948,8 +948,6 @@ position = Vector2(-104, -61)
 z_index = 1
 position = Vector2(492.99994, -229)
 
-[node name="Flying_enemy" parent="Enemies" instance=ExtResource("12_t8afp")]
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 color = Color(0.13, 0.13, 0.13, 1)
@@ -1023,23 +1021,10 @@ position = Vector2(23, 1)
 [node name="NPC" parent="Doors/E" instance=ExtResource("18_31phq")]
 position = Vector2(-630, -77)
 
-[node name="E2" parent="Doors" instance=ExtResource("17_k1rx4")]
-position = Vector2(916, 268)
-destination_level_tag = "f1"
-destination_door_tag = "W"
-spawn_direction = "left"
+[node name="Characters" type="Node" parent="."]
 
-[node name="CollisionShape2D" parent="Doors/E2" index="0"]
-position = Vector2(-1637, -395)
-
-[node name="Spawn" parent="Doors/E2" index="1"]
-position = Vector2(23, 1)
-
-[node name="spawn_1" type="Marker2D" parent="Doors/E2"]
-position = Vector2(-1639, -325)
-
-[node name="NPC" parent="Doors/E2" instance=ExtResource("18_31phq")]
-position = Vector2(-630, -77)
+[node name="CharacterBody2D" parent="Characters" instance=ExtResource("19_qxyq8")]
+position = Vector2(-929, -368)
 
 [editable path="Doors/W"]
 [editable path="Doors/W2"]

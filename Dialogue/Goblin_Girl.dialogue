@@ -1,0 +1,18 @@
+~ start
+Goblin Girl: Hello, little knight.
+- I feel lonely.
+	%0.9 Goblin Girl: I can fix that.
+	%0.1 Goblin Girl: I can fix that. [wait=1] Loser.
+- What are you doing?
+	Goblin Girl: Dancing with the [wave]wind[/wave].
+	Goblin Girl: Want to join me?
+	- Yes
+		Goblin Girl: Great, just dont hog the [wave]breeze[/wave].
+	- No
+		Goblin Girl: Suit yourself...
+		set Global.emit_signal("talking_done")
+		=> END
+- End the conversation => END
+	set Global.emit_signal("talking_done")
+set Global.emit_signal("talking_done")
+=> END

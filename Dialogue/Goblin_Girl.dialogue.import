@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://chjs2h1pb1mx0"
+path="res://.godot/imported/Goblin_Girl.dialogue-da3da2475b47705896d06d649cd64f91.tres"
+
+[deps]
+
+source_file="res://Dialogue/Goblin_Girl.dialogue"
+dest_files=["res://.godot/imported/Goblin_Girl.dialogue-da3da2475b47705896d06d649cd64f91.tres"]
+
+[params]
+
+defaults=true
