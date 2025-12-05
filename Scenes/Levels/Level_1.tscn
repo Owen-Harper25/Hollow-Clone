@@ -1023,6 +1023,25 @@ position = Vector2(23, 1)
 [node name="NPC" parent="Doors/E" instance=ExtResource("18_31phq")]
 position = Vector2(-630, -77)
 
+[node name="E2" parent="Doors" instance=ExtResource("17_k1rx4")]
+position = Vector2(916, 268)
+destination_level_tag = "f1"
+destination_door_tag = "W"
+spawn_direction = "left"
+
+[node name="CollisionShape2D" parent="Doors/E2" index="0"]
+position = Vector2(-1637, -395)
+
+[node name="Spawn" parent="Doors/E2" index="1"]
+position = Vector2(23, 1)
+
+[node name="spawn_1" type="Marker2D" parent="Doors/E2"]
+position = Vector2(-1639, -325)
+
+[node name="NPC" parent="Doors/E2" instance=ExtResource("18_31phq")]
+position = Vector2(-630, -77)
+
 [editable path="Doors/W"]
 [editable path="Doors/W2"]
 [editable path="Doors/E"]
+[editable path="Doors/E2"]
