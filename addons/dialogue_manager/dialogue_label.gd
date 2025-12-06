@@ -2,9 +2,9 @@
 
 @tool
 
+
 ## A RichTextLabel specifically for use with [b]Dialogue Manager[/b] dialogue.
 class_name DialogueLabel extends RichTextLabel
-
 
 ## Emitted for each letter typed out.
 signal spoke(letter: String, letter_index: int, speed: float)
@@ -20,7 +20,8 @@ signal finished_typing()
 
 ## [Deprecated] No longer emitted.
 signal paused_typing(duration: float)
-
+#
+#@onready var talk_sound: AudioStreamPlayer = $"../../../../../../TalkSound"
 
 ## The action to press to skip typing.
 @export var skip_action: StringName = &"ui_cancel"
@@ -70,7 +71,7 @@ var _last_mutation_index: int = -1
 var _waiting_seconds: float = 0
 var _is_awaiting_mutation: bool = false
 
-
+		
 func _process(delta: float) -> void:
 	if _is_typing:
 		# Type out text
@@ -127,7 +128,8 @@ func skip_typing() -> void:
 
 # Type out the next character(s)
 func _type_next(delta: float, seconds_needed: float) -> void:
-	if _is_awaiting_mutation: return
+	if _is_awaiting_mutation:
+		return
 
 	if visible_characters == get_total_character_count():
 		return
@@ -135,24 +137,30 @@ func _type_next(delta: float, seconds_needed: float) -> void:
 	if _last_mutation_index != visible_characters:
 		_last_mutation_index = visible_characters
 		_mutate_inline_mutations(visible_characters)
-		if _is_awaiting_mutation: return
+		if _is_awaiting_mutation:
+			return
 
 	# Pause on characters like "."
-	var waiting_seconds: float = seconds_per_pause_step if _should_auto_pause() else 0
-	if _last_wait_index != visible_characters and waiting_seconds > 0:
+	var waiting_seconds: float = seconds_per_pause_step if _should_auto_pause() else 0.0
+	if _last_wait_index != visible_characters and waiting_seconds > 0.0:
 		_last_wait_index = visible_characters
 		_waiting_seconds += waiting_seconds
 	else:
 		visible_characters += 1
 		if visible_characters <= get_total_character_count():
-			spoke.emit(get_parsed_text()[visible_characters - 1], visible_characters - 1, _get_speed(visible_characters))
-		# See if there's time to type out some more in this frame
+			var letter := get_parsed_text()[visible_characters - 1]
+			var speed := _get_speed(visible_characters)
+			spoke.emit(letter, visible_characters - 1, speed)
+			if not letter in [".", " "]:
+				#talk_sound.pitch_scale = randf_range(0.9, 1.1)
+				SoundLibrary.play_random_dash()
+
+		# See if there's time to type out more this frame
 		seconds_needed += seconds_per_step * (1.0 / _get_speed(visible_characters))
 		if seconds_needed > delta:
 			_waiting_seconds += seconds_needed
 		else:
 			_type_next(delta, seconds_needed)
-
 
 # Get the speed for the current typing position
 func _get_speed(at_index: int) -> float:

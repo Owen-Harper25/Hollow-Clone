@@ -1,6 +1,5 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
-@onready var talk_sound: AudioStreamPlayer = $TalkSound
 
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
@@ -64,12 +63,19 @@ func _ready() -> void:
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
 
-
+func _on_dialogue_label_spoke(letter: String, _letter_index: int, _speed: float) -> void:
+	print(letter)
+	print("Spoke signal")
+	#if not letter in [".", " "]:
+		#talk_sound.pitch_scale = randf_range(0.9, 1.1)
+		#talk_sound.play()
+		
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
 	get_viewport().set_input_as_handled()
 
 
+		
 func _notification(what: int) -> void:
 	## Detect a change of locale and update the current dialogue line to show the new language
 	if what == NOTIFICATION_TRANSLATION_CHANGED and _locale != TranslationServer.get_locale() and is_instance_valid(dialogue_label):
@@ -133,6 +139,7 @@ func next(next_id: String) -> void:
 	self.dialogue_line = await resource.get_next_dialogue_line(next_id, temporary_game_states)
 
 
+
 #region Signals
 
 
@@ -173,14 +180,10 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
-
-
-func _on_dialogue_label_spoke(_letter: String, _letter_index: int, _speed: float) -> void:
-	print("spoke signal fired")
-	if talk_sound and talk_sound.stream:
-		talk_sound.play()
-	#if not letter in [".", " "]:
-		#talk_sound.pitch_scale = randf_range(0.9, 1.1)
-		#talk_sound.play()
-
 #endregion
+
+
+
+func _on_dialogue_label_test() -> void:
+	print("hi")
+	pass # Replace with function body.
