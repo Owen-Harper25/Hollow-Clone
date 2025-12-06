@@ -363,17 +363,23 @@ func manage_animations() -> void:
 		PLAYER_SPRITE.flip_h = true
 	match state:
 		IDLE:
-			ANIMATION_PLAYER.play("Idle")
+			$AnimatedSprite2D.play("IDLE")
+			#ANIMATION_PLAYER.play("Idle")
 		WALK:
-			ANIMATION_PLAYER.play("Walk")
+			$AnimatedSprite2D.play("DRUNK_RUN")
+			#ANIMATION_PLAYER.play("Walk")
 		JUMP:
-			ANIMATION_PLAYER.play("Jump")
+			$AnimatedSprite2D.play("IDLE")
+			#ANIMATION_PLAYER.play("Jump")
 		FALL:
-			ANIMATION_PLAYER.play("Fall")
+			$AnimatedSprite2D.play("IDLE")
+			#ANIMATION_PLAYER.play("Fall")
 		WALL_SLIDE:
-			ANIMATION_PLAYER.play("Fall")
+			$AnimatedSprite2D.play("IDLE")
+			#ANIMATION_PLAYER.play("Fall")
 		SPRINT:
-			ANIMATION_PLAYER.play("Sprint")
+			$AnimatedSprite2D.play("RUNNING")
+			#ANIMATION_PLAYER.play("Sprint")
 
 ## Gets the strength and status of the mapped actions
 func get_inputs() -> Dictionary:
