@@ -20,7 +20,7 @@ signal healthChanged
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
-enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE}
+enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE, SIDE_ATTACK}
 
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
@@ -78,8 +78,8 @@ var dash_direction: Vector2 = Vector2.ZERO  # Direction of the dash
 
 
 ## The path to the character's [Sprite2D] node.  If no node path is provided the [param PLAYER_SPRITE] will be set to [param $Sprite2D] if it exists.
-@export_node_path("Sprite2D") var PLAYER_SPRITE_PATH: NodePath
-@onready var PLAYER_SPRITE: Sprite2D = get_node(PLAYER_SPRITE_PATH) if PLAYER_SPRITE_PATH else $Sprite2D ## The [Sprite2D] of the player character
+@export_node_path("AnimatedSprite2D") var PLAYER_SPRITE_PATH: NodePath
+@onready var PLAYER_SPRITE: AnimatedSprite2D = get_node(PLAYER_SPRITE_PATH) if PLAYER_SPRITE_PATH else $AnimatedSprite2D ## The [Sprite2D] of the player character
 
 ## The path to the character's [AnimationPlayer] node. If no node path is provided the [param ANIMATION_PLAYER] will be set to [param $AnimationPlayer] if it exists.
 @export_node_path("AnimationPlayer") var ANIMATION_PLAYER_PATH: NodePath
@@ -213,7 +213,8 @@ func _process(_delta: float) -> void:
 
 func start_dash(direction: Vector2) -> void:
 	direction.y = 0
-	$AnimationPlayer.play("dash")
+	#$AnimationPlayer.play("dash")
+	$AnimatedSprite2D.play("DASH")
 	var particle = DASH_PARTICLE.instantiate()
 	particle.emitting = true
 	particle.global_position = $Feet.global_position
@@ -369,17 +370,19 @@ func manage_animations() -> void:
 			$AnimatedSprite2D.play("DRUNK_RUN")
 			#ANIMATION_PLAYER.play("Walk")
 		JUMP:
-			$AnimatedSprite2D.play("IDLE")
+			$AnimatedSprite2D.play("JUMP_RUN")
 			#ANIMATION_PLAYER.play("Jump")
 		FALL:
-			$AnimatedSprite2D.play("IDLE")
+			$AnimatedSprite2D.play("FALLING")
 			#ANIMATION_PLAYER.play("Fall")
 		WALL_SLIDE:
-			$AnimatedSprite2D.play("IDLE")
+			$AnimatedSprite2D.play("SLIDE")
 			#ANIMATION_PLAYER.play("Fall")
 		SPRINT:
-			$AnimatedSprite2D.play("RUNNING")
+			$AnimatedSprite2D.play("SPRINT")
 			#ANIMATION_PLAYER.play("Sprint")
+		SIDE_ATTACK:
+			$AnimatedSprite2D.play("FORWARD_SLICE")
 
 ## Gets the strength and status of the mapped actions
 func get_inputs() -> Dictionary:
