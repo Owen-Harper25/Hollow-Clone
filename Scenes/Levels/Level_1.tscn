@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://ceh4xi3ujmy1p"]
+[gd_scene load_steps=41 format=4 uid="uid://ceh4xi3ujmy1p"]
 
 [ext_resource type="Texture2D" uid="uid://bmo2jfs8buao3" path="res://Assets/Sprites/Owen Art/light.png" id="1_irw6p"]
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="2_31phq"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bnrm085du1680" path="res://Scenes/Enviromentals/currency_pile.tscn" id="15_hnn05"]
 [ext_resource type="PackedScene" uid="uid://c4ftutkblxwk3" path="res://Scenes/Enviromentals/spikes.tscn" id="16_wxmgb"]
 [ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="17_k1rx4"]
-[ext_resource type="Material" uid="uid://e2isui1nvh72" path="res://Shaders/outlineshader.tres" id="18_7hll7"]
+[ext_resource type="Shader" uid="uid://btwn6sqe5e1ig" path="res://Shaders/outlineshader.gdshader" id="18_7hll7"]
 [ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="18_31phq"]
 [ext_resource type="PackedScene" uid="uid://cskoyirmvhif8" path="res://Scenes/Characters/Goblin_Girl.tscn" id="19_qxyq8"]
 
@@ -814,6 +814,85 @@ texture = ExtResource("5_nojx8")
 [sub_resource type="TileSet" id="TileSet_6sdse"]
 sources/0 = SubResource("TileSetAtlasSource_8lfqf")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fayjm"]
+resource_local_to_scene = true
+shader = ExtResource("18_7hll7")
+shader_parameter/outline_colour = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/outline_enabled = false
+
+[sub_resource type="Curve" id="Curve_nojx8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6321526, 0.59893614), -1.2279514, -1.2279514, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vvknj"]
+curve = SubResource("Curve_nojx8")
+
+[sub_resource type="Gradient" id="Gradient_ad63i"]
+offsets = PackedFloat32Array(0.41509435, 0.6415094)
+colors = PackedColorArray(1, 1, 1, 0.21568628, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pmbdk"]
+gradient = SubResource("Gradient_ad63i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ksf1i"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(500, 1, 1)
+gravity = Vector3(45, 98, 0)
+scale_max = 4.0
+color_initial_ramp = SubResource("GradientTexture1D_pmbdk")
+alpha_curve = SubResource("CurveTexture_vvknj")
+turbulence_enabled = true
+turbulence_influence_min = 0.020000001
+turbulence_influence_max = 0.080000006
+
+[sub_resource type="Gradient" id="Gradient_vif5h"]
+offsets = PackedFloat32Array(0, 0.45843828, 1)
+colors = PackedColorArray(0.8901961, 1, 1, 0, 0.8901961, 1, 1, 1, 0.8901961, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i7ma5"]
+gradient = SubResource("Gradient_vif5h")
+width = 1
+height = 32
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_t8afp"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1fgkh"]
+gradient = SubResource("Gradient_t8afp")
+
+[sub_resource type="Gradient" id="Gradient_hd8f4"]
+offsets = PackedFloat32Array(0, 0.47214076, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.97947216, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hnn05"]
+gradient = SubResource("Gradient_hd8f4")
+
+[sub_resource type="Curve" id="Curve_wxmgb"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.11989101, 75.531906), 0.0, 0.0, 0, 0, Vector2(0.2479564, -73.8298), 0.0, 0.0, 0, 0, Vector2(0.3760218, 72.765945), 0.0, 0.0, 0, 0, Vector2(0.5013624, -76.595764), 0.0, 0.0, 0, 0, Vector2(0.6076294, 75.531906), 0.0, 0.0, 0, 0, Vector2(0.7493188, -76.595764), 0.0, 0.0, 0, 0, Vector2(0.86376023, 72.765945), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_k1rx4"]
+curve = SubResource("Curve_wxmgb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yltcr"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(200, 200, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(100, 20, 0)
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 5.9999976
+tangential_accel_curve = SubResource("CurveTexture_k1rx4")
+damping_max = 100.00001
+scale_min = 1.5
+scale_max = 1.8
+color_ramp = SubResource("GradientTexture1D_hnn05")
+color_initial_ramp = SubResource("GradientTexture1D_1fgkh")
+
 [node name="level_1" type="Node2D"]
 
 [node name="Lights" type="Node2D" parent="."]
@@ -1022,11 +1101,31 @@ position = Vector2(23, 1)
 [node name="Characters" type="Node" parent="."]
 
 [node name="CharacterBody2D" parent="Characters" instance=ExtResource("19_qxyq8")]
-material = ExtResource("18_7hll7")
+material = SubResource("ShaderMaterial_fayjm")
 position = Vector2(-929, -368)
 
 [node name="NPC" parent="Characters" instance=ExtResource("18_31phq")]
 position = Vector2(-172, 57)
+
+[node name="Snow" type="GPUParticles2D" parent="."]
+position = Vector2(0, -356)
+amount = 200
+lifetime = 10.0
+preprocess = 30.0
+visibility_rect = Rect2(-2000, -2000, 4000, 4000)
+process_material = SubResource("ParticleProcessMaterial_ksf1i")
+
+[node name="Wind" type="GPUParticles2D" parent="."]
+position = Vector2(-459, -164)
+amount = 15
+texture = SubResource("GradientTexture2D_i7ma5")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 1.0
+visibility_rect = Rect2(-2000, -2000, 4000, 4000)
+trail_enabled = true
+trail_lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_yltcr")
 
 [editable path="Doors/W"]
 [editable path="Doors/W2"]
