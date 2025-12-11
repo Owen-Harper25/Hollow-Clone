@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bjsu2xyt720j0"]
+[gd_scene load_steps=18 format=4 uid="uid://bjsu2xyt720j0"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="1_ovj6s"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Owen Art/Rocks.png" id="1_smnlx"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://unqqvk6vxtjb" path="res://Scenes/Enviromentals/door.tscn" id="7_fphuk"]
 [ext_resource type="PackedScene" uid="uid://jip7uc7rsksu" path="res://Scenes/bench.tscn" id="8_pnnky"]
 [ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="9_blpqv"]
+[ext_resource type="Script" uid="uid://bfn3m7jyrys2j" path="res://Scenes/Levels/movingPlatform.gd" id="10_u40f0"]
+[ext_resource type="Texture2D" uid="uid://c1un7m5tyqg4s" path="res://Assets/Sprites/Stringstar Fields/tileset.png" id="11_0x4y1"]
 
 [sub_resource type="TileSet" id="TileSet_08cxd"]
 
@@ -69,6 +71,15 @@ texture = ExtResource("2_12fag")
 [sub_resource type="TileSet" id="TileSet_0jff0"]
 sources/0 = SubResource("TileSetAtlasSource_pnnky")
 sources/1 = SubResource("TileSetAtlasSource_blpqv")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eopvx"]
+size = Vector2(79.5, 4.5)
+
+[sub_resource type="Curve2D" id="Curve2D_uqiic"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 430, 82, 0, 0, 0, 0, 430, 311, 0, 0, 0, 0, 438, 205, 0, 0, 0, 0, 438, 198, 0, 0, 0, 0, 430, 82)
+}
+point_count = 5
 
 [node name="level_2" type="Node2D"]
 
@@ -151,6 +162,36 @@ position = Vector2(497, 64)
 
 [node name="NPC" parent="." instance=ExtResource("9_blpqv")]
 position = Vector2(0, -8)
+
+[node name="Platform" type="Node2D" parent="."]
+position = Vector2(430, 136)
+scale = Vector2(1, 0.76419216)
+
+[node name="StaticBody2D" type="AnimatableBody2D" parent="Platform"]
+scale = Vector2(0.9999999, 0.9999999)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform/StaticBody2D"]
+texture = ExtResource("11_0x4y1")
+region_enabled = true
+region_rect = Rect2(79.91242, 63.891884, 80.16088, 15.159294)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/StaticBody2D"]
+position = Vector2(-0.25, -5.25)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_eopvx")
+
+[node name="Path2D" type="Path2D" parent="Platform"]
+position = Vector2(-429.99997, -81.99999)
+scale = Vector2(0.99999994, 0.99999994)
+curve = SubResource("Curve2D_uqiic")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Platform/Path2D"]
+position = Vector2(430, 82)
+rotates = false
+script = ExtResource("10_u40f0")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Platform/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../StaticBody2D")
 
 [editable path="Doors/E"]
 [editable path="Doors/W"]
