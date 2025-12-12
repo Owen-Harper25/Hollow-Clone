@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bjsu2xyt720j0"]
+[gd_scene load_steps=19 format=4 uid="uid://bjsu2xyt720j0"]
 
 [ext_resource type="Texture2D" uid="uid://chl762chi6f1o" path="res://Assets/Sprites/Stringstar Fields/background_0.png" id="1_ovj6s"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Owen Art/Rocks.png" id="1_smnlx"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c16nfgi37ki5h" path="res://Scenes/Enviromentals/npc.tscn" id="9_blpqv"]
 [ext_resource type="Script" uid="uid://bfn3m7jyrys2j" path="res://Scenes/Levels/movingPlatform.gd" id="10_u40f0"]
 [ext_resource type="Texture2D" uid="uid://c1un7m5tyqg4s" path="res://Assets/Sprites/Stringstar Fields/tileset.png" id="11_0x4y1"]
+[ext_resource type="PackedScene" uid="uid://uahiiwxoqjtx" path="res://Scenes/Enemies/zombie.tscn" id="12_0x4y1"]
 
 [sub_resource type="TileSet" id="TileSet_08cxd"]
 
@@ -127,6 +128,15 @@ tile_set = SubResource("TileSet_0jff0")
 [node name="Breakables" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Zombie" parent="Enemies" instance=ExtResource("12_0x4y1")]
+position = Vector2(-512, 56)
+
+[node name="Zombie2" parent="Enemies" instance=ExtResource("12_0x4y1")]
+position = Vector2(-392, 379)
+
+[node name="Zombie3" parent="Enemies" instance=ExtResource("12_0x4y1")]
+position = Vector2(233, 372)
 
 [node name="Doors" type="Node" parent="."]
 

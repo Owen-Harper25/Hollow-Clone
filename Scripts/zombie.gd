@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 @onready var coin_scene = preload("res://Scenes/Enviromentals/coin.tscn")
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
