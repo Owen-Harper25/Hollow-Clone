@@ -28,7 +28,7 @@ signal pogo_now
 const level_1 = preload("res://Scenes/Levels/level_1.tscn")
 const level_2 = preload("res://Scenes/Levels/level_2.tscn")
 const level_3 = preload("res://Scenes/Levels/level_3.tscn")
-const f1 = preload("res://f1.tscn")
+const f1 = preload("res://Scenes/Levels/f1.tscn")
 
 var current_level: Node
 var spawn_door_tag: String

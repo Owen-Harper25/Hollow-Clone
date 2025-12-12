@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://b6vfdfnsqggom" path="res://Shaders/erosion.gdshader" id="1_8d8mn"]
 [ext_resource type="Texture2D" uid="uid://bh3nkiifpeog8" path="res://Assets/Sprites/Place_holder_Anims/Zombie_Girl/Zombie_Girl_SpriteSheet.png" id="1_673kn"]
-[ext_resource type="Script" uid="uid://cqb7lrugefykl" path="res://Scripts/zombie.gd" id="1_ttf1p"]
+[ext_resource type="Script" path="res://Scripts/zombie.gd" id="1_ttf1p"]
 [ext_resource type="Texture2D" uid="uid://b0myllnqt4i71" path="res://Assets/Sprites/Noise.png" id="2_o6bce"]
 [ext_resource type="Shader" uid="uid://cfql7dxyj88i4" path="res://Shaders/hit_effect.gdshader" id="4_o6bce"]
 
