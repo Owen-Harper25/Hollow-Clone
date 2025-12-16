@@ -25,6 +25,7 @@ signal talking_done
 signal game_resumed
 signal pogo_now
 
+const main_test_level = preload("res://Scenes/Levels/main_test_level.tscn")
 const level_1 = preload("res://Scenes/Levels/level_1.tscn")
 const level_2 = preload("res://Scenes/Levels/level_2.tscn")
 const level_3 = preload("res://Scenes/Levels/level_3.tscn")
@@ -47,6 +48,7 @@ func load_level(level_tag: String, spawn_tag: String) -> void:
 		"level_1": scene_to_load = level_1
 		"level_2": scene_to_load = level_2
 		"level_3": scene_to_load = level_3
+		"main_test_level": scene_to_load = main_test_level
 		"f1": scene_to_load = f1
 		_: 
 			push_error("Unknown level tag: " + level_tag)

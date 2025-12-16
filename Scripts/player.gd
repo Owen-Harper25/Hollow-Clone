@@ -20,7 +20,7 @@ signal healthChanged
 var knockback: Vector2 = Vector2.ZERO
 var knockback_timer: float = 0.0
 
-enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE, SIDE_ATTACK}
+enum {IDLE, SPRINT, WALK, JUMP, FALL, WALL_SLIDE, SIDE_ATTACK, OVERHEAD_ATTACK, DOWNWARD_ATTACK}
 
 ## The values for the jump direction, default is UP or -1
 enum JUMP_DIRECTIONS {UP = -1, DOWN = 1}
@@ -45,7 +45,7 @@ var facing_direction: Vector2 = Vector2.RIGHT  # default facing right
 @onready var hit_flash_animation_player: AnimationPlayer = $HitFlashAnimationPlayer
 @onready var AttackParent: Node2D = $Attack
 @onready var AttackSprite: Sprite2D = $Attack/Sprite2D
-@onready var AttackArea2D: Area2D = $Attack/Sprite2D/AttackArea2D
+@onready var AttackArea2D: Area2D = $Attack/AttackArea2D
 var attack_distance: float = 10.0
 var TotalAttackDuration: float = 0.3
 var attack_duration_timer: float = 0.2
@@ -229,7 +229,8 @@ func start_dash(direction: Vector2) -> void:
 	dash_timer = dash_duration
 	velocity.x = dash_direction.x * dash_speed
 	set_collision_mask_value(2, false)
-	
+
+
 func get_cardinal_direction(dir: Vector2) -> Vector2:
 	var deadzone := 0.2
 	var compliance := 1.1 if is_on_floor() else 1.0
@@ -305,13 +306,17 @@ func _attack_logic(delta: float) -> void:
 			
 			if facing_direction == Vector2.RIGHT:
 				AttackParent.rotation_degrees = 0
+				state = SIDE_ATTACK
 			elif facing_direction == Vector2.LEFT:
+				state = SIDE_ATTACK
 				AttackParent.rotation_degrees = 180
 			elif facing_direction == Vector2.UP:
+				state = OVERHEAD_ATTACK
 				AttackParent.rotation_degrees = -90
 			elif facing_direction == Vector2.DOWN:
 				if not is_on_floor():  # only allow down slash in air
 					AttackParent.rotation_degrees = 90
+					state = DOWNWARD_ATTACK
 			else:
 				if PLAYER_SPRITE.flip_h:
 					AttackParent.rotation_degrees = 180   # face left
@@ -383,6 +388,9 @@ func manage_animations() -> void:
 			#ANIMATION_PLAYER.play("Sprint")
 		SIDE_ATTACK:
 			$AnimatedSprite2D.play("FORWARD_SLICE")
+		OVERHEAD_ATTACK:
+			$AnimatedSprite2D.play("OVERHEAD_SLICE")
+
 
 ## Gets the strength and status of the mapped actions
 func get_inputs() -> Dictionary:

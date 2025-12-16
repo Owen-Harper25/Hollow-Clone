@@ -12,4 +12,4 @@ func _ready() -> void:
 	heartsContainer.updateHearts(player.currentHealth)
 	player.healthChanged.connect(heartsContainer.updateHearts)
 
-	Global.load_level("level_1", "spawn_1")
+	Global.load_level("main_test_level", "spawn_1")
