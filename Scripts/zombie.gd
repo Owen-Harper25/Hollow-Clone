@@ -28,6 +28,9 @@ var taking_damage: bool = false
 var player_in_area: bool = false
 var is_chase: bool = false
 var is_roaming: bool = true
+var attacking: bool = false
+
+var attack_chain: Array = [1, 1, 2]
 
 func _process(delta: float) -> void:
 	if knockback_timer > 0.0:
@@ -46,6 +49,7 @@ func _process(delta: float) -> void:
 	handle_animation()
 	move_and_slide()
 	
+
 func take_damage(attack: Attack):
 	if health > 0:
 		taking_damage = true
@@ -56,9 +60,8 @@ func take_damage(attack: Attack):
 			health = health_min
 			dead = true
 
-
 func move(delta: float):
-	if !dead:
+	if !dead and !attacking:
 		if !is_chase:
 			velocity += dir * speed * delta
 		elif is_chase and !taking_damage:
@@ -66,27 +69,30 @@ func move(delta: float):
 			velocity.x = dir_to_player.x
 			dir.x = abs(velocity.x) / velocity.x
 		is_roaming = true
-	elif dead:
+	elif dead or attacking:
 		velocity.x = 0
 
 func handle_animation():
-	if !dead and !is_dealing_damage and !taking_damage:
+	if !dead and !is_dealing_damage and !taking_damage and !attacking:
 		anim_sprite.play("Walk")
 		if dir.x == -1:
 			anim_sprite.flip_h = true
+			$AttackArea/CollisionShape2D.position.x = -5
 		elif dir.x == 1:
 			anim_sprite.flip_h = false
+			$AttackArea/CollisionShape2D.position.x = 5
 	elif !dead and !is_dealing_damage and taking_damage:
 		await get_tree().create_timer(0.4).timeout
 		taking_damage = false
 	elif dead and is_roaming:
 		is_roaming = false
 		remove_child($hitBox)
-		
 		set_collision_layer_value(2, false)
 		set_collision_mask_value(2, false)
 		anim_sprite.play("Death")
 		SoundLibrary.play_random_death()
+
+
 
 		var instance = coin_scene.instantiate()
 		instance.position = global_position
@@ -128,6 +134,23 @@ func _on_detection_zone_body_exited(body: Node2D) -> void:
 		is_chase = false
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
+	if body == player and player.is_dashing == false and player.invincibility == false:
+		var knockback_direction = (body.global_position - global_position).normalized()
+		body.apply_knockback(knockback_direction, 100, 0.12)
+		player.damage()
+
+
+func _on_attack_timer_timeout() -> void:
+	if !dead and is_chase and !attacking:
+		attacking = true
+		$AnimationPlayer.play("Light_Attack")
+		anim_sprite.play("Light_Attack")
+		await anim_sprite.animation_finished
+		$AttackTimer.start()
+		attacking = false
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body == player and player.is_dashing == false and player.invincibility == false:
 		var knockback_direction = (body.global_position - global_position).normalized()
 		body.apply_knockback(knockback_direction, 100, 0.12)

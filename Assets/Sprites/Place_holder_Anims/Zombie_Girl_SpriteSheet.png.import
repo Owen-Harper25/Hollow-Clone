@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bh3nkiifpeog8"
-path="res://.godot/imported/Zombie_Girl_SpriteSheet.png-3bbeb7f914b4a2271d7c90b200d1dce1.ctex"
+path="res://.godot/imported/Zombie_Girl_SpriteSheet.png-f6e30cbbdf6e93b4282a84d9455e4ea2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Place_holder_Anims/Zombie_Girl/Zombie_Girl_SpriteSheet.png"
-dest_files=["res://.godot/imported/Zombie_Girl_SpriteSheet.png-3bbeb7f914b4a2271d7c90b200d1dce1.ctex"]
+source_file="res://Assets/Sprites/Place_holder_Anims/Zombie_Girl_SpriteSheet.png"
+dest_files=["res://.godot/imported/Zombie_Girl_SpriteSheet.png-f6e30cbbdf6e93b4282a84d9455e4ea2.ctex"]
 
 [params]
 

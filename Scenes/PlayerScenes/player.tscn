@@ -3155,7 +3155,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acd72"]
-size = Vector2(22.504196, 18.231953)
+size = Vector2(31.632687, 32.291733)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
 radius = 3.0
@@ -3174,10 +3174,10 @@ shape = SubResource("CapsuleShape2D_hqtel")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_4bgo2")
 sprite_frames = SubResource("SpriteFrames_cegx8")
-animation = &"FALLING_FLAT"
+animation = &"FORWARD_SLICE"
 autoplay = "IDLE"
-frame = 45
-frame_progress = 0.31781998
+frame = 7
+frame_progress = 0.61641926
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -3237,13 +3237,15 @@ scale = Vector2(70831.78, 0.6812891)
 texture = ExtResource("4_c45ss")
 offset = Vector2(10, 0)
 
-[node name="AttackArea2D" type="Area2D" parent="Attack/Sprite2D"]
+[node name="AttackArea2D" type="Area2D" parent="Attack"]
+position = Vector2(100000.01, 0.8000002)
+scale = Vector2(70831.79, 0.68128914)
 collision_layer = 0
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Sprite2D/AttackArea2D"]
-position = Vector2(13.502513, 0)
-scale = Vector2(0.9999997, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/AttackArea2D"]
+position = Vector2(18.066757, 0)
+scale = Vector2(0.99999964, 1)
 shape = SubResource("RectangleShape2D_acd72")
 
 [node name="Directions" type="Node2D" parent="."]
@@ -3283,8 +3285,8 @@ visible = false
 [connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="Timers/Resume Timer" to="." method="_on_resume_timer_timeout"]
 [connection signal="timeout" from="Timers/Resume Timer 2" to="." method="_on_resume_timer_2_timeout"]
-[connection signal="area_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
-[connection signal="body_entered" from="Attack/Sprite2D/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
+[connection signal="area_entered" from="Attack/AttackArea2D" to="." method="_on_attack_area_2d_area_entered"]
+[connection signal="body_entered" from="Attack/AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
 
 [editable path="Menu\'s/PauseMenu"]

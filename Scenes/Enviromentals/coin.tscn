@@ -26,6 +26,7 @@ shape = SubResource("CircleShape2D_l8qws")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_ixiiq")
+debug_color = Color(0.7855226, 0.5925085, 0.02436937, 0.42)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.5, -0.5)
