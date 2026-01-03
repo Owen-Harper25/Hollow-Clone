@@ -386,10 +386,10 @@ func manage_animations() -> void:
 		SPRINT:
 			$AnimatedSprite2D.play("SPRINT")
 			#ANIMATION_PLAYER.play("Sprint")
-		SIDE_ATTACK:
-			$AnimatedSprite2D.play("FORWARD_SLICE")
-		OVERHEAD_ATTACK:
-			$AnimatedSprite2D.play("OVERHEAD_SLICE")
+		#SIDE_ATTACK:
+			#$AnimatedSprite2D.play("FORWARD_SLICE")
+		#OVERHEAD_ATTACK:
+			#$AnimatedSprite2D.play("OVERHEAD_SLICE")
 
 
 ## Gets the strength and status of the mapped actions
