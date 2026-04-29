@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://nba5v7qghg1y"]
+
+[ext_resource type="Script" uid="uid://bbgr64xgkdjw6" path="res://Scripts/wind_area_2d.gd" id="1_vjwfg"]
+
+[node name="WindArea2D" type="Area2D"]
+script = ExtResource("1_vjwfg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
