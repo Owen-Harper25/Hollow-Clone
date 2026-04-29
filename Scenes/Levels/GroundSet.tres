@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://cqnw1qkbbw853"]
+[gd_resource type="TileSet" format=3 uid="uid://cqnw1qkbbw853"]
 
 [ext_resource type="Texture2D" uid="uid://c1un7m5tyqg4s" path="res://Assets/Sprites/Stringstar Fields/tileset.png" id="1_5a16d"]
 [ext_resource type="Texture2D" uid="uid://gmhya21xlrrd" path="res://Assets/Sprites/Owen Art/Rocks.png" id="2_2551j"]

@@ -31,6 +31,7 @@ var DUST_PARTICLE = preload("res://Scenes/PlayerScenes/DustParticle.tscn")
 var DASH_PARTICLE = preload("res://Scenes/PlayerScenes/DashParticle.tscn")
 var paused: bool = false
 var coin_counter = 0
+var wind_velocity: Vector2 = Vector2.ZERO
 
 @onready var feet: Marker2D = $Feet
 @export var allow_diagonal: bool = true  # Set false to restrict diagonal movement
@@ -281,7 +282,7 @@ func physics_tick(delta: float) -> void:
 		_attack_logic(delta)
 		# We have to handle the gravity after the state
 		handle_gravity(delta) 
-
+		velocity += wind_velocity * 0.4
 		move_and_slide()
 
 func damage_check():
@@ -386,10 +387,10 @@ func manage_animations() -> void:
 		SPRINT:
 			$AnimatedSprite2D.play("SPRINT")
 			#ANIMATION_PLAYER.play("Sprint")
-		SIDE_ATTACK:
-			$AnimatedSprite2D.play("FORWARD_SLICE")
-		OVERHEAD_ATTACK:
-			$AnimatedSprite2D.play("OVERHEAD_SLICE")
+		#SIDE_ATTACK:
+			#$AnimatedSprite2D.play("FORWARD_SLICE")
+		#OVERHEAD_ATTACK:
+			#$AnimatedSprite2D.play("OVERHEAD_SLICE")
 
 
 ## Gets the strength and status of the mapped actions
@@ -414,7 +415,7 @@ func get_input_direction() -> Vector2:
 ## to be handled after the state and animations in the default behaviour to make sure the 
 ## animations are handled correctly.
 func handle_gravity(delta: float) -> void:
-	velocity.y += GRAVITY * delta
+	velocity.y += GRAVITY * delta if wind_velocity.y == 0.0 else 0.0
 	
 	if can_wall_jump and state == WALL_SLIDE and not jumping:
 		velocity.y = clampf(velocity.y, 0.0, WALL_SLIDE_SPEED)
